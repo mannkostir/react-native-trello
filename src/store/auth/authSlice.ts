@@ -10,7 +10,7 @@ interface ISignInParams {
   email: string;
   password: string;
 }
-type ISignInResponse = {
+type SignInResponse = {
   id: string;
   email: string;
   name: string;
@@ -34,7 +34,9 @@ export const signIn = createAsyncThunk(
       },
     );
 
-    const result: ISignInResponse = await res.json();
+    const result: SignInResponse = await res.json();
+
+    return result;
   },
 );
 
@@ -43,6 +45,13 @@ interface ISignUpParams {
   name: string;
   password: string;
 }
+type SignUpResponse = {
+  email: string;
+  name: string;
+  password: string;
+  token: string;
+  columns: {title: string; id: number}[];
+};
 
 export const signUp = createAsyncThunk(
   'auth/sign-up',
@@ -62,7 +71,9 @@ export const signUp = createAsyncThunk(
       },
     );
 
-    const result = await res.json();
+    const result: SignUpResponse = await res.json();
+
+    return result;
   },
 );
 
