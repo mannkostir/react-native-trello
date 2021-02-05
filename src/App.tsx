@@ -8,14 +8,16 @@
  * @format
  */
 
+import 'react-native-gesture-handler';
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import MainNavigator from './navigators/MainNavigator';
+import {NavigationContainer} from '@react-navigation/native';
 
 declare const global: {HermesInternal: null | {}};
 
 const App = () => {
-  return <></>;
+  return <MainNavigator />;
 };
 
 const styles = StyleSheet.create({});
