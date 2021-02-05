@@ -1,8 +1,12 @@
 import {Prayer, List} from './Common.types';
 
 export type ListsState = {
-  lists: List[];
+  currentLists: List[];
 };
 export type PrayersState = {
-  cards: Prayer[];
+  currentPrayers: Prayer[];
+};
+export type AuthState = {
+  username: string | null;
+  userId: string | null;
 };
