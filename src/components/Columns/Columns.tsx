@@ -1,4 +1,4 @@
-import {Prayer, List} from '@/types/Common.types';
+import {Card, Column} from '@/types/Common.types';
 import {BoardScreenNavigation} from '@/types/Navigation.types';
 import React from 'react';
 import {FlatList, Text, View} from 'react-native';
@@ -11,15 +11,15 @@ const ListItem = ({
   navigation,
 }: {
   title: string;
-  id: string;
-  cards: Prayer[];
+  id: number;
+  cards: Card[];
   navigation: BoardScreenNavigation;
 }) => {
   return (
     <View>
       <Text
         onPress={() =>
-          navigation.navigate('List', {
+          navigation.navigate('Column', {
             title,
             cards,
           })
@@ -31,8 +31,8 @@ const ListItem = ({
 };
 
 interface IListsProps {
-  lists: List[];
-  cards: Prayer[];
+  lists: Column[];
+  cards: Card[];
   navigation: BoardScreenNavigation;
 }
 
@@ -43,13 +43,13 @@ const Lists = ({lists, navigation, cards}: IListsProps) => {
         data={lists}
         renderItem={({item}) => (
           <ListItem
-            cards={cards.filter((card) => card.listId === item.id)}
+            cards={cards.filter((card) => card.columnId === item.id)}
             navigation={navigation}
             title={item.title}
             id={item.id}
           />
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
       />
     </SafeAreaView>
   );

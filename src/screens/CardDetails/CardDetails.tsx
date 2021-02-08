@@ -1,10 +1,10 @@
-import {PrayerDetailsRoute} from '@/types/Navigation.types';
+import {CardDetailsRoute} from '@/types/Navigation.types';
 import {useRoute} from '@react-navigation/native';
 import React from 'react';
 import {Text, View} from 'react-native';
 
-const PrayerDetails = () => {
-  const route = useRoute<PrayerDetailsRoute>();
+const CardDetails = () => {
+  const route = useRoute<CardDetailsRoute>();
 
   return (
     <View>
@@ -13,4 +13,4 @@ const PrayerDetails = () => {
   );
 };
 
-export default PrayerDetails;
+export default CardDetails;

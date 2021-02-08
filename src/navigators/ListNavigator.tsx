@@ -1,8 +1,8 @@
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Prayers from '@/screens/Prayers';
-import SubscribedPrayers from '@/screens/SubscribedPrayers';
-import {Prayer} from '@/types/Common.types';
+import Prayers from '@/screens/Cards';
+import {Card} from '@/types/Common.types';
+import Subscribed from '@/screens/Subscribed';
 
 const TopTab = createMaterialTopTabNavigator();
 
@@ -10,18 +10,15 @@ const TopTab = createMaterialTopTabNavigator();
 // Also just was too lazy to set up Context
 // These functions will be eliminated once redux will come to the rescue
 
-const ListNavigator = ({cards}: {cards: Prayer[]}) => {
+const ListNavigator = ({cards}: {cards: Card[]}) => {
   return (
     <TopTab.Navigator>
-      <TopTab.Screen name="Prayers">
+      <TopTab.Screen name="Cards">
         {(props) => <Prayers {...props} cards={cards} />}
       </TopTab.Screen>
       <TopTab.Screen name="Subscribed">
         {(props) => (
-          <SubscribedPrayers
-            {...props}
-            subscribedPrayers={cards.filter((card) => card.subscribed.length)}
-          />
+          <Subscribed {...props} subscribed={cards.filter((card) => false)} />
         )}
       </TopTab.Screen>
     </TopTab.Navigator>

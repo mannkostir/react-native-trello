@@ -1,35 +1,74 @@
-import Lists from '@/components/Lists/Lists';
-import {Prayer, List} from '@/types/Common.types';
+import Lists from '@/components/Columns/Columns';
+import {Card, Column} from '@/types/Common.types';
 import {BoardScreenNavigation} from '@/types/Navigation.types';
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {View} from 'react-native';
 
-const ListsItems: List[] = [
+const ListsItems: Column[] = [
   {
-    id: '1',
+    id: 1,
     title: 'To Do',
+    userId: 1,
   },
   {
-    id: '2',
+    id: 2,
     title: 'In Progress',
+    userId: 1,
   },
   {
-    id: '3',
+    id: 3,
     title: 'Testing',
+    userId: 1,
   },
   {
-    id: '4',
+    id: 4,
     title: 'Done',
+    userId: 1,
   },
 ];
 
-const Cards: Prayer[] = [
-  {title: 'First Item', id: '1', listId: '1', subscribed: []},
-  {title: 'Second Item', id: '2', listId: '2', subscribed: []},
-  {title: 'Third Item', id: '3', listId: '3', subscribed: []},
-  {title: 'Fourth Item', id: '4', listId: '4', subscribed: []},
-  {title: 'Fifth Item', id: '5', listId: '1', subscribed: []},
+const Cards: Card[] = [
+  {
+    title: 'First Item',
+    id: 1,
+    columnId: 1,
+    description: 'nope',
+    checked: false,
+    commentsIds: [],
+  },
+  {
+    title: 'Second Item',
+    id: 2,
+    columnId: 2,
+    description: 'nope',
+    checked: false,
+    commentsIds: [],
+  },
+  {
+    title: 'Third Item',
+    id: 3,
+    columnId: 3,
+    description: 'nope',
+    checked: false,
+    commentsIds: [],
+  },
+  {
+    title: 'Fourth Item',
+    id: 4,
+    columnId: 4,
+    description: 'nope',
+    checked: false,
+    commentsIds: [],
+  },
+  {
+    title: 'Fifth Item',
+    id: 5,
+    columnId: 5,
+    description: 'nope',
+    checked: false,
+    commentsIds: [],
+  },
 ];
 
 const Board = () => {

@@ -2,10 +2,10 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Board from '@/screens/Board';
 import {NavigationContainer} from '@react-navigation/native';
-import List from '@/screens/List';
+import Column from '@/screens/Column';
 import Auth from '@/screens/Auth';
 import {MainNavigatorParamList} from '@/types/Navigation.types';
-import PrayerDetails from '@/screens/PrayerDetails';
+import CardDetails from '@/screens/CardDetails';
 
 const Stack = createStackNavigator<MainNavigatorParamList>();
 
@@ -18,13 +18,13 @@ const MainNavigator = () => {
         {isAuthenticated ? null : <Stack.Screen name="Auth" component={Auth} />}
         <Stack.Screen name="Board" component={Board} />
         <Stack.Screen
-          name="List"
-          component={List}
+          name="Column"
+          component={Column}
           options={({route}) => ({title: route.params.title})}
         />
         <Stack.Screen
-          name="PrayerDetails"
-          component={PrayerDetails}
+          name="CardDetails"
+          component={CardDetails}
           options={({route}) => ({title: route.params.cardInfo.title})}
         />
       </Stack.Navigator>

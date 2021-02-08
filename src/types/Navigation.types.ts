@@ -4,12 +4,12 @@ import {Card} from './Common.types';
 
 export type MainNavigatorParamList = {
   Board: undefined;
-  List: {title: string; cards: Card[]};
-  PrayerDetails: {cardInfo: Card};
+  Column: {title: string; cards: Card[]};
+  CardDetails: {cardInfo: Card};
   Auth: undefined;
 };
 
-export type ListNavigatorParamList = {
+export type ColumnNavigatorParamList = {
   cards: Card[];
   subscribed: Card[];
 };
@@ -18,13 +18,10 @@ export type BoardScreenNavigation = StackNavigationProp<
   MainNavigatorParamList,
   'Board'
 >;
-export type ListScreenNavigation = StackNavigationProp<
+export type ColumnScreenNavigator = StackNavigationProp<
   MainNavigatorParamList,
-  'List'
+  'Column'
 >;
 
-export type ListScreenRoute = RouteProp<MainNavigatorParamList, 'List'>;
-export type PrayerDetailsRoute = RouteProp<
-  MainNavigatorParamList,
-  'PrayerDetails'
->;
+export type ColumnScreenRoute = RouteProp<MainNavigatorParamList, 'Column'>;
+export type CardDetailsRoute = RouteProp<MainNavigatorParamList, 'CardDetails'>;
