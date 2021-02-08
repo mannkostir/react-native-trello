@@ -10,6 +10,9 @@ import {
 import {Provider} from 'react-redux';
 import rootSaga from './sagas';
 import createSagaMiddleware from 'redux-saga';
+import {persistReducer, persistStore} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const defaultState = {
   cards: defaultCards,
@@ -29,6 +32,8 @@ const rootReducer = combineReducers({
   columns: columnsReducer,
 });
 
+const persistedReducer = persistReducer({key: 'root', storage}, rootReducer);
+
 export type RootState = ReturnType<typeof rootReducer>;
 
 const sagaMiddleware = createSagaMiddleware();
@@ -37,12 +42,27 @@ const StoreProvider = ({children}: IStoreProps) => {
   const store = configureStore({
     reducer: rootReducer,
     preloadedState: defaultState,
-    middleware: [...getDefaultMiddleware(), sagaMiddleware],
+    middleware: [
+      ...getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: ['persist/PERSIST'],
+        },
+      }),
+      sagaMiddleware,
+    ],
   });
+
+  const persistor = persistStore(store);
 
   sagaMiddleware.run(rootSaga);
 
-  return <Provider store={store}>{children}</Provider>;
+  return (
+    <Provider store={store}>
+      <PersistGate persistor={persistor} loading={null}>
+        {children}
+      </PersistGate>
+    </Provider>
+  );
 };
 
 export default StoreProvider;
