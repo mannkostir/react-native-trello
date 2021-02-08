@@ -1,3 +1,4 @@
+import React from 'react';
 import authReducer, {defaultAuth} from './auth/authSlice';
 import cardsReducer, {defaultCards} from './cards/cardsSlice';
 import commentsReducer, {defaultComments} from './comments/commentsSlice';

@@ -29,7 +29,7 @@ export enum ColumnsPublicActions {
 
 export const columnsSlice = createSlice({
   name: 'lists',
-  initialState: defaultLists,
+  initialState: defaultColumns,
   reducers: {
     [ColumnsPublicActions.GET_ALL_COLUMNS](
       state,

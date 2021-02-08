@@ -11,9 +11,14 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import MainNavigator from './navigators/MainNavigator';
+import StoreProvider from './store';
 
 const App = () => {
-  return <MainNavigator />;
+  return (
+    <StoreProvider>
+      <MainNavigator />
+    </StoreProvider>
+  );
 };
 
 export default App;
