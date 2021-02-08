@@ -1,17 +1,17 @@
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {Prayer} from './Common.types';
+import {Card} from './Common.types';
 
 export type MainNavigatorParamList = {
   Board: undefined;
-  List: {title: string; cards: Prayer[]};
-  PrayerDetails: {cardInfo: Prayer};
+  List: {title: string; cards: Card[]};
+  PrayerDetails: {cardInfo: Card};
   Auth: undefined;
 };
 
 export type ListNavigatorParamList = {
-  cards: Prayer[];
-  subscribed: Prayer[];
+  cards: Card[];
+  subscribed: Card[];
 };
 
 export type BoardScreenNavigation = StackNavigationProp<

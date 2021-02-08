@@ -1,89 +1,52 @@
 import {AuthState} from '@/types/Store.types';
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {
+  SignInParams,
+  SignUpParams,
+  SignUpResponse,
+  SignInResponse,
+} from './auth.types';
 
 export const defaultAuth: AuthState = {
   userId: null,
   username: null,
+  error: null,
+  token: null,
+  isLoading: false,
 };
 
-interface ISignInParams {
-  email: string;
-  password: string;
+export enum AuthPublicActions {
+  SIGN_IN = 'signInRequested',
+  SIGN_UP = 'signUpRequested',
 }
-type SignInResponse = {
-  id: string;
-  email: string;
-  name: string;
-  token: string;
-};
 
-export const signIn = createAsyncThunk(
-  'auth/sign-in',
-  async ({email, password}: ISignInParams) => {
-    const res = await fetch(
-      'http://trello-purrweb.herokuapp.com/auth/sign-in',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      },
-    );
-
-    const result: SignInResponse = await res.json();
-
-    return result;
-  },
-);
-
-interface ISignUpParams {
-  email: string;
-  name: string;
-  password: string;
-}
-type SignUpResponse = {
-  email: string;
-  name: string;
-  password: string;
-  token: string;
-  columns: {title: string; id: number}[];
-};
-
-export const signUp = createAsyncThunk(
-  'auth/sign-up',
-  async ({email, name, password}: ISignUpParams) => {
-    const res = await fetch(
-      'http://trello-purrweb.herokuapp.com/auth/sign-up',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          name,
-          password,
-        }),
-      },
-    );
-
-    const result: SignUpResponse = await res.json();
-
-    return result;
-  },
-);
-
-export const authSlice = createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState: defaultAuth,
   reducers: {
-    signOut(state) {
-      state = defaultAuth;
+    [AuthPublicActions.SIGN_IN](state, action: PayloadAction<SignInParams>) {
+      state.isLoading = true;
+    },
+    signInSucceeded(state, action: PayloadAction<SignInResponse>) {
+      state.userId = action.payload.id;
+      state.username = action.payload.name;
+      state.error = null;
+      state.isLoading = false;
+    },
+    signInFailed(state, action: PayloadAction<{message: string}>) {
+      state.error = action.payload.message;
+      state.isLoading = false;
+    },
+    [AuthPublicActions.SIGN_UP](state, action: PayloadAction<SignUpParams>) {
+      state.isLoading = true;
+    },
+    signUpSucceeded(state, action: PayloadAction<SignUpResponse>) {},
+    signUpFailed(state, action: PayloadAction<{message: string}>) {},
+    signOut() {
+      return defaultAuth;
     },
   },
-  extraReducers: (builder) => {},
 });
+
+export const authActions = authSlice.actions;
+export default authSlice.reducer;
