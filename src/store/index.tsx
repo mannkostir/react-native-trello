@@ -12,7 +12,7 @@ import {Provider} from 'react-redux';
 import rootSaga from './sagas';
 import createSagaMiddleware from 'redux-saga';
 import {persistReducer, persistStore} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import {PersistGate} from 'redux-persist/integration/react';
 
 const defaultState = {
@@ -33,7 +33,10 @@ const rootReducer = combineReducers({
   columns: columnsReducer,
 });
 
-const persistedReducer = persistReducer({key: 'root', storage}, rootReducer);
+const persistedReducer = persistReducer(
+  {key: 'root', storage: AsyncStorage},
+  rootReducer,
+);
 
 export type RootState = ReturnType<typeof rootReducer>;
 
