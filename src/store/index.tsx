@@ -40,7 +40,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const StoreProvider = ({children}: IStoreProps) => {
   const store = configureStore({
-    reducer: rootReducer,
+    reducer: persistedReducer,
     preloadedState: defaultState,
     middleware: [
       ...getDefaultMiddleware({
