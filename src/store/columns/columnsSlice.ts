@@ -14,7 +14,28 @@ import {
 } from './columns.types';
 
 export const defaultColumns: ColumnsState = {
-  currentColumns: [],
+  currentColumns: [
+    {
+      id: 1,
+      title: 'To Do',
+      userId: 1,
+    },
+    {
+      id: 2,
+      title: 'In Progress',
+      userId: 1,
+    },
+    {
+      id: 3,
+      title: 'Testing',
+      userId: 1,
+    },
+    {
+      id: 4,
+      title: 'Done',
+      userId: 1,
+    },
+  ],
   isLoading: false,
   error: null,
 };
