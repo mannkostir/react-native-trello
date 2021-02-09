@@ -14,7 +14,13 @@ const ListNavigator = ({cards}: {cards: Card[]}) => {
   return (
     <TopTab.Navigator>
       <TopTab.Screen name="Cards">
-        {(props) => <Prayers {...props} cards={cards} />}
+        {(props) => (
+          <Prayers
+            {...props}
+            uncheckedCards={cards.filter((card) => !card.checked)}
+            checkedCards={cards.filter((card) => card.checked)}
+          />
+        )}
       </TopTab.Screen>
       <TopTab.Screen name="Subscribed">
         {(props) => (

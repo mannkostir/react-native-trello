@@ -50,7 +50,7 @@ export const defaultCards: CardsState = {
     {
       title: 'Fifth Item',
       id: 5,
-      columnId: 5,
+      columnId: 1,
       description: 'nope',
       checked: false,
       commentsIds: [],

@@ -14,18 +14,26 @@ const isAuthenticated = true;
 const MainNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
         {isAuthenticated ? null : <Stack.Screen name="Auth" component={Auth} />}
         <Stack.Screen name="Board" component={Board} />
         <Stack.Screen
           name="Column"
           component={Column}
-          options={({route}) => ({title: route.params.title})}
+          options={({route}) => ({
+            title: route.params.title,
+          })}
         />
         <Stack.Screen
           name="CardDetails"
           component={CardDetails}
-          options={({route}) => ({title: route.params.cardInfo.title})}
+          options={({route}) => ({
+            title: route.params.cardInfo.title,
+            headerStyle: {
+              backgroundColor: '#BFB393',
+            },
+            headerTitleAlign: 'left',
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>

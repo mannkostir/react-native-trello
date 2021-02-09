@@ -1,7 +1,7 @@
 import {Card, Column} from '@/types/Common.types';
 import {BoardScreenNavigation} from '@/types/Navigation.types';
 import React from 'react';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 const ListItem = ({
@@ -16,8 +16,9 @@ const ListItem = ({
   navigation: BoardScreenNavigation;
 }) => {
   return (
-    <View>
+    <View style={styles.column}>
       <Text
+        style={styles.columnText}
         onPress={() =>
           navigation.navigate('Column', {
             title,
@@ -54,5 +55,20 @@ const Lists = ({lists, navigation, cards}: IListsProps) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  column: {
+    padding: 20,
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#e5e5e5',
+    backgroundColor: '#ffffff',
+    fontSize: 17,
+    marginBottom: 7,
+  },
+  columnText: {
+    fontWeight: '700',
+  },
+});
 
 export default Lists;
