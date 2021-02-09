@@ -26,4 +26,4 @@ export type DeleteCardParams = {
   token: string;
   cardId: number;
 };
-export type DeleteCardResponse = null;
+export type DeleteCardResponse = {cardId: number};

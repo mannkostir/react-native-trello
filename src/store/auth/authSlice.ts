@@ -8,10 +8,8 @@ import {
 } from './auth.types';
 
 export const defaultAuth: AuthState = {
-  userId: null,
-  username: null,
+  currentUser: null,
   error: null,
-  token: null,
   isLoading: false,
 };
 
@@ -28,8 +26,13 @@ const authSlice = createSlice({
       state.isLoading = true;
     },
     signInSucceeded(state, action: PayloadAction<SignInResponse>) {
-      state.userId = action.payload.id;
-      state.username = action.payload.name;
+      const user: typeof state.currentUser = {
+        email: action.payload.email,
+        id: action.payload.id,
+        token: action.payload.token,
+        name: action.payload.name,
+      };
+      state.currentUser = user;
       state.error = null;
       state.isLoading = false;
     },
@@ -40,8 +43,12 @@ const authSlice = createSlice({
     [AuthPublicActions.SIGN_UP](state, action: PayloadAction<SignUpParams>) {
       state.isLoading = true;
     },
-    signUpSucceeded(state, action: PayloadAction<SignUpResponse>) {},
-    signUpFailed(state, action: PayloadAction<{message: string}>) {},
+    signUpSucceeded(state, action: PayloadAction<SignUpResponse>) {
+      state.isLoading = false;
+    },
+    signUpFailed(state, action: PayloadAction<{message: string}>) {
+      state.isLoading = false;
+    },
     signOut() {
       return defaultAuth;
     },

@@ -75,33 +75,85 @@ const cardsSlice = createSlice({
     [CardsPublicActions.GET_ALL_CARDS](
       state,
       action: PayloadAction<GetAllCardsParams>,
-    ) {},
-    getAllCardsSucceeded(state, action: PayloadAction<GetAllCardsResponse>) {},
-    getAllCardsFailed(state, action: PayloadAction<{message: string}>) {},
+    ) {
+      state.isLoading = true;
+    },
+    getAllCardsSucceeded(state, action: PayloadAction<GetAllCardsResponse>) {
+      state.currentCards = action.payload;
+      state.isLoading = false;
+    },
+    getAllCardsFailed(state, action: PayloadAction<{message: string}>) {
+      state.error = action.payload.message;
+      state.isLoading = false;
+    },
     [CardsPublicActions.CREATE_CARD](
       state,
       action: PayloadAction<CreateCardParams>,
-    ) {},
-    createCardSucceeded(state, action: PayloadAction<CreateCardResponse>) {},
-    createCardFailed(state, action: PayloadAction<{message: string}>) {},
-    [CardsPublicActions.GET_CARD](
-      state,
-      action: PayloadAction<GetCardParams>,
-    ) {},
-    getCardSucceeded(state, action: PayloadAction<GetCardResponse>) {},
-    getCardFailed(state, action: PayloadAction<{message: string}>) {},
+    ) {
+      state.isLoading = true;
+    },
+    createCardSucceeded(state, action: PayloadAction<CreateCardResponse>) {
+      const {column, ...cardData} = action.payload;
+      state.currentCards.push({...cardData, commentsIds: []});
+      state.isLoading = false;
+    },
+    createCardFailed(state, action: PayloadAction<{message: string}>) {
+      state.error = action.payload.message;
+      state.isLoading = false;
+    },
+    [CardsPublicActions.GET_CARD](state, action: PayloadAction<GetCardParams>) {
+      state.isLoading = true;
+    },
+    getCardSucceeded(state, action: PayloadAction<GetCardResponse>) {
+      state.currentCards.length = 0;
+      state.currentCards.push(action.payload);
+      state.isLoading = false;
+    },
+    getCardFailed(state, action: PayloadAction<{message: string}>) {
+      state.error = action.payload.message;
+      state.isLoading = false;
+    },
     [CardsPublicActions.UPDATE_CARD](
       state,
       action: PayloadAction<UpdateCardParams>,
-    ) {},
-    updateCardSucceeded(state, action: PayloadAction<UpdateCardResponse>) {},
-    updateCardFailed(state, action: PayloadAction<{message: string}>) {},
+    ) {
+      state.isLoading = true;
+    },
+    updateCardSucceeded(state, action: PayloadAction<UpdateCardResponse>) {
+      const targetCardIndex = state.currentCards.findIndex(
+        (card) => card.id === action.payload.id,
+      );
+
+      state.currentCards[targetCardIndex] = {
+        ...state.currentCards[targetCardIndex],
+        ...action.payload,
+      };
+
+      state.isLoading = false;
+    },
+    updateCardFailed(state, action: PayloadAction<{message: string}>) {
+      state.error = action.payload.message;
+      state.isLoading = false;
+    },
     [CardsPublicActions.DELETE_CARD](
       state,
       action: PayloadAction<DeleteCardParams>,
-    ) {},
-    deleteCardSucceeded(state, action: PayloadAction<DeleteCardResponse>) {},
-    deleteCardFailed(state, action: PayloadAction<{message: string}>) {},
+    ) {
+      state.isLoading = true;
+    },
+    deleteCardSucceeded(state, action: PayloadAction<DeleteCardResponse>) {
+      const targetCardIndex = state.currentCards.findIndex(
+        (card) => card.id === action.payload.cardId,
+      );
+
+      state.currentCards.splice(targetCardIndex, 1);
+
+      state.isLoading = false;
+    },
+    deleteCardFailed(state, action: PayloadAction<{message: string}>) {
+      state.error = action.payload.message;
+      state.isLoading = false;
+    },
   },
 });
 

@@ -132,7 +132,10 @@ function* updateCommentWorker(action: PayloadAction<UpdateCommentParams>) {
 
 function* deleteCommentWorker(action: PayloadAction<DeleteCommentParams>) {
   try {
-    const sendRequest = async ({token, commentId}: typeof action.payload) => {
+    const sendRequest = async ({
+      token,
+      commentId,
+    }: typeof action.payload): Promise<DeleteCommentResponse> => {
       const res = await fetch(
         `http://trello-purrweb.herokuapp.com/comments/${commentId}`,
         {
@@ -144,9 +147,9 @@ function* deleteCommentWorker(action: PayloadAction<DeleteCommentParams>) {
         },
       );
 
-      const result: DeleteCommentResponse = await res.json();
+      const result = await res.json();
 
-      return result;
+      return {commentId: action.payload.commentId, ...result};
     };
 
     const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(

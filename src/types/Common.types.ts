@@ -13,7 +13,7 @@ export type Column = {
   userId: number;
 };
 export type User = {
-  id: string;
+  id: number;
   name: string;
   email: string;
   token: string;

@@ -1,4 +1,4 @@
-import {Card, Column, Comment} from './Common.types';
+import {Card, Column, Comment, User} from './Common.types';
 
 export type ColumnsState = {
   currentColumns: Column[];
@@ -16,9 +16,7 @@ export type CommentsState = {
   error: string | null;
 };
 export type AuthState = {
-  username: string | null;
-  userId: string | null;
+  currentUser: User | null;
   error: string | null;
-  token: string | null;
   isLoading: boolean;
 };

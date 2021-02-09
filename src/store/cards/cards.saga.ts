@@ -134,7 +134,10 @@ function* updateCardWorker(action: PayloadAction<UpdateCardParams>) {
 
 function* deleteCardWorker(action: PayloadAction<DeleteCardParams>) {
   try {
-    const sendRequest = async ({token, cardId}: typeof action.payload) => {
+    const sendRequest = async ({
+      token,
+      cardId,
+    }: typeof action.payload): Promise<DeleteCardResponse> => {
       const res = await fetch(
         `http://trello-purrweb.herokuapp.com/cards/${cardId}`,
         {
@@ -145,9 +148,9 @@ function* deleteCardWorker(action: PayloadAction<DeleteCardParams>) {
         },
       );
 
-      const result: DeleteCardResponse = await res.json();
+      const result = await res.json();
 
-      return result;
+      return {cardId: action.payload.cardId, ...result};
     };
 
     const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(

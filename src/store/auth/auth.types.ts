@@ -13,4 +13,4 @@ export type SignUpParams = {
 };
 export type SignUpResponse = User & {
   columns: Pick<Column, 'title' | 'id'>[];
-};
+} & {password: string};

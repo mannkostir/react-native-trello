@@ -139,7 +139,10 @@ function* updateColumnWorker(action: PayloadAction<UpdateColumnParams>) {
 
 function* deleteColumnWorker(action: PayloadAction<DeleteColumnParams>) {
   try {
-    const sendRequest = async ({listId, token}: typeof action.payload) => {
+    const sendRequest = async ({
+      listId,
+      token,
+    }: typeof action.payload): Promise<DeleteColumnResponse> => {
       const res = await fetch(
         `http://trello-purrweb.herokuapp.com/columns/${listId}`,
         {
@@ -151,9 +154,9 @@ function* deleteColumnWorker(action: PayloadAction<DeleteColumnParams>) {
         },
       );
 
-      const result: DeleteColumnResponse = await res.json();
+      const result = await res.json();
 
-      return result;
+      return {listId: action.payload.listId, ...result};
     };
 
     const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(

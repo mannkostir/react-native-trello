@@ -18,4 +18,4 @@ export type UpdateCommentParams = {commentId: number; token: string} & Pick<
 export type UpdateCommentResponse = Comment;
 
 export type DeleteCommentParams = {commentId: number; token: string};
-export type DeleteCommentResponse = null;
+export type DeleteCommentResponse = {commentId: number};
