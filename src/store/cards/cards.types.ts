@@ -6,8 +6,9 @@ export type GetAllCardsParams = {
 export type GetAllCardsResponse = Card[];
 
 export type CreateCardParams = {
+  cardData: Pick<Card, 'title' | 'description' | 'checked' | 'columnId'>;
   token: string;
-} & Pick<Card, 'title' | 'description' | 'checked'> & {column: Column};
+};
 export type CreateCardResponse = Omit<Card, 'commentsIds'> & {column: Column};
 
 export type GetCardParams = {
@@ -19,7 +20,8 @@ export type GetCardResponse = Card;
 export type UpdateCardParams = {
   token: string;
   cardId: number;
-} & Pick<Card, 'title' | 'description' | 'checked'> & {column: Column};
+  cardData: Pick<Card, 'title' | 'description' | 'checked'>;
+} & {column: Column};
 export type UpdateCardResponse = Omit<Card, 'columnId'>;
 
 export type DeleteCardParams = {

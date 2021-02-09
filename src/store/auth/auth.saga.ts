@@ -2,34 +2,13 @@ import {Unpromise} from '@/types/Common.types';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
 import {authActions, AuthPublicActions} from './authSlice';
-import {
-  SignInParams,
-  SignInResponse,
-  SignUpParams,
-  SignUpResponse,
-} from './auth.types';
+import {SignInParams, SignUpParams} from './auth.types';
+import authService from '@/services/authService';
 
 function* signInWorker(action: PayloadAction<SignInParams>) {
   try {
-    const sendRequest = async ({email, password}: SignInParams) => {
-      const res = await fetch(
-        'http://trello-purrweb.herokuapp.com/auth/sign-in',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({email, password}),
-        },
-      );
-
-      const result: SignInResponse = await res.json();
-
-      return result;
-    };
-
-    const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(
-      sendRequest,
+    const data: Unpromise<ReturnType<typeof authService.signIn>> = yield call(
+      authService.signIn,
       action.payload,
     );
     yield put(authActions.signInSucceeded(data));
@@ -40,25 +19,8 @@ function* signInWorker(action: PayloadAction<SignInParams>) {
 
 function* signUpWorker(action: PayloadAction<SignUpParams>) {
   try {
-    const sendRequest = async ({email, name, password}: SignUpParams) => {
-      const res = await fetch(
-        'http://trello-purrweb.herokuapp.com/auth/sign-up',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({email, name, password}),
-        },
-      );
-
-      const result: SignUpResponse = await res.json();
-
-      return result;
-    };
-
-    const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(
-      sendRequest,
+    const data: Unpromise<ReturnType<typeof authService.signUp>> = yield call(
+      authService.signUp,
       action.payload,
     );
 

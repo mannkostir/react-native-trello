@@ -1,3 +1,4 @@
+import columnsService from '@/services/columnsService';
 import {Unpromise} from '@/types/Common.types';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
@@ -17,23 +18,9 @@ import {columnsActions, ColumnsPublicActions} from './columnsSlice';
 
 function* getAllColumnsWorker(action: PayloadAction<GetAllColumnsParams>) {
   try {
-    const sendRequest = async ({token}: typeof action.payload) => {
-      const res = await fetch('http://trello-purrweb.herokuapp.com/columns', {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const result: GetAllColumnsResponse = await res.json();
-
-      return result;
-    };
-
-    const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(
-      sendRequest,
-      action.payload,
-    );
+    const data: Unpromise<
+      ReturnType<typeof columnsService.getAllColumns>
+    > = yield call(columnsService.getAllColumns, action.payload);
 
     yield put(columnsActions.getAllColumnsSucceeded(data));
   } catch (e) {
@@ -43,29 +30,9 @@ function* getAllColumnsWorker(action: PayloadAction<GetAllColumnsParams>) {
 
 function* getColumnWorker(action: PayloadAction<GetColumnParams>) {
   try {
-    const sendRequest = async ({token, listId}: typeof action.payload) => {
-      const res = await fetch(
-        `http://trello-purrweb.herokuapp.com/columns/${listId}`,
-        {
-          headers: {
-            Authorization: `bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        },
-      );
-
-      const result: GetColumnResponse = await res.json();
-
-      return result;
-    };
-
-    const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(
-      sendRequest,
-      {
-        listId: action.payload.listId,
-        token: action.payload.token,
-      },
-    );
+    const data: Unpromise<
+      ReturnType<typeof columnsService.getColumn>
+    > = yield call(columnsService.getColumn, action.payload);
 
     yield put(columnsActions.getColumnSucceeded(data));
   } catch (e) {
@@ -75,29 +42,9 @@ function* getColumnWorker(action: PayloadAction<GetColumnParams>) {
 
 function* createColumnWorker(action: PayloadAction<CreateColumnParams>) {
   try {
-    const sendRequest = async (requestData: typeof action.payload) => {
-      const {token, listId, ...columnData} = requestData;
-      const res = await fetch(
-        `http://trello-purrweb.herokuapp.com/columns/${listId}`,
-        {
-          headers: {
-            Authorization: `bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          method: 'POST',
-          body: JSON.stringify(columnData),
-        },
-      );
-
-      const result: CreateColumnResponse = await res.json();
-
-      return result;
-    };
-
-    const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(
-      sendRequest,
-      action.payload,
-    );
+    const data: Unpromise<
+      ReturnType<typeof columnsService.createColumn>
+    > = yield call(columnsService.createColumn, action.payload);
 
     yield put(columnsActions.createColumnSucceeded(data));
   } catch (e) {
@@ -107,29 +54,9 @@ function* createColumnWorker(action: PayloadAction<CreateColumnParams>) {
 
 function* updateColumnWorker(action: PayloadAction<UpdateColumnParams>) {
   try {
-    const sendRequest = async (requestData: typeof action.payload) => {
-      const {token, listId, ...columnData} = requestData;
-      const res = await fetch(
-        `http://trello-purrweb.herokuapp.com/columns/${listId}`,
-        {
-          headers: {
-            Authorization: `bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          method: 'PUT',
-          body: JSON.stringify(columnData),
-        },
-      );
-
-      const result: UpdateColumnResponse = await res.json();
-
-      return result;
-    };
-
-    const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(
-      sendRequest,
-      action.payload,
-    );
+    const data: Unpromise<
+      ReturnType<typeof columnsService.updateColumn>
+    > = yield call(columnsService.updateColumn, action.payload);
 
     yield put(columnsActions.updateColumnSucceeded(data));
   } catch (e) {
@@ -139,30 +66,9 @@ function* updateColumnWorker(action: PayloadAction<UpdateColumnParams>) {
 
 function* deleteColumnWorker(action: PayloadAction<DeleteColumnParams>) {
   try {
-    const sendRequest = async ({
-      listId,
-      token,
-    }: typeof action.payload): Promise<DeleteColumnResponse> => {
-      const res = await fetch(
-        `http://trello-purrweb.herokuapp.com/columns/${listId}`,
-        {
-          headers: {
-            Authorization: `bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          method: 'DELETE',
-        },
-      );
-
-      const result = await res.json();
-
-      return {listId: action.payload.listId, ...result};
-    };
-
-    const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(
-      sendRequest,
-      action.payload,
-    );
+    const data: Unpromise<
+      ReturnType<typeof columnsService.deleteColumn>
+    > = yield call(columnsService.deleteColumn, action.payload);
 
     yield put(columnsActions.deleteColumnSucceeded(data));
   } catch (e) {

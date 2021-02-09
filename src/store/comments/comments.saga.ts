@@ -1,39 +1,21 @@
+import commentsService from '@/services/commentsService';
 import {Unpromise} from '@/types/Common.types';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
 import {
   CreateCommentParams,
-  CreateCommentResponse,
   DeleteCommentParams,
-  DeleteCommentResponse,
   GetAllCommentsParams,
-  GetAllCommentsResponse,
   GetCommentParams,
-  GetCommentResponse,
   UpdateCommentParams,
-  UpdateCommentResponse,
 } from './comments.types';
 import {commentsActions, CommentsPublicActions} from './commentsSlice';
 
 function* getAllCommentsWorker(action: PayloadAction<GetAllCommentsParams>) {
   try {
-    const sendRequest = async ({token}: typeof action.payload) => {
-      const res = await fetch(`http://trello-purrweb.herokuapp.com/comments`, {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const result: GetAllCommentsResponse = await res.json();
-
-      return result;
-    };
-
-    const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(
-      sendRequest,
-      action.payload,
-    );
+    const data: Unpromise<
+      ReturnType<typeof commentsService.getAllComments>
+    > = yield call(commentsService.getAllComments, action.payload);
 
     yield put(commentsActions.getAllCommentsSucceeded(data));
   } catch (e) {
@@ -43,27 +25,9 @@ function* getAllCommentsWorker(action: PayloadAction<GetAllCommentsParams>) {
 
 function* createCommentWorker(action: PayloadAction<CreateCommentParams>) {
   try {
-    const sendRequest = async (requestData: typeof action.payload) => {
-      const {token, ...commentData} = requestData;
-
-      const res = await fetch(`http://trello-purrweb.herokuapp.com/comments`, {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify(commentData),
-      });
-
-      const result: CreateCommentResponse = await res.json();
-
-      return result;
-    };
-
-    const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(
-      sendRequest,
-      action.payload,
-    );
+    const data: Unpromise<
+      ReturnType<typeof commentsService.createComment>
+    > = yield call(commentsService.createComment, action.payload);
 
     yield put(commentsActions.createCommentSucceeded(data));
   } catch (e) {
@@ -73,26 +37,9 @@ function* createCommentWorker(action: PayloadAction<CreateCommentParams>) {
 
 function* getCommentWorker(action: PayloadAction<GetCommentParams>) {
   try {
-    const sendRequest = async ({token, commentId}: typeof action.payload) => {
-      const res = await fetch(
-        `http://trello-purrweb.herokuapp.com/comments/${commentId}`,
-        {
-          headers: {
-            Authorization: `bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        },
-      );
-
-      const result: GetCommentResponse = await res.json();
-
-      return result;
-    };
-
-    const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(
-      sendRequest,
-      action.payload,
-    );
+    const data: Unpromise<
+      ReturnType<typeof commentsService.getComment>
+    > = yield call(commentsService.getComment, action.payload);
 
     yield put(commentsActions.getCommentSucceeded(data));
   } catch (e) {
@@ -102,27 +49,9 @@ function* getCommentWorker(action: PayloadAction<GetCommentParams>) {
 
 function* updateCommentWorker(action: PayloadAction<UpdateCommentParams>) {
   try {
-    const sendRequest = async (requestData: typeof action.payload) => {
-      const {commentId, token, ...commentData} = requestData;
-
-      const res = await fetch(`http://trello-purrweb.herokuapp.com/comments`, {
-        headers: {
-          Authorization: `bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-        method: 'PUT',
-        body: JSON.stringify(commentData),
-      });
-
-      const result: UpdateCommentResponse = await res.json();
-
-      return result;
-    };
-
-    const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(
-      sendRequest,
-      action.payload,
-    );
+    const data: Unpromise<
+      ReturnType<typeof commentsService.updateComment>
+    > = yield call(commentsService.updateComment, action.payload);
 
     yield put(commentsActions.updateCommentSucceeded(data));
   } catch (e) {
@@ -132,30 +61,9 @@ function* updateCommentWorker(action: PayloadAction<UpdateCommentParams>) {
 
 function* deleteCommentWorker(action: PayloadAction<DeleteCommentParams>) {
   try {
-    const sendRequest = async ({
-      token,
-      commentId,
-    }: typeof action.payload): Promise<DeleteCommentResponse> => {
-      const res = await fetch(
-        `http://trello-purrweb.herokuapp.com/comments/${commentId}`,
-        {
-          headers: {
-            Authorization: `bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-          method: 'DELETE',
-        },
-      );
-
-      const result = await res.json();
-
-      return {commentId: action.payload.commentId, ...result};
-    };
-
-    const data: Unpromise<ReturnType<typeof sendRequest>> = yield call(
-      sendRequest,
-      action.payload,
-    );
+    const data: Unpromise<
+      ReturnType<typeof commentsService.deleteComment>
+    > = yield call(commentsService.deleteComment, action.payload);
 
     yield put(commentsActions.deleteCommentSucceeded(data));
   } catch (e) {
