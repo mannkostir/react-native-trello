@@ -1,11 +1,12 @@
-import Lists from '@/components/Columns/Columns';
+import BoardScreenTitle from '@/components/BoardScreenTitle';
+import Columns from '@/components/Columns';
 import {RootState} from '@/store';
 import {columnsActions} from '@/store/columns';
-import {Card, Column} from '@/types/Common.types';
 import {BoardScreenNavigation} from '@/types/Navigation.types';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 
 const Board = () => {
@@ -18,21 +19,26 @@ const Board = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(
-    //   columnsActions.getAllColumns({
-    //     token: state.auth.currentUser?.token || null,
-    //   }),
-    // );
+    dispatch(
+      columnsActions.getAllColumns({
+        token: state.auth.currentUser?.token || null,
+      }),
+    );
   }, []);
 
   return (
-    <View>
-      <Lists
+    <ScrollView>
+      <Columns
+        dispatch={dispatch}
         navigation={navigation}
-        cards={state.cards.currentCards}
         lists={state.columns.currentColumns}
       />
-    </View>
+      <BoardScreenTitle
+        dispatch={dispatch}
+        token={state.auth.currentUser?.token || null}
+        title="Test"
+      />
+    </ScrollView>
   );
 };
 

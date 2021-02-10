@@ -4,8 +4,8 @@ import {Card} from './Common.types';
 
 export type MainNavigatorParamList = {
   Board: undefined;
-  Column: {title: string; cards: Card[]};
-  CardDetails: {cardInfo: Card};
+  Column: {title: string; columnId: number};
+  CardDetails: {cardId: number; title: string};
   Auth: undefined;
 };
 

@@ -9,28 +9,7 @@ import {
 } from './columns.types';
 
 export const defaultColumns: ColumnsState = {
-  currentColumns: [
-    {
-      id: 1,
-      title: 'To Do',
-      userId: 1,
-    },
-    {
-      id: 2,
-      title: 'In Progress',
-      userId: 1,
-    },
-    {
-      id: 3,
-      title: 'Testing',
-      userId: 1,
-    },
-    {
-      id: 4,
-      title: 'Done',
-      userId: 1,
-    },
-  ],
+  currentColumns: [],
   isLoading: false,
   error: null,
 };
@@ -61,6 +40,7 @@ const columnsSlice = createSlice({
     getAllColumnsFailed(state, action: PayloadAction<{message: string}>) {
       state.isLoading = false;
       state.error = action.payload.message;
+      throw new Error(action.payload.message);
     },
     [ColumnsPublicActions.GET_COLUMN](state) {
       state.isLoading = true;

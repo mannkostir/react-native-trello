@@ -1,7 +1,7 @@
-import {Column} from '@/types/Common.types';
+import {AuthToken, Column} from '@/types/Common.types';
 
 export type GetAllColumnsParams = {
-  token: string | null;
+  token: AuthToken;
 };
 export type GetAllColumnsResponse = Column[];
 
@@ -10,8 +10,7 @@ export type CreateColumnParams = {
     title: string;
     description: string;
   };
-  token: string;
-  listId: number;
+  token: AuthToken;
 };
 export type CreateColumnResponse = {
   title: string;
@@ -21,7 +20,7 @@ export type CreateColumnResponse = {
 };
 
 export type GetColumnParams = {
-  token: string;
+  token: AuthToken;
   listId: number;
 };
 export type GetColumnResponse = Column;
@@ -29,15 +28,14 @@ export type GetColumnResponse = Column;
 export type UpdateColumnParams = {
   columnData: {
     title: string;
-    description: string;
   };
-  token: string;
+  token: AuthToken;
   listId: number;
 };
 export type UpdateColumnResponse = Column;
 
 export type DeleteColumnParams = {
-  token: string;
+  token: AuthToken;
   listId: number;
 };
 export type DeleteColumnResponse = {

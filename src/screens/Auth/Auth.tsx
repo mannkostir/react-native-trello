@@ -1,12 +1,9 @@
+import AuthNavigator from '@/navigators/AuthNavigator';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 
 const Auth = () => {
-  return (
-    <View>
-      <Text>Auth</Text>
-    </View>
-  );
+  return <AuthNavigator />;
 };
 
 export default Auth;

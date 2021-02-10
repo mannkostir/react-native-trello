@@ -3,14 +3,13 @@ interface IFetchAPIOptions {
   token?: null | string;
   rawBody?: {} | null;
 }
-
 interface ResponseError extends Error {
   status?: number;
 }
 
 export default async function fetchAPI<T>(
   url: RequestInfo,
-  reqOptions: IFetchAPIOptions = {method: 'GET'},
+  reqOptions: IFetchAPIOptions,
 ): Promise<T> {
   try {
     const options: RequestInit = {};
@@ -20,16 +19,18 @@ export default async function fetchAPI<T>(
       } else {
         options.body = reqOptions.rawBody;
       }
-      if (!reqOptions.rawBody) reqOptions.rawBody = null;
-      options.method = reqOptions.method || 'GET';
-      options.headers = {
-        ...options.headers,
-        ...(reqOptions.token
-          ? {Authorization: `bearer ${reqOptions.token}`}
-          : {}),
-        'Content-Type': 'application/json',
-      };
+    } else {
+      reqOptions.rawBody = null;
     }
+
+    options.method = reqOptions.method || 'GET';
+    options.headers = {
+      ...options.headers,
+      ...(reqOptions.token
+        ? {Authorization: `bearer ${reqOptions.token}`}
+        : {}),
+      'Content-Type': 'application/json',
+    };
 
     const response = await fetch(url, options);
 

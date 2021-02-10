@@ -6,7 +6,7 @@ import React from 'react';
 const List = () => {
   const route = useRoute<ColumnScreenRoute>();
 
-  return <ListNavigator cards={route.params.cards} />;
+  return <ListNavigator columnId={route.params.columnId} />;
 };
 
 export default List;

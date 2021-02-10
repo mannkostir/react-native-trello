@@ -32,13 +32,9 @@ export const getColumn = async ({listId, token}: GetColumnParams) => {
   return data;
 };
 
-export const createColumn = async ({
-  listId,
-  token,
-  columnData,
-}: CreateColumnParams) => {
+export const createColumn = async ({token, columnData}: CreateColumnParams) => {
   const data = await fetchAPI<CreateColumnResponse>(
-    `http://trello-purrweb.herokuapp.com/columns/${listId}`,
+    `http://trello-purrweb.herokuapp.com/columns`,
     {token, method: 'POST', rawBody: columnData},
   );
 

@@ -1,50 +1,86 @@
+import {RootState} from '@/store';
+import {columnsActions} from '@/store/columns';
 import {Card, Column} from '@/types/Common.types';
 import {BoardScreenNavigation} from '@/types/Navigation.types';
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useSelector} from 'react-redux';
 
 const ListItem = ({
   title,
   id,
-  cards,
   navigation,
+  dispatch,
 }: {
   title: string;
   id: number;
-  cards: Card[];
   navigation: BoardScreenNavigation;
+  dispatch: React.Dispatch<any>;
 }) => {
+  const token = useSelector(
+    (state: RootState) => state.auth.currentUser?.token || null,
+  );
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [newTitle, setNewTitle] = useState('');
+
+  const handleColumnTitleChange = () => {
+    if (newTitle) {
+      dispatch(
+        columnsActions.updateColumn({
+          columnData: {title: newTitle},
+          listId: id,
+          token,
+        }),
+      );
+    }
+    setIsEditing(false);
+  };
   return (
     <View style={styles.column}>
-      <Text
-        style={styles.columnText}
-        onPress={() =>
-          navigation.navigate('Column', {
-            title,
-            cards,
-          })
-        }>
-        {title}
-      </Text>
+      {isEditing ? (
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <TextInput
+            placeholder={title}
+            onChangeText={(text) => setNewTitle(text)}
+          />
+          <TouchableOpacity onPress={handleColumnTitleChange}>
+            <Text style={{marginLeft: 15}}>Edit</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <Text
+          style={styles.columnText}
+          onPress={() =>
+            navigation.navigate('Column', {
+              title,
+              columnId: id,
+            })
+          }
+          onLongPress={() => setIsEditing(true)}>
+          {title}
+        </Text>
+      )}
     </View>
   );
 };
 
 interface IListsProps {
   lists: Column[];
-  cards: Card[];
   navigation: BoardScreenNavigation;
+  dispatch: React.Dispatch<any>;
 }
 
-const Lists = ({lists, navigation, cards}: IListsProps) => {
+const Columns = ({lists, navigation, dispatch}: IListsProps) => {
   return (
     <SafeAreaView>
       <FlatList
         data={lists}
         renderItem={({item}) => (
           <ListItem
-            cards={cards.filter((card) => card.columnId === item.id)}
+            dispatch={dispatch}
             navigation={navigation}
             title={item.title}
             id={item.id}
@@ -71,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Lists;
+export default Columns;

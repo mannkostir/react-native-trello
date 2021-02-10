@@ -1,24 +1,27 @@
 import AddCard from '@/components/AddCard';
 import Card from '@/components/Card';
+import {RootState} from '@/store';
 import * as types from '@/types/Common.types';
 import React, {useState} from 'react';
-import {Button, FlatList, StyleSheet, Text, View} from 'react-native';
-import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useDispatch, useSelector} from 'react-redux';
 
-const Cards = ({
-  uncheckedCards,
-  checkedCards,
-}: {
-  uncheckedCards: types.Card[];
-  checkedCards: types.Card[];
-}) => {
+const Cards = ({currentColumnId}: {currentColumnId: number}) => {
+  const cards = useSelector((state: RootState) =>
+    state.cards.currentCards.filter(
+      (card) => card.columnId === currentColumnId,
+    ),
+  );
+  const dispatch = useDispatch();
+
   const [isShowingCheckedCards, setIsShowingCheckedCards] = useState(false);
   return (
     <>
-      <AddCard />
+      <AddCard dispatch={dispatch} columnId={currentColumnId} />
       <FlatList
-        data={uncheckedCards}
-        renderItem={({item}) => <Card card={item} />}
+        data={cards.filter((card) => !card.checked)}
+        renderItem={({item}) => <Card dispatch={dispatch} card={item} />}
         keyExtractor={(card) => card.id.toString()}
         style={styles.list}
       />
@@ -33,8 +36,8 @@ const Cards = ({
       </TouchableOpacity>
       {isShowingCheckedCards ? (
         <FlatList
-          data={checkedCards}
-          renderItem={({item}) => <Card card={item} />}
+          data={cards.filter((card) => card.checked)}
+          renderItem={({item}) => <Card dispatch={dispatch} card={item} />}
           keyExtractor={(card) => card.id.toString()}
           style={styles.list}
         />

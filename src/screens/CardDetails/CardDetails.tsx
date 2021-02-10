@@ -1,12 +1,27 @@
 import CardComments from '@/components/CardComments';
 import CardMembers from '@/components/CardMembers';
+import {RootState} from '@/store';
+import {cardsActions} from '@/store/cards';
 import {CardDetailsRoute} from '@/types/Navigation.types';
 import {useRoute} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 
 const CardDetails = () => {
   const route = useRoute<CardDetailsRoute>();
+  const {card, comments, token} = useSelector((state: RootState) => ({
+    card: state.cards.currentCards.filter(
+      (card) => card.id === route.params.cardId,
+    )[0],
+    comments: state.comments,
+    token: state.auth.currentUser?.token || null,
+  }));
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(cardsActions.getCard({cardId: card.id, token}));
+  }, [comments]);
 
   return (
     <View style={{flex: 1}}>
@@ -31,11 +46,17 @@ const CardDetails = () => {
         </View>
         <View style={styles.infoTableItem}>
           <Text>1</Text>
-          <Text>Time Prayed By Others</Text>
+          <Text>Times Prayed By Others</Text>
         </View>
       </View>
       <CardMembers members={[]} />
-      <CardComments comments={[]} />
+      <CardComments
+        comments={comments.currentComments.filter((comment) =>
+          card.commentsIds.includes(comment.id),
+        )}
+        cardId={card.id}
+        dispatch={dispatch}
+      />
     </View>
   );
 };

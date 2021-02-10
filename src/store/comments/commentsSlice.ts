@@ -47,7 +47,7 @@ const commentsSlice = createSlice({
       state,
       action: PayloadAction<CreateCommentResponse>,
     ) {
-      const {user, ...commentData} = action.payload;
+      const {user, card, ...commentData} = action.payload;
       state.currentComments.push(commentData);
       state.isLoading = false;
     },

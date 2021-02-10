@@ -9,48 +9,7 @@ import {
 } from './cards.types';
 
 export const defaultCards: CardsState = {
-  currentCards: [
-    {
-      title: 'First Item',
-      id: 1,
-      columnId: 1,
-      description: 'nope',
-      checked: false,
-      commentsIds: [],
-    },
-    {
-      title: 'Second Item',
-      id: 2,
-      columnId: 2,
-      description: 'nope',
-      checked: false,
-      commentsIds: [],
-    },
-    {
-      title: 'Third Item',
-      id: 3,
-      columnId: 3,
-      description: 'nope',
-      checked: false,
-      commentsIds: [],
-    },
-    {
-      title: 'Fourth Item',
-      id: 4,
-      columnId: 4,
-      description: 'nope',
-      checked: false,
-      commentsIds: [],
-    },
-    {
-      title: 'Fifth Item',
-      id: 5,
-      columnId: 1,
-      description: 'nope',
-      checked: false,
-      commentsIds: [],
-    },
-  ],
+  currentCards: [],
   isLoading: false,
   error: null,
 };

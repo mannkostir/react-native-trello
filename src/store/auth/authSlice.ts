@@ -42,6 +42,7 @@ const authSlice = createSlice({
       state.isLoading = false;
     },
     signUpFailed(state, action: PayloadAction<{message: string}>) {
+      state.error = action.payload.message;
       state.isLoading = false;
     },
     signOut() {

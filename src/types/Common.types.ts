@@ -29,3 +29,5 @@ export type Comment = {
 export type Unpromise<T extends Promise<any>> = T extends Promise<infer U>
   ? U
   : never;
+
+export type AuthToken = string | null;

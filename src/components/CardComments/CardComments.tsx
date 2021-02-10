@@ -12,7 +12,15 @@ const CardCommentsItem = ({comment}: {comment: Comment}) => {
   );
 };
 
-const CardComments = ({comments}: {comments: Comment[]}) => {
+const CardComments = ({
+  comments,
+  cardId,
+  dispatch,
+}: {
+  comments: Comment[];
+  cardId: number;
+  dispatch: React.Dispatch<any>;
+}) => {
   return (
     <View>
       <Text>Comments</Text>
@@ -21,7 +29,7 @@ const CardComments = ({comments}: {comments: Comment[]}) => {
         renderItem={({item}) => <CardCommentsItem comment={item} />}
         keyExtractor={(item) => item.id.toString()}
       />
-      <AddComment />
+      <AddComment cardId={cardId} dispatch={dispatch} />
     </View>
   );
 };

@@ -1,15 +1,32 @@
-import {cardsActions} from '@/store/cards/cardsSlice';
+import {RootState} from '@/store';
+import {cardsActions} from '@/store/cards';
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
-const AddCard = () => {
+const AddCard = ({
+  columnId,
+  dispatch,
+}: {
+  columnId: number;
+  dispatch: React.Dispatch<any>;
+}) => {
   const [newCardTitle, setNewCardTitle] = useState('');
 
-  const dispatch = useDispatch();
+  const auth = useSelector((state: RootState) => state.auth);
 
-  const handleAddCard = () => {};
+  const handleAddCard = () => {
+    if (newCardTitle) {
+      dispatch(
+        cardsActions.createCard({
+          cardData: {title: newCardTitle, description: '', checked: false},
+          token: auth.currentUser?.token || null,
+          columnId,
+        }),
+      );
+    }
+  };
   return (
     <View style={styles.addCardWrapper}>
       <TextInput
@@ -17,7 +34,7 @@ const AddCard = () => {
         placeholder={'Add a prayer...'}
         onChangeText={(text) => setNewCardTitle(text)}
       />
-      <TouchableOpacity style={styles.addCardSubmitBtn}>
+      <TouchableOpacity style={styles.addCardSubmitBtn} onPress={handleAddCard}>
         <Text style={styles.addCardSubmitBtnText}>+</Text>
       </TouchableOpacity>
     </View>
