@@ -1,11 +1,12 @@
 import Lists from '@/components/Columns/Columns';
 import {RootState} from '@/store';
+import {columnsActions} from '@/store/columns/columnsSlice';
 import {Card, Column} from '@/types/Common.types';
 import {BoardScreenNavigation} from '@/types/Navigation.types';
 import {useNavigation} from '@react-navigation/native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 const Board = () => {
   const navigation = useNavigation<BoardScreenNavigation>();
@@ -13,6 +14,7 @@ const Board = () => {
     cards: state.cards,
     columns: state.columns,
   }));
+  const dispatch = useDispatch();
 
   return (
     <View>

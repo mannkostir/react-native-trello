@@ -1,5 +1,5 @@
 import {ColumnsState} from '@/types/Store.types';
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createAction, createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {
   CreateColumnParams,
   CreateColumnResponse,

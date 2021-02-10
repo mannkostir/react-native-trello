@@ -23,9 +23,13 @@ export const getAllCards = async ({token}: GetAllCardsParams) => {
   return data;
 };
 
-export const createCard = async ({token, cardData}: CreateCardParams) => {
+export const createCard = async ({
+  token,
+  columnId,
+  cardData,
+}: CreateCardParams) => {
   const data = await fetchAPI<CreateCardResponse>(
-    'http://trello-purrweb.herokuapp.com/cards',
+    `http://trello-purrweb.herokuapp.com/columns/${columnId}/cards`,
     {
       token,
       method: 'POST',

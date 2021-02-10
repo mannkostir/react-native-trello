@@ -1,9 +1,15 @@
+import {cardsActions} from '@/store/cards/cardsSlice';
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
+import {useDispatch} from 'react-redux';
 
 const AddCard = () => {
   const [newCardTitle, setNewCardTitle] = useState('');
+
+  const dispatch = useDispatch();
+
+  const handleAddCard = () => {};
   return (
     <View style={styles.addCardWrapper}>
       <TextInput
@@ -30,7 +36,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   addCardSubmitBtn: {
-    zIndex: 2,
+    alignSelf: 'center',
   },
   addCardSubmitBtnText: {
     color: '#72A8BC',

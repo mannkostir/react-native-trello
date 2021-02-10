@@ -6,6 +6,7 @@ import Column from '@/screens/Column';
 import Auth from '@/screens/Auth';
 import {MainNavigatorParamList} from '@/types/Navigation.types';
 import CardDetails from '@/screens/CardDetails';
+import BoardScreenTitle from '@/components/BoardScreenTitle';
 
 const Stack = createStackNavigator<MainNavigatorParamList>();
 
@@ -16,7 +17,15 @@ const MainNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
         {isAuthenticated ? null : <Stack.Screen name="Auth" component={Auth} />}
-        <Stack.Screen name="Board" component={Board} />
+        <Stack.Screen
+          name="Board"
+          component={Board}
+          options={({route}) => ({
+            headerTitle: (props) => (
+              <BoardScreenTitle title="Board" {...props} />
+            ),
+          })}
+        />
         <Stack.Screen
           name="Column"
           component={Column}
