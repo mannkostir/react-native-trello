@@ -1,7 +1,7 @@
 import {Unpromise} from '@/types/Common.types';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
-import {authActions, AuthPublicActions} from './authSlice';
+import {authInternalActions, AuthPublicActions} from './authSlice';
 import {SignInParams, SignUpParams} from './auth.types';
 import authService from '@/services/authService';
 
@@ -11,9 +11,9 @@ function* signInWorker(action: PayloadAction<SignInParams>) {
       authService.signIn,
       action.payload,
     );
-    yield put(authActions.signInSucceeded(data));
+    yield put(authInternalActions.signInSucceeded(data));
   } catch (e) {
-    yield put(authActions.signInFailed({message: e.message}));
+    yield put(authInternalActions.signInFailed({message: e.message}));
   }
 }
 
@@ -24,9 +24,9 @@ function* signUpWorker(action: PayloadAction<SignUpParams>) {
       action.payload,
     );
 
-    yield put(authActions.signUpSucceeded(data));
+    yield put(authInternalActions.signUpSucceeded(data));
   } catch (e) {
-    yield put(authActions.signUpFailed({message: e.message}));
+    yield put(authInternalActions.signUpFailed({message: e.message}));
   }
 }
 

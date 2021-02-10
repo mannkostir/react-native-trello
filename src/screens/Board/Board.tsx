@@ -1,6 +1,5 @@
 import Lists from '@/components/Columns/Columns';
 import {RootState} from '@/store';
-import {columnsActions} from '@/store/columns/columnsSlice';
 import {Card, Column} from '@/types/Common.types';
 import {BoardScreenNavigation} from '@/types/Navigation.types';
 import {useNavigation} from '@react-navigation/native';
@@ -15,6 +14,10 @@ const Board = () => {
     columns: state.columns,
   }));
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    // dispatch();
+  });
 
   return (
     <View>

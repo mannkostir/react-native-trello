@@ -9,7 +9,7 @@ import {
   GetCommentParams,
   UpdateCommentParams,
 } from './comments.types';
-import {commentsActions, CommentsPublicActions} from './commentsSlice';
+import {commentsInternalActions, CommentsPublicActions} from './commentsSlice';
 
 function* getAllCommentsWorker(action: PayloadAction<GetAllCommentsParams>) {
   try {
@@ -17,9 +17,11 @@ function* getAllCommentsWorker(action: PayloadAction<GetAllCommentsParams>) {
       ReturnType<typeof commentsService.getAllComments>
     > = yield call(commentsService.getAllComments, action.payload);
 
-    yield put(commentsActions.getAllCommentsSucceeded(data));
+    yield put(commentsInternalActions.getAllCommentsSucceeded(data));
   } catch (e) {
-    yield put(commentsActions.getAllCommentsFailed({message: e.message}));
+    yield put(
+      commentsInternalActions.getAllCommentsFailed({message: e.message}),
+    );
   }
 }
 
@@ -29,9 +31,11 @@ function* createCommentWorker(action: PayloadAction<CreateCommentParams>) {
       ReturnType<typeof commentsService.createComment>
     > = yield call(commentsService.createComment, action.payload);
 
-    yield put(commentsActions.createCommentSucceeded(data));
+    yield put(commentsInternalActions.createCommentSucceeded(data));
   } catch (e) {
-    yield put(commentsActions.createCommentFailed({message: e.message}));
+    yield put(
+      commentsInternalActions.createCommentFailed({message: e.message}),
+    );
   }
 }
 
@@ -41,9 +45,9 @@ function* getCommentWorker(action: PayloadAction<GetCommentParams>) {
       ReturnType<typeof commentsService.getComment>
     > = yield call(commentsService.getComment, action.payload);
 
-    yield put(commentsActions.getCommentSucceeded(data));
+    yield put(commentsInternalActions.getCommentSucceeded(data));
   } catch (e) {
-    yield put(commentsActions.getCommentFailed({message: e.message}));
+    yield put(commentsInternalActions.getCommentFailed({message: e.message}));
   }
 }
 
@@ -53,9 +57,11 @@ function* updateCommentWorker(action: PayloadAction<UpdateCommentParams>) {
       ReturnType<typeof commentsService.updateComment>
     > = yield call(commentsService.updateComment, action.payload);
 
-    yield put(commentsActions.updateCommentSucceeded(data));
+    yield put(commentsInternalActions.updateCommentSucceeded(data));
   } catch (e) {
-    yield put(commentsActions.updateCommentFailed({message: e.message}));
+    yield put(
+      commentsInternalActions.updateCommentFailed({message: e.message}),
+    );
   }
 }
 
@@ -65,9 +71,11 @@ function* deleteCommentWorker(action: PayloadAction<DeleteCommentParams>) {
       ReturnType<typeof commentsService.deleteComment>
     > = yield call(commentsService.deleteComment, action.payload);
 
-    yield put(commentsActions.deleteCommentSucceeded(data));
+    yield put(commentsInternalActions.deleteCommentSucceeded(data));
   } catch (e) {
-    yield put(commentsActions.deleteCommentFailed({message: e.message}));
+    yield put(
+      commentsInternalActions.deleteCommentFailed({message: e.message}),
+    );
   }
 }
 

@@ -1,15 +1,10 @@
 import {ColumnsState} from '@/types/Store.types';
-import {createAction, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {
-  CreateColumnParams,
   CreateColumnResponse,
-  DeleteColumnParams,
   DeleteColumnResponse,
-  GetAllColumnsParams,
   GetAllColumnsResponse,
-  GetColumnParams,
   GetColumnResponse,
-  UpdateColumnParams,
   UpdateColumnResponse,
 } from './columns.types';
 
@@ -48,14 +43,11 @@ export enum ColumnsPublicActions {
   DELETE_COLUMN = 'deleteColumnRequested',
 }
 
-export const columnsSlice = createSlice({
+const columnsSlice = createSlice({
   name: 'lists',
   initialState: defaultColumns,
   reducers: {
-    [ColumnsPublicActions.GET_ALL_COLUMNS](
-      state,
-      action: PayloadAction<GetAllColumnsParams>,
-    ) {
+    [ColumnsPublicActions.GET_ALL_COLUMNS](state) {
       state.isLoading = true;
     },
     getAllColumnsSucceeded(
@@ -70,10 +62,7 @@ export const columnsSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload.message;
     },
-    [ColumnsPublicActions.GET_COLUMN](
-      state,
-      action: PayloadAction<GetColumnParams>,
-    ) {
+    [ColumnsPublicActions.GET_COLUMN](state) {
       state.isLoading = true;
     },
     getColumnSucceeded(state, action: PayloadAction<GetColumnResponse>) {
@@ -85,10 +74,7 @@ export const columnsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [ColumnsPublicActions.CREATE_COLUMN](
-      state,
-      action: PayloadAction<CreateColumnParams>,
-    ) {
+    [ColumnsPublicActions.CREATE_COLUMN](state) {
       state.isLoading = true;
     },
     createColumnSucceeded(state, action: PayloadAction<CreateColumnResponse>) {
@@ -103,10 +89,7 @@ export const columnsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [ColumnsPublicActions.UPDATE_COLUMN](
-      state,
-      action: PayloadAction<UpdateColumnParams>,
-    ) {
+    [ColumnsPublicActions.UPDATE_COLUMN](state) {
       state.isLoading = true;
     },
     updateColumnSucceeded(state, action: PayloadAction<UpdateColumnResponse>) {
@@ -124,10 +107,7 @@ export const columnsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [ColumnsPublicActions.DELETE_COLUMN](
-      state,
-      action: PayloadAction<DeleteColumnParams>,
-    ) {
+    [ColumnsPublicActions.DELETE_COLUMN](state) {
       state.isLoading = true;
     },
     deleteColumnSucceeded(state, action: PayloadAction<DeleteColumnResponse>) {
@@ -145,5 +125,5 @@ export const columnsSlice = createSlice({
   },
 });
 
-export const columnsActions = columnsSlice.actions;
+export const columnsInternalActions = columnsSlice.actions;
 export default columnsSlice.reducer;

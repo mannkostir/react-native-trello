@@ -1,11 +1,6 @@
 import {AuthState} from '@/types/Store.types';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {
-  SignInParams,
-  SignUpParams,
-  SignUpResponse,
-  SignInResponse,
-} from './auth.types';
+import {SignUpResponse, SignInResponse} from './auth.types';
 
 export const defaultAuth: AuthState = {
   currentUser: null,
@@ -22,7 +17,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: defaultAuth,
   reducers: {
-    [AuthPublicActions.SIGN_IN](state, action: PayloadAction<SignInParams>) {
+    [AuthPublicActions.SIGN_IN](state) {
       state.isLoading = true;
     },
     signInSucceeded(state, action: PayloadAction<SignInResponse>) {
@@ -40,7 +35,7 @@ const authSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [AuthPublicActions.SIGN_UP](state, action: PayloadAction<SignUpParams>) {
+    [AuthPublicActions.SIGN_UP](state) {
       state.isLoading = true;
     },
     signUpSucceeded(state, action: PayloadAction<SignUpResponse>) {
@@ -55,5 +50,5 @@ const authSlice = createSlice({
   },
 });
 
-export const authActions = authSlice.actions;
+export const authInternalActions = authSlice.actions;
 export default authSlice.reducer;

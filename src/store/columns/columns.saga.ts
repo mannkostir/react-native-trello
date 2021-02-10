@@ -4,17 +4,12 @@ import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
 import {
   CreateColumnParams,
-  CreateColumnResponse,
   DeleteColumnParams,
-  DeleteColumnResponse,
   GetAllColumnsParams,
-  GetAllColumnsResponse,
   GetColumnParams,
-  GetColumnResponse,
   UpdateColumnParams,
-  UpdateColumnResponse,
 } from './columns.types';
-import {columnsActions, ColumnsPublicActions} from './columnsSlice';
+import {columnsInternalActions, ColumnsPublicActions} from './columnsSlice';
 
 function* getAllColumnsWorker(action: PayloadAction<GetAllColumnsParams>) {
   try {
@@ -22,9 +17,9 @@ function* getAllColumnsWorker(action: PayloadAction<GetAllColumnsParams>) {
       ReturnType<typeof columnsService.getAllColumns>
     > = yield call(columnsService.getAllColumns, action.payload);
 
-    yield put(columnsActions.getAllColumnsSucceeded(data));
+    yield put(columnsInternalActions.getAllColumnsSucceeded(data));
   } catch (e) {
-    yield put(columnsActions.getAllColumnsFailed({message: e.message}));
+    yield put(columnsInternalActions.getAllColumnsFailed({message: e.message}));
   }
 }
 
@@ -34,9 +29,9 @@ function* getColumnWorker(action: PayloadAction<GetColumnParams>) {
       ReturnType<typeof columnsService.getColumn>
     > = yield call(columnsService.getColumn, action.payload);
 
-    yield put(columnsActions.getColumnSucceeded(data));
+    yield put(columnsInternalActions.getColumnSucceeded(data));
   } catch (e) {
-    yield put(columnsActions.getColumnFailed({message: e.message}));
+    yield put(columnsInternalActions.getColumnFailed({message: e.message}));
   }
 }
 
@@ -46,9 +41,9 @@ function* createColumnWorker(action: PayloadAction<CreateColumnParams>) {
       ReturnType<typeof columnsService.createColumn>
     > = yield call(columnsService.createColumn, action.payload);
 
-    yield put(columnsActions.createColumnSucceeded(data));
+    yield put(columnsInternalActions.createColumnSucceeded(data));
   } catch (e) {
-    yield put(columnsActions.createColumnFailed({message: e.message}));
+    yield put(columnsInternalActions.createColumnFailed({message: e.message}));
   }
 }
 
@@ -58,9 +53,9 @@ function* updateColumnWorker(action: PayloadAction<UpdateColumnParams>) {
       ReturnType<typeof columnsService.updateColumn>
     > = yield call(columnsService.updateColumn, action.payload);
 
-    yield put(columnsActions.updateColumnSucceeded(data));
+    yield put(columnsInternalActions.updateColumnSucceeded(data));
   } catch (e) {
-    yield put(columnsActions.updateColumnFailed({message: e.message}));
+    yield put(columnsInternalActions.updateColumnFailed({message: e.message}));
   }
 }
 
@@ -70,9 +65,9 @@ function* deleteColumnWorker(action: PayloadAction<DeleteColumnParams>) {
       ReturnType<typeof columnsService.deleteColumn>
     > = yield call(columnsService.deleteColumn, action.payload);
 
-    yield put(columnsActions.deleteColumnSucceeded(data));
+    yield put(columnsInternalActions.deleteColumnSucceeded(data));
   } catch (e) {
-    yield put(columnsActions.deleteColumnFailed({message: e.message}));
+    yield put(columnsInternalActions.deleteColumnFailed({message: e.message}));
   }
 }
 

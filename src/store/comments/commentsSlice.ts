@@ -1,15 +1,10 @@
 import {CommentsState} from '@/types/Store.types';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {
-  CreateCommentParams,
   CreateCommentResponse,
-  DeleteCommentParams,
   DeleteCommentResponse,
-  GetAllCommentsParams,
   GetAllCommentsResponse,
-  GetCommentParams,
   GetCommentResponse,
-  UpdateCommentParams,
   UpdateCommentResponse,
 } from './comments.types';
 
@@ -31,10 +26,7 @@ const commentsSlice = createSlice({
   name: 'comments',
   initialState: defaultComments,
   reducers: {
-    [CommentsPublicActions.GET_ALL_COMMENTS](
-      state,
-      action: PayloadAction<GetAllCommentsParams>,
-    ) {
+    [CommentsPublicActions.GET_ALL_COMMENTS](state) {
       state.isLoading = true;
     },
     getAllCommentsSucceeded(
@@ -48,10 +40,7 @@ const commentsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [CommentsPublicActions.CREATE_COMMENT](
-      state,
-      action: PayloadAction<CreateCommentParams>,
-    ) {
+    [CommentsPublicActions.CREATE_COMMENT](state) {
       state.isLoading = true;
     },
     createCommentSucceeded(
@@ -66,10 +55,7 @@ const commentsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [CommentsPublicActions.GET_COMMENT](
-      state,
-      action: PayloadAction<GetCommentParams>,
-    ) {
+    [CommentsPublicActions.GET_COMMENT](state) {
       state.isLoading = true;
     },
     getCommentSucceeded(state, action: PayloadAction<GetCommentResponse>) {
@@ -81,10 +67,7 @@ const commentsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [CommentsPublicActions.UPDATE_COMMENT](
-      state,
-      action: PayloadAction<UpdateCommentParams>,
-    ) {
+    [CommentsPublicActions.UPDATE_COMMENT](state) {
       state.isLoading = true;
     },
     updateCommentSucceeded(
@@ -103,10 +86,7 @@ const commentsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [CommentsPublicActions.DELETE_COMMENT](
-      state,
-      action: PayloadAction<DeleteCommentParams>,
-    ) {
+    [CommentsPublicActions.DELETE_COMMENT](state) {
       state.isLoading = true;
     },
     deleteCommentSucceeded(
@@ -128,5 +108,5 @@ const commentsSlice = createSlice({
   },
 });
 
-export const commentsActions = commentsSlice.actions;
+export const commentsInternalActions = commentsSlice.actions;
 export default commentsSlice.reducer;

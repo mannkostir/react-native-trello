@@ -1,8 +1,8 @@
 import {Comment, User} from '@/types/Common.types';
 
-export interface GetAllCommentsParams {
+export type GetAllCommentsParams = {
   token: string;
-}
+};
 export type GetAllCommentsResponse = Comment[];
 
 export type CreateCommentParams = {

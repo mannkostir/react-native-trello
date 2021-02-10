@@ -1,15 +1,10 @@
 import {CardsState} from '@/types/Store.types';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {
-  CreateCardParams,
   CreateCardResponse,
-  DeleteCardParams,
   DeleteCardResponse,
-  GetAllCardsParams,
   GetAllCardsResponse,
-  GetCardParams,
   GetCardResponse,
-  UpdateCardParams,
   UpdateCardResponse,
 } from './cards.types';
 
@@ -72,10 +67,7 @@ const cardsSlice = createSlice({
   name: 'cards',
   initialState: defaultCards,
   reducers: {
-    [CardsPublicActions.GET_ALL_CARDS](
-      state,
-      action: PayloadAction<GetAllCardsParams>,
-    ) {
+    [CardsPublicActions.GET_ALL_CARDS](state) {
       state.isLoading = true;
     },
     getAllCardsSucceeded(state, action: PayloadAction<GetAllCardsResponse>) {
@@ -86,10 +78,7 @@ const cardsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [CardsPublicActions.CREATE_CARD](
-      state,
-      action: PayloadAction<CreateCardParams>,
-    ) {
+    [CardsPublicActions.CREATE_CARD](state) {
       state.isLoading = true;
     },
     createCardSucceeded(state, action: PayloadAction<CreateCardResponse>) {
@@ -101,7 +90,7 @@ const cardsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [CardsPublicActions.GET_CARD](state, action: PayloadAction<GetCardParams>) {
+    [CardsPublicActions.GET_CARD](state) {
       state.isLoading = true;
     },
     getCardSucceeded(state, action: PayloadAction<GetCardResponse>) {
@@ -113,10 +102,7 @@ const cardsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [CardsPublicActions.UPDATE_CARD](
-      state,
-      action: PayloadAction<UpdateCardParams>,
-    ) {
+    [CardsPublicActions.UPDATE_CARD](state) {
       state.isLoading = true;
     },
     updateCardSucceeded(state, action: PayloadAction<UpdateCardResponse>) {
@@ -135,10 +121,7 @@ const cardsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [CardsPublicActions.DELETE_CARD](
-      state,
-      action: PayloadAction<DeleteCardParams>,
-    ) {
+    [CardsPublicActions.DELETE_CARD](state) {
       state.isLoading = true;
     },
     deleteCardSucceeded(state, action: PayloadAction<DeleteCardResponse>) {
@@ -157,5 +140,5 @@ const cardsSlice = createSlice({
   },
 });
 
-export const cardsActions = cardsSlice.actions;
+export const cardsInternalActions = cardsSlice.actions;
 export default cardsSlice.reducer;
