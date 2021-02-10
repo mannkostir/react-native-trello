@@ -1,7 +1,7 @@
 import {Column} from '@/types/Common.types';
 
 export type GetAllColumnsParams = {
-  token: string;
+  token: string | null;
 };
 export type GetAllColumnsResponse = Column[];
 

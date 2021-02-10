@@ -4,6 +4,10 @@ interface IFetchAPIOptions {
   rawBody?: {} | null;
 }
 
+interface ResponseError extends Error {
+  status?: number;
+}
+
 export default async function fetchAPI<T>(
   url: RequestInfo,
   reqOptions: IFetchAPIOptions = {method: 'GET'},
@@ -29,10 +33,18 @@ export default async function fetchAPI<T>(
 
     const response = await fetch(url, options);
 
-    if (!response.ok)
-      throw new Error(
-        response.statusText || 'Something went wrong, try again later',
+    if (!response.ok) {
+      let error: ResponseError = new Error(
+        response.statusText ||
+          `Something went wrong, try again later. ${
+            response.status ? 'Code: ' + response.status : ''
+          }`,
       );
+
+      error.status = response.status;
+
+      throw error;
+    }
 
     const data: Promise<T> =
       response.status !== 204 ? await response.json() : response;

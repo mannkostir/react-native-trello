@@ -1,5 +1,6 @@
 import Lists from '@/components/Columns/Columns';
 import {RootState} from '@/store';
+import {columnsActions} from '@/store/columns';
 import {Card, Column} from '@/types/Common.types';
 import {BoardScreenNavigation} from '@/types/Navigation.types';
 import {useNavigation} from '@react-navigation/native';
@@ -12,12 +13,17 @@ const Board = () => {
   const state = useSelector((state: RootState) => ({
     cards: state.cards,
     columns: state.columns,
+    auth: state.auth,
   }));
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch();
-  });
+    // dispatch(
+    //   columnsActions.getAllColumns({
+    //     token: state.auth.currentUser?.token || null,
+    //   }),
+    // );
+  }, []);
 
   return (
     <View>
