@@ -2,10 +2,12 @@ import CardComments from '@/components/CardComments';
 import CardMembers from '@/components/CardMembers';
 import {RootState} from '@/store';
 import {cardsActions} from '@/store/cards';
+import {commentActions} from '@/store/comments';
 import {CardDetailsRoute} from '@/types/Navigation.types';
 import {useRoute} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 
 const CardDetails = () => {
@@ -20,11 +22,20 @@ const CardDetails = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(commentActions.getAllComments({token}));
+
+    return () => {
+      dispatch(cardsActions.getAllCards({token}));
+    };
+  }, []);
+
+  useEffect(() => {
     dispatch(cardsActions.getCard({cardId: card.id, token}));
   }, [comments]);
 
   return (
-    <View style={{flex: 1}}>
+    <ScrollView style={{flex: 1}}>
+      <Text>{card.title}</Text>
       <View style={styles.lastPrayed}>
         <Text>Last prayed</Text>
       </View>
@@ -57,7 +68,7 @@ const CardDetails = () => {
         cardId={card.id}
         dispatch={dispatch}
       />
-    </View>
+    </ScrollView>
   );
 };
 

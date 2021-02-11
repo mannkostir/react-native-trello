@@ -29,7 +29,7 @@ export const createComment = async ({
   cardId,
 }: CreateCommentParams) => {
   const data = await fetchAPI<CreateCommentResponse>(
-    `http://trello-purrweb.herokuapp.com/cards/${1620}/comments`,
+    `http://trello-purrweb.herokuapp.com/cards/${cardId}/comments`,
     {
       method: 'POST',
       token,
