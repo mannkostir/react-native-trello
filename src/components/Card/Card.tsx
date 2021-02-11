@@ -63,11 +63,11 @@ const Card = ({
     setIsEditing(false);
   };
 
-  const checkCard = () => {
-    if (!card.checked) {
+  const toggleCheckCard = () => {
+    if (card) {
       dispatch(
         cardsActions.updateCard({
-          cardData: {...card, checked: true},
+          cardData: {...card, checked: !card.checked},
           cardId: card.id,
           column,
           token,
@@ -83,7 +83,7 @@ const Card = ({
       }}>
       <CheckBox
         value={card.checked}
-        onValueChange={checkCard}
+        onValueChange={toggleCheckCard}
         style={styles.cardCheckbox}
       />
       {isEditing ? (

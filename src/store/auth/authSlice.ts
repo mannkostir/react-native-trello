@@ -30,20 +30,24 @@ const authSlice = createSlice({
       state.currentUser = user;
       state.error = null;
       state.isLoading = false;
+      console.log(action.payload.name);
     },
     signInFailed(state, action: PayloadAction<{message: string}>) {
       state.error = action.payload.message;
       state.isLoading = false;
+      console.error(action.payload.message);
     },
     [AuthPublicActions.SIGN_UP](state) {
       state.isLoading = true;
     },
     signUpSucceeded(state, action: PayloadAction<SignUpResponse>) {
       state.isLoading = false;
+      console.log(action.payload.name);
     },
     signUpFailed(state, action: PayloadAction<{message: string}>) {
       state.error = action.payload.message;
       state.isLoading = false;
+      console.error(action.payload.message);
     },
     signOut() {
       return defaultAuth;
