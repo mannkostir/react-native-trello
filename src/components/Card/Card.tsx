@@ -50,22 +50,65 @@ const Card = ({
 
     setIsEditing(false);
   };
+
+  const handleCardDelete = () => {
+    dispatch(
+      cardsActions.deleteCard({
+        cardId: card.id,
+        token,
+      }),
+    );
+    dispatch(cardsActions.getAllCards({token}));
+
+    setIsEditing(false);
+  };
+
+  const checkCard = () => {
+    if (!card.checked) {
+      dispatch(
+        cardsActions.updateCard({
+          cardData: {...card, checked: true},
+          cardId: card.id,
+          column,
+          token,
+        }),
+      );
+    }
+  };
   return (
-    <View style={styles.card}>
+    <View
+      style={{
+        ...styles.card,
+        ...(isEditing ? {paddingVertical: 0} : {paddingVertical: 10}),
+      }}>
       <CheckBox
-        value={isChecked}
-        onValueChange={(isChecked) => setIsChecked(isChecked)}
+        value={card.checked}
+        onValueChange={checkCard}
         style={styles.cardCheckbox}
       />
       {isEditing ? (
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            flex: 1,
+          }}>
           <TextInput
             placeholder={card.title}
             onChangeText={(text) => setNewTitle(text)}
           />
-          <TouchableOpacity onPress={handleCardTitleChange}>
-            <Text>Edit</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonsWrapper}>
+            <View style={styles.editCardBtn}>
+              <TouchableOpacity onPress={handleCardTitleChange}>
+                <Text style={styles.editCardBtnText}>Edit</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.cardDeleteBtn}>
+              <TouchableOpacity onPress={handleCardDelete}>
+                <Text style={styles.cardDeleteBtnText}>Delete</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
       ) : (
         <Text
@@ -87,9 +130,8 @@ const Card = ({
 const styles = StyleSheet.create({
   card: {
     position: 'relative',
-    padding: 15,
-    borderBottomWidth: 2,
-    borderStyle: 'solid',
+    // padding: 15,
+    borderBottomWidth: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -98,6 +140,29 @@ const styles = StyleSheet.create({
   },
   cardText: {
     flex: 1,
+  },
+  buttonsWrapper: {
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    right: 20,
+    flexDirection: 'row',
+  },
+  cardDeleteBtn: {
+    backgroundColor: '#AC5253',
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+  },
+  cardDeleteBtnText: {
+    color: '#ffffff',
+  },
+  editCardBtn: {
+    backgroundColor: '#72A8BC',
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+  },
+  editCardBtnText: {
+    color: '#ffffff',
   },
 });
 

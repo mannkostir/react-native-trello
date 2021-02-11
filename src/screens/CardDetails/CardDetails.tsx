@@ -10,62 +10,77 @@ import {StyleSheet, Text, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 
+const cardMembers = [
+  {name: 'MemberOne', id: 1},
+  {name: 'MemberTwo', id: 2},
+  {name: 'MemberThree', id: 3},
+];
+
 const CardDetails = () => {
   const route = useRoute<CardDetailsRoute>();
-  const {card, comments, token} = useSelector((state: RootState) => ({
+  const {card, comments, auth} = useSelector((state: RootState) => ({
     card: state.cards.currentCards.filter(
       (card) => card.id === route.params.cardId,
     )[0],
     comments: state.comments,
-    token: state.auth.currentUser?.token || null,
+    auth: state.auth,
   }));
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(commentActions.getAllComments({token}));
+    dispatch(
+      commentActions.getAllComments({token: auth.currentUser?.token || null}),
+    );
 
     return () => {
-      dispatch(cardsActions.getAllCards({token}));
+      dispatch(
+        cardsActions.getAllCards({token: auth.currentUser?.token || null}),
+      );
     };
   }, []);
 
   useEffect(() => {
-    dispatch(cardsActions.getCard({cardId: card.id, token}));
+    dispatch(
+      cardsActions.getCard({
+        cardId: card.id,
+        token: auth.currentUser?.token || null,
+      }),
+    );
   }, [comments]);
 
   return (
     <ScrollView style={{flex: 1}}>
-      <Text>{card.title}</Text>
       <View style={styles.lastPrayed}>
-        <Text>Last prayed</Text>
+        <Text>Last prayed a while ago</Text>
       </View>
       <View style={styles.infoTable}>
         <View style={styles.infoTableItem}>
-          <Text>July whatever</Text>
+          <Text style={styles.infoItemTitle}>July whatever</Text>
           <Text>Date Added</Text>
           <Text>Opened for how long</Text>
         </View>
         <View style={styles.infoTableItem}>
-          <Text>9001</Text>
+          <Text style={styles.infoItemTitle}>9001</Text>
           <Text>Times Prayed Total</Text>
         </View>
       </View>
       <View style={styles.infoTable}>
         <View style={styles.infoTableItem}>
-          <Text>9000</Text>
+          <Text style={styles.infoItemTitle}>9000</Text>
           <Text>Times Prayed By Me</Text>
         </View>
         <View style={styles.infoTableItem}>
-          <Text>1</Text>
+          <Text style={styles.infoItemTitle}>1</Text>
           <Text>Times Prayed By Others</Text>
         </View>
       </View>
-      <CardMembers members={[]} />
+      <CardMembers members={cardMembers} />
       <CardComments
         comments={comments.currentComments.filter((comment) =>
           card.commentsIds.includes(comment.id),
         )}
         cardId={card.id}
+        currentUser={auth.currentUser || null}
         dispatch={dispatch}
       />
     </ScrollView>
@@ -89,6 +104,10 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     padding: 10,
     justifyContent: 'center',
+  },
+  infoItemTitle: {
+    fontSize: 24,
+    color: '#BFB393',
   },
 });
 

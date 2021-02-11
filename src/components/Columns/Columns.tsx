@@ -75,9 +75,10 @@ interface IListsProps {
 
 const Columns = ({lists, navigation, dispatch}: IListsProps) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.columnsSection}>
       <FlatList
         data={lists}
+        style={styles.columnsList}
         renderItem={({item}) => (
           <ListItem
             dispatch={dispatch}
@@ -93,14 +94,21 @@ const Columns = ({lists, navigation, dispatch}: IListsProps) => {
 };
 
 const styles = StyleSheet.create({
+  columnsSection: {
+    paddingHorizontal: 20,
+  },
   column: {
     padding: 20,
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: '#e5e5e5',
     backgroundColor: '#ffffff',
+    borderRadius: 5,
     fontSize: 17,
-    marginBottom: 7,
+    marginBottom: 10,
+  },
+  columnsList: {
+    marginTop: 20,
   },
   columnText: {
     fontWeight: '700',

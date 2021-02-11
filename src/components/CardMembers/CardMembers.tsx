@@ -1,9 +1,14 @@
+import commonStyles from '@/styles/common.styles';
 import {User} from '@/types/Common.types';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 
-const CardMembersItem = ({memberInfo}: {memberInfo: User}) => {
+const CardMembersItem = ({
+  memberInfo,
+}: {
+  memberInfo: {name: string; id: number};
+}) => {
   return (
     <View>
       <Text>{memberInfo.name}</Text>
@@ -11,11 +16,12 @@ const CardMembersItem = ({memberInfo}: {memberInfo: User}) => {
   );
 };
 
-const CardMembers = ({members}: {members: User[]}) => {
+const CardMembers = ({members}: {members: {name: string; id: number}[]}) => {
   return (
     <View>
-      <Text>Members</Text>
+      <Text style={commonStyles.sectionTitle}>Members</Text>
       <FlatList
+        style={styles.membersList}
         data={members}
         renderItem={({item}) => <CardMembersItem memberInfo={item} />}
         keyExtractor={(item) => item.id.toString()}
@@ -23,5 +29,11 @@ const CardMembers = ({members}: {members: User[]}) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  membersList: {
+    flexDirection: 'row',
+  },
+});
 
 export default CardMembers;

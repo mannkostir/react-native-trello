@@ -4,18 +4,19 @@ import {RootState} from '@/store';
 import {cardsActions} from '@/store/cards';
 import * as types from '@/types/Common.types';
 import React, {useEffect, useState} from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {FlatList, StyleSheet, Text} from 'react-native';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 
 const Cards = ({currentColumnId}: {currentColumnId: number}) => {
-  const cards = useSelector((state: RootState) =>
-    state.cards.currentCards.filter(
-      (card) => card.columnId === currentColumnId,
-    ),
-  );
-  const token = useSelector(
-    (state: RootState) => state.auth.currentUser?.token || null,
+  const {currentCards, isCardsLoading, token} = useSelector(
+    (state: RootState) => ({
+      currentCards: state.cards.currentCards.filter(
+        (card) => card.columnId === currentColumnId,
+      ),
+      isCardsLoading: state.cards.isLoading,
+      token: state.auth.currentUser?.token || null,
+    }),
   );
   const dispatch = useDispatch();
 
@@ -25,10 +26,11 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
 
   const [isShowingCheckedCards, setIsShowingCheckedCards] = useState(false);
   return (
-    <>
+    <ScrollView
+      style={{paddingTop: 25, paddingHorizontal: 15, paddingBottom: 30}}>
       <AddCard dispatch={dispatch} columnId={currentColumnId} />
       <FlatList
-        data={cards}
+        data={currentCards.filter((card) => !card.checked)}
         renderItem={({item}) => <Card dispatch={dispatch} card={item} />}
         keyExtractor={(card) => card.id.toString()}
         style={styles.list}
@@ -44,13 +46,13 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
       </TouchableOpacity>
       {isShowingCheckedCards ? (
         <FlatList
-          data={cards.filter((card) => card.checked)}
+          data={currentCards.filter((card) => card.checked)}
           renderItem={({item}) => <Card dispatch={dispatch} card={item} />}
           keyExtractor={(card) => card.id.toString()}
           style={styles.list}
         />
       ) : null}
-    </>
+    </ScrollView>
   );
 };
 

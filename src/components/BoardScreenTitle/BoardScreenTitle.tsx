@@ -1,5 +1,6 @@
 import {RootState} from '@/store';
 import {columnsActions} from '@/store/columns';
+import commonStyles from '@/styles/common.styles';
 import {AuthToken} from '@/types/Common.types';
 import React, {useState} from 'react';
 import {Alert, StyleSheet, Text, View} from 'react-native';
@@ -16,11 +17,13 @@ const BoardScreenTitle = ({
 }) => {
   return (
     <View style={styles.titleContainer}>
-      <Text>{title}</Text>
-      <TouchableOpacity
-        onPress={() => setIsAddingColumn((isAdding) => !isAdding)}>
-        <Text style={styles.titleIcon}>+</Text>
-      </TouchableOpacity>
+      <Text style={commonStyles.headerTitle}>{title}</Text>
+      <View style={styles.titleButton}>
+        <TouchableOpacity
+          onPress={() => setIsAddingColumn((isAdding) => !isAdding)}>
+          <Text style={styles.titleIcon}>+</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -28,11 +31,20 @@ const BoardScreenTitle = ({
 const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
+    flexGrow: 1,
+  },
+  titleButton: {
+    position: 'absolute',
+    marginLeft: 20,
+    right: 20,
   },
   titleIcon: {
-    marginLeft: 10,
     fontSize: 25,
+  },
+  titleText: {
+    paddingVertical: 10,
   },
 });
 

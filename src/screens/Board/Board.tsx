@@ -9,8 +9,9 @@ import {
 } from '@/types/Navigation.types';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Alert, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 
 const Board = ({
@@ -49,7 +50,7 @@ const Board = ({
   }, []);
 
   return (
-    <ScrollView>
+    <SafeAreaView>
       {isAddingColumn ? (
         <AddColumn handleSubmit={handleColumnCreationSubmit} />
       ) : null}
@@ -58,7 +59,7 @@ const Board = ({
         navigation={navigation}
         lists={state.columns.currentColumns}
       />
-    </ScrollView>
+    </SafeAreaView>
   );
 };
 

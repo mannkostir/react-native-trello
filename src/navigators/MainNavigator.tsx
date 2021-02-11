@@ -1,7 +1,7 @@
 import React, {useMemo, useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Board from '@/screens/Board';
-import {NavigationContainer} from '@react-navigation/native';
+import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import Column from '@/screens/Column';
 import Auth from '@/screens/Auth';
 import {MainNavigatorParamList} from '@/types/Navigation.types';
@@ -22,7 +22,18 @@ const MainNavigator = () => {
   const isAuthenticated = useMemo(() => token, [token]);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={{
+        ...DefaultTheme,
+        colors: {
+          ...DefaultTheme.colors,
+          background: '#ffffff',
+          text: '#514D47',
+          border: '#E5E5E5',
+          card: '#ffffff',
+          primary: '#72A8BC',
+        },
+      }}>
       <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
         {isAuthenticated ? (
           <>
@@ -31,7 +42,7 @@ const MainNavigator = () => {
               // component={Board}
               initialParams={{isAddingColumn}}
               options={({route}) => ({
-                headerTitle: (props) => (
+                header: (props) => (
                   <BoardScreenTitle
                     setIsAddingColumn={setIsAddingColumn}
                     isAddingColumn={isAddingColumn}
