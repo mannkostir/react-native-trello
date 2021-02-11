@@ -1,5 +1,6 @@
 import {RootState} from '@/store';
 import {commentActions} from '@/store/comments';
+import commonStyles from '@/styles/common.styles';
 import React, {useState} from 'react';
 import {Button, View} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
@@ -35,6 +36,7 @@ const AddComment = ({
   return (
     <View>
       <TextInput
+        style={commonStyles.textInput}
         placeholder="Add a comment..."
         onChangeText={(text) => setCommentBody(text)}
       />

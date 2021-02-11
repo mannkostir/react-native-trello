@@ -64,7 +64,10 @@ const CardCommentsItem = ({
       </View>
       {isEditMode ? (
         <View>
-          <TextInput onChangeText={(text) => setNewCommentBody(text)} />
+          <TextInput
+            style={commonStyles.textInput}
+            onChangeText={(text) => setNewCommentBody(text)}
+          />
           <TouchableOpacity onPress={handleCommentEdit}>
             <Text>Edit</Text>
           </TouchableOpacity>
