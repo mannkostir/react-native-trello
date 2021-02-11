@@ -1,11 +1,12 @@
 import {commentActions} from '@/store/comments';
 import commonStyles from '@/styles/common.styles';
 import {Comment, User} from '@/types/Common.types';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {
   FlatList,
   ScrollView,
+  TextInput,
   TouchableOpacity,
 } from 'react-native-gesture-handler';
 import AddComment from '../AddComment/AddComment';
@@ -31,6 +32,9 @@ const CardCommentsItem = ({
   user: User | null;
   dispatch: React.Dispatch<any>;
 }) => {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [newCommentBody, setNewCommentBody] = useState('');
+
   const handleCommentDelete = () => {
     dispatch(
       commentActions.deleteComment({
@@ -38,6 +42,17 @@ const CardCommentsItem = ({
         token: user?.token || null,
       }),
     );
+  };
+  const handleCommentEdit = () => {
+    dispatch(
+      commentActions.updateComment({
+        commentData: {...comment, body: newCommentBody},
+        commentId: comment.id,
+        token: user?.token || null,
+      }),
+    );
+
+    setIsEditMode(false);
   };
   return (
     <View style={styles.comment}>
@@ -47,7 +62,16 @@ const CardCommentsItem = ({
           {getDuration(Date.now() - Date.parse(comment.created))}
         </Text>
       </View>
-      <Text>{comment.body}</Text>
+      {isEditMode ? (
+        <View>
+          <TextInput onChangeText={(text) => setNewCommentBody(text)} />
+          <TouchableOpacity onPress={handleCommentEdit}>
+            <Text>Edit</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <Text onLongPress={() => setIsEditMode(true)}>{comment.body}</Text>
+      )}
       {comment.userId === user?.id ? (
         <View style={styles.commentDeleteBtn}>
           <TouchableOpacity onPress={handleCommentDelete}>

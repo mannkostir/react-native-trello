@@ -81,10 +81,12 @@ const commentsSlice = createSlice({
       state.currentComments[targetCommentIndex] = action.payload;
 
       state.isLoading = false;
+      console.log(action.payload.body);
     },
     updateCommentFailed(state, action: PayloadAction<{message: string}>) {
       state.error = action.payload.message;
       state.isLoading = false;
+      console.error(action.payload.message);
     },
     [CommentsPublicActions.DELETE_COMMENT](state) {
       state.isLoading = true;

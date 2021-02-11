@@ -55,9 +55,9 @@ const CardDetails = () => {
       </View>
       <View style={styles.infoTable}>
         <View style={styles.infoTableItem}>
-          <Text style={styles.infoItemTitle}>July whatever</Text>
+          <Text style={styles.infoItemTitle}>February 30 2017</Text>
           <Text>Date Added</Text>
-          <Text>Opened for how long</Text>
+          <Text>Opened for several days</Text>
         </View>
         <View style={styles.infoTableItem}>
           <Text style={styles.infoItemTitle}>9001</Text>
