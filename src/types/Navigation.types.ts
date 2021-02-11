@@ -3,7 +3,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {Card} from './Common.types';
 
 export type MainNavigatorParamList = {
-  Board: undefined;
+  Board: {isAddingColumn: boolean};
   Column: {title: string; columnId: number};
   CardDetails: {cardId: number; title: string};
   Auth: undefined;
@@ -23,5 +23,6 @@ export type ColumnScreenNavigator = StackNavigationProp<
   'Column'
 >;
 
+export type BoardScreenRoute = RouteProp<MainNavigatorParamList, 'Board'>;
 export type ColumnScreenRoute = RouteProp<MainNavigatorParamList, 'Column'>;
 export type CardDetailsRoute = RouteProp<MainNavigatorParamList, 'CardDetails'>;

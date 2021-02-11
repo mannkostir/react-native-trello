@@ -58,7 +58,7 @@ const columnsSlice = createSlice({
       state.isLoading = true;
     },
     createColumnSucceeded(state, action: PayloadAction<CreateColumnResponse>) {
-      state.currentColumns.push({
+      state.currentColumns.unshift({
         id: action.payload.id,
         title: action.payload.title,
         userId: action.payload.user,

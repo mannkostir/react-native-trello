@@ -13,13 +13,13 @@ import {useSelector} from 'react-redux';
 const Stack = createStackNavigator<MainNavigatorParamList>();
 
 const MainNavigator = () => {
-  const auth = useSelector((state: RootState) => state.auth);
+  const token = useSelector(
+    (state: RootState) => state.auth.currentUser?.token || null,
+  );
 
   const [isAddingColumn, setIsAddingColumn] = useState(false);
 
-  const isAuthenticated = useMemo(() => auth.currentUser?.token, [
-    auth.currentUser?.token,
-  ]);
+  const isAuthenticated = useMemo(() => token, [token]);
 
   return (
     <NavigationContainer>
@@ -28,13 +28,24 @@ const MainNavigator = () => {
           <>
             <Stack.Screen
               name="Board"
-              component={Board}
+              // component={Board}
+              initialParams={{isAddingColumn}}
               options={({route}) => ({
                 headerTitle: (props) => (
-                  <BoardScreenTitle title="Board" {...props} />
+                  <BoardScreenTitle
+                    setIsAddingColumn={setIsAddingColumn}
+                    isAddingColumn={isAddingColumn}
+                    title="Board"
+                  />
                 ),
-              })}
-            />
+              })}>
+              {(props) => (
+                <Board
+                  isAddingColumn={isAddingColumn}
+                  setIsAddingColumn={setIsAddingColumn}
+                />
+              )}
+            </Stack.Screen>
             <Stack.Screen
               name="Column"
               component={Column}

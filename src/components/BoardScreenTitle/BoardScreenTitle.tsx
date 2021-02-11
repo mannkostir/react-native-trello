@@ -8,50 +8,19 @@ import {useDispatch, useSelector} from 'react-redux';
 
 const BoardScreenTitle = ({
   title,
-  token,
-  dispatch,
+  setIsAddingColumn,
 }: {
   title: string;
-  token: AuthToken;
-  dispatch: React.Dispatch<any>;
+  setIsAddingColumn: React.Dispatch<React.SetStateAction<boolean>>;
+  isAddingColumn: boolean;
 }) => {
-  const [isAddingColumn, setIsAddingColumn] = useState(false);
-
-  const [columnName, setColumnName] = useState('');
-
-  const addColumn = () => {
-    if (columnName) {
-      dispatch(
-        columnsActions.createColumn({
-          columnData: {title: columnName, description: ''},
-          token,
-        }),
-      );
-    }
-
-    setIsAddingColumn(false);
-  };
   return (
     <View style={styles.titleContainer}>
-      {isAddingColumn ? (
-        <>
-          <TextInput
-            placeholder="Name"
-            onChangeText={(text) => setColumnName(text)}
-          />
-          <TouchableOpacity onPress={addColumn}>
-            <Text style={styles.titleIcon}>+</Text>
-          </TouchableOpacity>
-        </>
-      ) : (
-        <>
-          <Text>{title}</Text>
-          <TouchableOpacity
-            onPress={() => setIsAddingColumn((isAdding) => !isAdding)}>
-            <Text style={styles.titleIcon}>+</Text>
-          </TouchableOpacity>
-        </>
-      )}
+      <Text>{title}</Text>
+      <TouchableOpacity
+        onPress={() => setIsAddingColumn((isAdding) => !isAdding)}>
+        <Text style={styles.titleIcon}>+</Text>
+      </TouchableOpacity>
     </View>
   );
 };
