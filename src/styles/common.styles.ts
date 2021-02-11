@@ -9,4 +9,9 @@ export default StyleSheet.create({
     fontWeight: '700',
     marginVertical: 10,
   },
+  textInput: {
+    minHeight: 30,
+    marginVertical: 10,
+    paddingLeft: 20,
+  },
 });

@@ -1,5 +1,6 @@
 import {RootState} from '@/store';
 import {authActions} from '@/store/auth';
+import commonStyles from '@/styles/common.styles';
 import React, {useState} from 'react';
 import {Alert, Button, Text, View} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
@@ -19,14 +20,17 @@ const SignUp = () => {
   return (
     <View>
       <TextInput
+        style={commonStyles.textInput}
         placeholder="Enter name"
         onChangeText={(text) => setName(text)}
       />
       <TextInput
+        style={commonStyles.textInput}
         placeholder="Enter email"
         onChangeText={(text) => setEmail(text)}
       />
       <TextInput
+        style={commonStyles.textInput}
         placeholder="Enter password"
         onChangeText={(text) => setPassword(text)}
       />

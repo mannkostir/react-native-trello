@@ -24,7 +24,7 @@ const App = () => {
       <View
         style={{
           flex: 1,
-          paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+          paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 18,
         }}>
         <MainNavigator />
       </View>

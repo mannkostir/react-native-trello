@@ -13,7 +13,9 @@ const ListNavigator = ({columnId}: {columnId: number}) => {
         {(props) => <Cards {...props} currentColumnId={columnId} />}
       </TopTab.Screen>
       <TopTab.Screen name="Subscribed">
-        {(props) => <Subscribed {...props} subscribed={[]} />}
+        {(props) => (
+          <Subscribed {...props} currentColumnId={columnId} subscribed={[]} />
+        )}
       </TopTab.Screen>
     </TopTab.Navigator>
   );

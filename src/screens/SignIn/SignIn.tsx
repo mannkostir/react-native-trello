@@ -1,4 +1,5 @@
 import {authActions} from '@/store/auth';
+import commonStyles from '@/styles/common.styles';
 import React, {useState} from 'react';
 import {Button, View} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
@@ -18,11 +19,16 @@ const SignIn = () => {
   return (
     <View>
       <TextInput
+        style={commonStyles.textInput}
+        autoCapitalize="none"
         placeholder="Enter email"
         onChangeText={(text) => setEmail(text)}
       />
       <TextInput
+        style={commonStyles.textInput}
+        autoCapitalize="none"
         placeholder="Enter password"
+        secureTextEntry={true}
         onChangeText={(text) => setPassword(text)}
       />
       <Button title="Sign In" onPress={handleSignIn} />
