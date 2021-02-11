@@ -1,8 +1,9 @@
 import AddCard from '@/components/AddCard';
 import Card from '@/components/Card';
 import {RootState} from '@/store';
+import {cardsActions} from '@/store/cards';
 import * as types from '@/types/Common.types';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
@@ -13,14 +14,21 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
       (card) => card.columnId === currentColumnId,
     ),
   );
+  const token = useSelector(
+    (state: RootState) => state.auth.currentUser?.token || null,
+  );
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(cardsActions.getAllCards({token}));
+  }, []);
 
   const [isShowingCheckedCards, setIsShowingCheckedCards] = useState(false);
   return (
     <>
       <AddCard dispatch={dispatch} columnId={currentColumnId} />
       <FlatList
-        data={cards.filter((card) => !card.checked)}
+        data={cards}
         renderItem={({item}) => <Card dispatch={dispatch} card={item} />}
         keyExtractor={(card) => card.id.toString()}
         style={styles.list}
