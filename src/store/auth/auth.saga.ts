@@ -8,22 +8,30 @@ import {authActions} from '.';
 
 function* signInWorker(action: PayloadAction<SignInParams>) {
   try {
-    const data: Unpromise<ReturnType<typeof authService.signIn>> = yield call(
-      authService.signIn,
-      action.payload,
-    );
+    const data: Unpromise<ReturnType<typeof authService.signIn>> & {
+      message?: string;
+    } = yield call(authService.signIn, action.payload);
+
+    if (data.name === 'QueryFailedError') {
+      throw new Error(data.message);
+    }
+
     yield put(authInternalActions.signInSucceeded(data));
   } catch (e) {
+    console.log(e);
     yield put(authInternalActions.signInFailed({message: e.message}));
   }
 }
 
 function* signUpWorker(action: PayloadAction<SignUpParams>) {
   try {
-    const data: Unpromise<ReturnType<typeof authService.signUp>> = yield call(
-      authService.signUp,
-      action.payload,
-    );
+    const data: Unpromise<ReturnType<typeof authService.signUp>> & {
+      message?: string;
+    } = yield call(authService.signUp, action.payload);
+
+    if (data.name === 'QueryFailedError') {
+      throw new Error(data.message);
+    }
 
     yield put(authInternalActions.signUpSucceeded(data));
   } catch (e) {
