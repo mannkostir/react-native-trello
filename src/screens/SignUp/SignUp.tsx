@@ -22,16 +22,20 @@ const SignUp = () => {
       <TextInput
         style={commonStyles.textInput}
         placeholder="Enter name"
+        autoCapitalize="none"
         onChangeText={(text) => setName(text)}
       />
       <TextInput
         style={commonStyles.textInput}
         placeholder="Enter email"
+        autoCapitalize="none"
         onChangeText={(text) => setEmail(text)}
       />
       <TextInput
         style={commonStyles.textInput}
         placeholder="Enter password"
+        autoCapitalize="none"
+        secureTextEntry={true}
         onChangeText={(text) => setPassword(text)}
       />
       <Button title="Sign Up" onPress={handleSignUp} />
