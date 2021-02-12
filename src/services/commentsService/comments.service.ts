@@ -68,7 +68,7 @@ export const deleteComment = async ({
 }: DeleteCommentParams) => {
   const data = await fetchAPI<DeleteCommentResponse>(
     `http://trello-purrweb.herokuapp.com/comments/${commentId}`,
-    {token},
+    {token, method: 'DELETE'},
   );
 
   return data;

@@ -57,7 +57,7 @@ const CardCommentsItem = ({
   return (
     <View style={styles.comment}>
       <View style={styles.commentHeader}>
-        <Text style={styles.commentAuthor}>Author</Text>
+        <Text style={styles.commentAuthor}>{user?.name || 'Unknown'}</Text>
         <Text style={styles.commentDate}>
           {getDuration(Date.now() - Date.parse(comment.created))}
         </Text>
