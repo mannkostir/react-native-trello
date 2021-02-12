@@ -49,7 +49,7 @@ const CardDetails = () => {
   }, [comments]);
 
   return (
-    <ScrollView style={{flex: 1, marginBottom: 20}}>
+    <ScrollView style={{flex: 1, marginBottom: 20, paddingHorizontal: 10}}>
       <View style={styles.lastPrayed}>
         <Text>Last prayed a while ago</Text>
       </View>

@@ -9,7 +9,7 @@ const CardMembersItem = ({
 }: {
   memberInfo: {name: string; id: number};
 }) => {
-  return <Text>{memberInfo.name}</Text>;
+  return <Text style={{marginRight: 10}}>{memberInfo.name}</Text>;
 };
 
 const CardMembers = ({members}: {members: {name: string; id: number}[]}) => {
@@ -18,6 +18,7 @@ const CardMembers = ({members}: {members: {name: string; id: number}[]}) => {
       <Text style={commonStyles.sectionTitle}>Members</Text>
       <FlatList
         style={styles.membersList}
+        horizontal={true}
         data={members}
         renderItem={({item}) => <CardMembersItem memberInfo={item} />}
         keyExtractor={(item) => item.id.toString()}
