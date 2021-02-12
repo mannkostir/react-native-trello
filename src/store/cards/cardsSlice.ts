@@ -66,12 +66,17 @@ const cardsSlice = createSlice({
         (card) => card.id === action.payload.cardId,
       );
 
+      console.log(state.currentCards[targetCardIndex].title);
+
       state.currentCards.splice(targetCardIndex, 1);
 
       state.isLoading = false;
     },
     deleteCardFailed(state, action: PayloadAction<{message: string}>) {
       state.error = action.payload.message;
+
+      console.log(action.payload.message);
+
       state.isLoading = false;
     },
   },

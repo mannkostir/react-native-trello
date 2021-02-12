@@ -62,11 +62,14 @@ export const updateCard = async ({
   return data;
 };
 
-export const deleteCard = async ({cardId, token}: DeleteCardParams) => {
-  const data = await fetchAPI<DeleteCardResponse>(
-    `http://trello-purrweb.herokuapp.com/cards/${cardId}`,
-    {method: 'DELETE', token},
-  );
+export const deleteCard = async ({
+  cardId,
+  token,
+}: DeleteCardParams): Promise<DeleteCardResponse> => {
+  await fetchAPI(`http://trello-purrweb.herokuapp.com/cards/${cardId}`, {
+    method: 'DELETE',
+    token,
+  });
 
-  return data;
+  return {cardId};
 };

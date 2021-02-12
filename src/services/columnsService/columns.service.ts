@@ -54,11 +54,14 @@ export const updateColumn = async ({
   return data;
 };
 
-export const deleteColumn = async ({listId, token}: DeleteColumnParams) => {
-  const data = await fetchAPI<DeleteColumnResponse>(
+export const deleteColumn = async ({
+  listId,
+  token,
+}: DeleteColumnParams): Promise<DeleteColumnResponse> => {
+  const data = await fetchAPI(
     `http://trello-purrweb.herokuapp.com/columns/${listId}`,
     {token, method: 'DELETE'},
   );
 
-  return {...data, listId};
+  return {listId};
 };

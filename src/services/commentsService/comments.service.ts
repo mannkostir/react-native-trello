@@ -65,11 +65,11 @@ export const updateComment = async ({
 export const deleteComment = async ({
   commentId,
   token,
-}: DeleteCommentParams) => {
-  const data = await fetchAPI<DeleteCommentResponse>(
+}: DeleteCommentParams): Promise<DeleteCommentResponse> => {
+  const data = await fetchAPI(
     `http://trello-purrweb.herokuapp.com/comments/${commentId}`,
     {token, method: 'DELETE'},
   );
 
-  return data;
+  return {commentId};
 };
