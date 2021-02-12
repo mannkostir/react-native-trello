@@ -3,6 +3,7 @@ import {User} from '@/types/Common.types';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
+import MainText from '../MainText';
 
 const CardMembersItem = ({
   memberInfo,
@@ -15,7 +16,7 @@ const CardMembersItem = ({
 const CardMembers = ({members}: {members: {name: string; id: number}[]}) => {
   return (
     <View>
-      <Text style={commonStyles.sectionTitle}>Members</Text>
+      <MainText style={commonStyles.sectionTitle}>Members</MainText>
       <FlatList
         style={styles.membersList}
         horizontal={true}

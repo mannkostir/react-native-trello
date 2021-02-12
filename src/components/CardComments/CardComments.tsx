@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
 } from 'react-native-gesture-handler';
 import AddComment from '../AddComment/AddComment';
+import MainText from '../MainText';
 
 function getDuration(ms: number): string {
   let minutes = Math.floor(ms / 60000);
@@ -57,10 +58,12 @@ const CardCommentsItem = ({
   return (
     <View style={styles.comment}>
       <View style={styles.commentHeader}>
-        <Text style={styles.commentAuthor}>{user?.name || 'Unknown'}</Text>
-        <Text style={styles.commentDate}>
+        <MainText style={styles.commentAuthor}>
+          {user?.name || 'Unknown'}
+        </MainText>
+        <MainText style={styles.commentDate}>
           {getDuration(Date.now() - Date.parse(comment.created))}
-        </Text>
+        </MainText>
       </View>
       {isEditMode ? (
         <View>
@@ -69,16 +72,18 @@ const CardCommentsItem = ({
             onChangeText={(text) => setNewCommentBody(text)}
           />
           <TouchableOpacity onPress={handleCommentEdit}>
-            <Text>Edit</Text>
+            <MainText>Edit</MainText>
           </TouchableOpacity>
         </View>
       ) : (
-        <Text onLongPress={() => setIsEditMode(true)}>{comment.body}</Text>
+        <MainText onLongPress={() => setIsEditMode(true)}>
+          {comment.body}
+        </MainText>
       )}
       {comment.userId === user?.id ? (
         <View style={styles.commentDeleteBtn}>
           <TouchableOpacity onPress={handleCommentDelete}>
-            <Text style={styles.commentDeleteBtnText}>Delete</Text>
+            <MainText style={styles.commentDeleteBtnText}>Delete</MainText>
           </TouchableOpacity>
         </View>
       ) : null}

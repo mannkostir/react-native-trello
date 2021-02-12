@@ -8,6 +8,7 @@ import CheckBox from '@react-native-community/checkbox';
 import {cardsActions} from '@/store/cards';
 import {useSelector} from 'react-redux';
 import {RootState} from '@/store';
+import MainText from '../MainText';
 
 const Card = ({
   card,
@@ -104,18 +105,18 @@ const Card = ({
           <View style={styles.buttonsWrapper}>
             <View style={styles.editCardBtn}>
               <TouchableOpacity onPress={handleCardTitleChange}>
-                <Text style={styles.editCardBtnText}>Edit</Text>
+                <MainText style={styles.editCardBtnText}>Edit</MainText>
               </TouchableOpacity>
             </View>
             <View style={styles.cardDeleteBtn}>
               <TouchableOpacity onPress={handleCardDelete}>
-                <Text style={styles.cardDeleteBtnText}>Delete</Text>
+                <MainText style={styles.cardDeleteBtnText}>Delete</MainText>
               </TouchableOpacity>
             </View>
           </View>
         </View>
       ) : (
-        <Text
+        <MainText
           numberOfLines={1}
           onPress={() =>
             navigation.navigate('CardDetails', {
@@ -126,7 +127,7 @@ const Card = ({
           onLongPress={() => setIsEditing(true)}
           style={styles.cardText}>
           {card.title}
-        </Text>
+        </MainText>
       )}
     </View>
   );

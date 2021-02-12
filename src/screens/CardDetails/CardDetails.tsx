@@ -1,5 +1,6 @@
 import CardComments from '@/components/CardComments';
 import CardMembers from '@/components/CardMembers';
+import MainText from '@/components/MainText';
 import {RootState} from '@/store';
 import {cardsActions} from '@/store/cards';
 import {commentActions} from '@/store/comments';
@@ -51,27 +52,31 @@ const CardDetails = () => {
   return (
     <ScrollView style={{flex: 1, marginBottom: 20, paddingHorizontal: 10}}>
       <View style={styles.lastPrayed}>
-        <Text>Last prayed a while ago</Text>
+        <MainText>Last prayed a while ago</MainText>
       </View>
       <View style={styles.infoTable}>
         <View style={styles.infoTableItem}>
-          <Text style={styles.infoItemTitle}>February 30 2017</Text>
-          <Text>Date Added</Text>
-          <Text>Opened for several days</Text>
+          <MainText style={styles.infoItemTitle}>February 30 2017</MainText>
+          <MainText style={styles.infoItemText}>Date Added</MainText>
+          <MainText style={[styles.infoItemText, {color: 'blue'}]}>
+            Opened for several days
+          </MainText>
         </View>
         <View style={styles.infoTableItem}>
-          <Text style={styles.infoItemTitle}>9001</Text>
-          <Text>Times Prayed Total</Text>
+          <MainText style={styles.infoItemTitle}>9001</MainText>
+          <MainText style={styles.infoItemText}>Times Prayed Total</MainText>
         </View>
       </View>
       <View style={styles.infoTable}>
         <View style={styles.infoTableItem}>
-          <Text style={styles.infoItemTitle}>9000</Text>
-          <Text>Times Prayed By Me</Text>
+          <MainText style={styles.infoItemTitle}>9000</MainText>
+          <MainText style={styles.infoItemText}>Times Prayed By Me</MainText>
         </View>
         <View style={styles.infoTableItem}>
-          <Text style={styles.infoItemTitle}>1</Text>
-          <Text>Times Prayed By Others</Text>
+          <MainText style={styles.infoItemTitle}>1</MainText>
+          <MainText style={styles.infoItemText}>
+            Times Prayed By Others
+          </MainText>
         </View>
       </View>
       <CardMembers members={cardMembers} />
@@ -106,8 +111,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   infoItemTitle: {
-    fontSize: 24,
+    fontSize: 18,
     color: '#BFB393',
+    marginBottom: 5,
+  },
+  infoItemText: {
+    fontSize: 12,
+    lineHeight: 12,
   },
 });
 

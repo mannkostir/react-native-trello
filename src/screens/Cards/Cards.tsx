@@ -1,5 +1,6 @@
 import AddCard from '@/components/AddCard';
 import Card from '@/components/Card';
+import MainText from '@/components/MainText';
 import {RootState} from '@/store';
 import {cardsActions} from '@/store/cards';
 import * as types from '@/types/Common.types';
@@ -38,11 +39,11 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
       <TouchableOpacity
         style={styles.toggleAnsweredVisibilityBtn}
         onPress={() => setIsShowingCheckedCards((isShowing) => !isShowing)}>
-        <Text style={{color: '#fff'}}>
+        <MainText style={{color: '#fff'}}>
           {isShowingCheckedCards
             ? 'HIDE ANSWERED PRAYERS'
             : 'SHOW ANSWERED PRAYERS'}
-        </Text>
+        </MainText>
       </TouchableOpacity>
       {isShowingCheckedCards ? (
         <FlatList

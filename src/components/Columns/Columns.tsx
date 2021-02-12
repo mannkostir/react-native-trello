@@ -53,10 +53,10 @@ const ListItem = ({
             onChangeText={(text) => setNewTitle(text)}
           />
           <TouchableOpacity onPress={handleColumnTitleChange}>
-            <Text style={{marginLeft: 15}}>Edit</Text>
+            <MainText style={{marginLeft: 15}}>Edit</MainText>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleColumnDelete}>
-            <Text style={{marginLeft: 15}}>Delete</Text>
+            <MainText style={{marginLeft: 15}}>Delete</MainText>
           </TouchableOpacity>
         </View>
       ) : (

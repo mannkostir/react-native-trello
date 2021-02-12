@@ -30,7 +30,7 @@ const MainText = ({
 
 const styles = StyleSheet.create({
   common: {
-    fontSize: 16,
+    fontSize: 15,
     lineHeight: 20,
   },
   regularText: {

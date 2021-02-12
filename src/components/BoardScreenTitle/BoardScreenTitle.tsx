@@ -22,7 +22,7 @@ const BoardScreenTitle = ({
       <View style={styles.titleButton}>
         <TouchableOpacity
           onPress={() => setIsAddingColumn((isAdding) => !isAdding)}>
-          <Text style={styles.titleIcon}>+</Text>
+          <MainText style={styles.titleIcon}>+</MainText>
         </TouchableOpacity>
       </View>
     </View>
