@@ -3,7 +3,6 @@ import {commentActions} from '@/store/comments';
 import commonStyles from '@/styles/common.styles';
 import React, {useState} from 'react';
 import {Button, View} from 'react-native';
-import {TextInput} from 'react-native-gesture-handler';
 import {useSelector} from 'react-redux';
 import MainTextInput from '../MainTextInput';
 

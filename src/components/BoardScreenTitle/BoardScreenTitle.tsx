@@ -1,11 +1,6 @@
-import {RootState} from '@/store';
-import {columnsActions} from '@/store/columns';
-import commonStyles from '@/styles/common.styles';
-import {AuthToken} from '@/types/Common.types';
-import React, {useState} from 'react';
-import {Alert, Dimensions, StyleSheet, Text, View} from 'react-native';
-import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
-import {useDispatch, useSelector} from 'react-redux';
+import React from 'react';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import MainText from '../MainText';
 
 const BoardScreenTitle = ({

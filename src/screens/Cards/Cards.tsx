@@ -3,7 +3,6 @@ import Card from '@/components/Card';
 import MainText from '@/components/MainText';
 import {RootState} from '@/store';
 import {cardsActions} from '@/store/cards';
-import * as types from '@/types/Common.types';
 import React, {useEffect, useState} from 'react';
 import {FlatList, StyleSheet, Text} from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';

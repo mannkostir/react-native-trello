@@ -1,10 +1,10 @@
 import {RootState} from '@/store';
 import {columnsActions} from '@/store/columns';
-import {Card, Column} from '@/types/Common.types';
+import {Column} from '@/types/Common.types';
 import {BoardScreenNavigation} from '@/types/Navigation.types';
 import React, {useState} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
 import EditColumnModal from '../EditColumnModal';

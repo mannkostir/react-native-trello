@@ -3,7 +3,7 @@ import {ColumnScreenNavigator} from '@/types/Navigation.types';
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import CheckBox from '@react-native-community/checkbox';
 import {cardsActions} from '@/store/cards';
 import {useSelector} from 'react-redux';

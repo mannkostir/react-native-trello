@@ -1,16 +1,10 @@
 import AddColumn from '@/components/AddColumn';
-import BoardScreenTitle from '@/components/BoardScreenTitle';
 import Columns from '@/components/Columns';
 import {RootState} from '@/store';
 import {columnsActions} from '@/store/columns';
-import {
-  BoardScreenNavigation,
-  BoardScreenRoute,
-} from '@/types/Navigation.types';
-import {useNavigation, useRoute} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
-import {Alert, StyleSheet, View} from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
+import {BoardScreenNavigation} from '@/types/Navigation.types';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 

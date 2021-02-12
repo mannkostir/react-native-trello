@@ -2,9 +2,8 @@ import {RootState} from '@/store';
 import {cardsActions} from '@/store/cards';
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
-import {useDispatch, useSelector} from 'react-redux';
-import MainText from '../MainText';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useSelector} from 'react-redux';
 import MainTextInput from '../MainTextInput';
 
 const AddCard = ({
