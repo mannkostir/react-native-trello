@@ -3,9 +3,10 @@ import {columnsActions} from '@/store/columns';
 import commonStyles from '@/styles/common.styles';
 import {AuthToken} from '@/types/Common.types';
 import React, {useState} from 'react';
-import {Alert, StyleSheet, Text, View} from 'react-native';
+import {Alert, Dimensions, StyleSheet, Text, View} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
+import MainText from '../MainText';
 
 const BoardScreenTitle = ({
   title,
@@ -17,7 +18,7 @@ const BoardScreenTitle = ({
 }) => {
   return (
     <View style={styles.titleContainer}>
-      <Text style={commonStyles.headerTitle}>{title}</Text>
+      <MainText style={[styles.titleText]}>{title}</MainText>
       <View style={styles.titleButton}>
         <TouchableOpacity
           onPress={() => setIsAddingColumn((isAdding) => !isAdding)}>
@@ -34,6 +35,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flexGrow: 1,
+    width: Dimensions.get('window').width,
   },
   titleButton: {
     position: 'absolute',
@@ -41,11 +43,10 @@ const styles = StyleSheet.create({
     right: 20,
   },
   titleIcon: {
-    fontSize: 25,
+    fontSize: 30,
+    color: '#72A8BC',
   },
-  titleText: {
-    paddingVertical: 10,
-  },
+  titleText: {},
 });
 
 export default BoardScreenTitle;

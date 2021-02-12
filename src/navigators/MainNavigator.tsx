@@ -9,6 +9,8 @@ import CardDetails from '@/screens/CardDetails';
 import BoardScreenTitle from '@/components/BoardScreenTitle';
 import {RootState} from '@/store';
 import {useSelector} from 'react-redux';
+import {Text, View} from 'react-native';
+import {Header} from 'react-native/Libraries/NewAppScreen';
 
 const Stack = createStackNavigator<MainNavigatorParamList>();
 
@@ -34,7 +36,11 @@ const MainNavigator = () => {
           primary: '#72A8BC',
         },
       }}>
-      <Stack.Navigator screenOptions={{headerTitleAlign: 'center'}}>
+      <Stack.Navigator
+        screenOptions={{
+          headerTitleAlign: 'center',
+          headerStyle: {height: 60},
+        }}>
         {isAuthenticated ? (
           <>
             <Stack.Screen
@@ -42,7 +48,7 @@ const MainNavigator = () => {
               // component={Board}
               initialParams={{isAddingColumn}}
               options={({route}) => ({
-                header: (props) => (
+                headerTitle: (props) => (
                   <BoardScreenTitle
                     setIsAddingColumn={setIsAddingColumn}
                     isAddingColumn={isAddingColumn}
@@ -71,7 +77,18 @@ const MainNavigator = () => {
                 title: route.params.title,
                 headerStyle: {
                   backgroundColor: '#BFB393',
+                  height: 120,
                 },
+                headerBackTitleVisible: false,
+                headerLeftContainerStyle: {
+                  width: 10,
+                  justifyContent: 'flex-start',
+                },
+                headerTitle: (props) => (
+                  <View style={{marginLeft: -60, marginTop: 20}}>
+                    <Text>{route.params.title}</Text>
+                  </View>
+                ),
                 headerTitleAlign: 'left',
               })}
             />
