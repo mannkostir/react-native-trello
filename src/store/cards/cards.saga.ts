@@ -2,6 +2,7 @@ import cardsService from '@/services/cardsService';
 import {Unpromise} from '@/types/Common.types';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
+import {cardsActions} from '.';
 import {
   CreateCardParams,
   DeleteCardParams,
@@ -9,7 +10,7 @@ import {
   GetCardParams,
   UpdateCardParams,
 } from './cards.types';
-import {cardsInternalActions, CardsPublicActions} from './cardsSlice';
+import {cardsInternalActions} from './cardsSlice';
 
 function* getAllCardsWorker(action: PayloadAction<GetAllCardsParams>) {
   try {
@@ -73,9 +74,9 @@ function* deleteCardWorker(action: PayloadAction<DeleteCardParams>) {
 }
 
 export default function* cardsWatcher() {
-  yield takeEvery(CardsPublicActions.GET_ALL_CARDS, getAllCardsWorker);
-  yield takeEvery(CardsPublicActions.CREATE_CARD, createCardWorker);
-  yield takeEvery(CardsPublicActions.GET_CARD, getCardWorker);
-  yield takeEvery(CardsPublicActions.UPDATE_CARD, updateCardWorker);
-  yield takeEvery(CardsPublicActions.DELETE_CARD, deleteCardWorker);
+  yield takeEvery(cardsActions.getAllCards, getAllCardsWorker);
+  yield takeEvery(cardsActions.createCard, createCardWorker);
+  yield takeEvery(cardsActions.getCard, getCardWorker);
+  yield takeEvery(cardsActions.updateCard, updateCardWorker);
+  yield takeEvery(cardsActions.deleteCard, deleteCardWorker);
 }

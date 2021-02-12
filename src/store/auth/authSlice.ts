@@ -1,5 +1,6 @@
 import {AuthState} from '@/types/Store.types';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {authActions} from '.';
 import {SignUpResponse, SignInResponse} from './auth.types';
 
 export const defaultAuth: AuthState = {
@@ -8,18 +9,10 @@ export const defaultAuth: AuthState = {
   isLoading: false,
 };
 
-export enum AuthPublicActions {
-  SIGN_IN = 'signInRequested',
-  SIGN_UP = 'signUpRequested',
-}
-
 const authSlice = createSlice({
   name: 'auth',
   initialState: defaultAuth,
   reducers: {
-    [AuthPublicActions.SIGN_IN](state) {
-      state.isLoading = true;
-    },
     signInSucceeded(state, action: PayloadAction<SignInResponse>) {
       const user: typeof state.currentUser = {
         email: action.payload.email,
@@ -37,9 +30,6 @@ const authSlice = createSlice({
       state.isLoading = false;
       console.error(action.payload.message);
     },
-    [AuthPublicActions.SIGN_UP](state) {
-      state.isLoading = true;
-    },
     signUpSucceeded(state, action: PayloadAction<SignUpResponse>) {
       state.isLoading = false;
       console.log(action.payload.name);
@@ -53,6 +43,14 @@ const authSlice = createSlice({
       return defaultAuth;
     },
   },
+  extraReducers: (builder) =>
+    builder
+      .addCase(authActions.signIn, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(authActions.signUp, (state) => {
+        state.isLoading = true;
+      }),
 });
 
 export const authInternalActions = authSlice.actions;

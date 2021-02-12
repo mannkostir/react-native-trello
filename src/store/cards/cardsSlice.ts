@@ -1,5 +1,6 @@
 import {CardsState} from '@/types/Store.types';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {cardsActions} from '.';
 import {
   CreateCardResponse,
   DeleteCardResponse,
@@ -14,21 +15,10 @@ export const defaultCards: CardsState = {
   error: null,
 };
 
-export enum CardsPublicActions {
-  GET_ALL_CARDS = 'getAllCardsRequested',
-  CREATE_CARD = 'createCardRequested',
-  GET_CARD = 'getCardRequested',
-  UPDATE_CARD = 'updateCardRequested',
-  DELETE_CARD = 'deleteCardRequested',
-}
-
 const cardsSlice = createSlice({
   name: 'cards',
   initialState: defaultCards,
   reducers: {
-    [CardsPublicActions.GET_ALL_CARDS](state) {
-      state.isLoading = true;
-    },
     getAllCardsSucceeded(state, action: PayloadAction<GetAllCardsResponse>) {
       state.currentCards = action.payload;
       state.isLoading = false;
@@ -36,9 +26,6 @@ const cardsSlice = createSlice({
     getAllCardsFailed(state, action: PayloadAction<{message: string}>) {
       state.error = action.payload.message;
       state.isLoading = false;
-    },
-    [CardsPublicActions.CREATE_CARD](state) {
-      state.isLoading = true;
     },
     createCardSucceeded(state, action: PayloadAction<CreateCardResponse>) {
       const {column, ...cardData} = action.payload;
@@ -49,9 +36,6 @@ const cardsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [CardsPublicActions.GET_CARD](state) {
-      state.isLoading = true;
-    },
     getCardSucceeded(state, action: PayloadAction<GetCardResponse>) {
       state.currentCards.length = 0;
       state.currentCards.push(action.payload);
@@ -60,9 +44,6 @@ const cardsSlice = createSlice({
     getCardFailed(state, action: PayloadAction<{message: string}>) {
       state.error = action.payload.message;
       state.isLoading = false;
-    },
-    [CardsPublicActions.UPDATE_CARD](state) {
-      state.isLoading = true;
     },
     updateCardSucceeded(state, action: PayloadAction<UpdateCardResponse>) {
       const targetCardIndex = state.currentCards.findIndex(
@@ -80,9 +61,6 @@ const cardsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [CardsPublicActions.DELETE_CARD](state) {
-      state.isLoading = true;
-    },
     deleteCardSucceeded(state, action: PayloadAction<DeleteCardResponse>) {
       const targetCardIndex = state.currentCards.findIndex(
         (card) => card.id === action.payload.cardId,
@@ -97,6 +75,23 @@ const cardsSlice = createSlice({
       state.isLoading = false;
     },
   },
+  extraReducers: (builder) =>
+    builder
+      .addCase(cardsActions.getAllCards, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(cardsActions.createCard, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(cardsActions.getCard, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(cardsActions.updateCard, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(cardsActions.deleteCard, (state) => {
+        state.isLoading = true;
+      }),
 });
 
 export const cardsInternalActions = cardsSlice.actions;

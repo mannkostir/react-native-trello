@@ -6,7 +6,14 @@ import {
   GetColumnParams,
   UpdateColumnParams,
 } from './columns.types';
-import {ColumnsPublicActions} from './columnsSlice';
+
+enum ColumnsPublicActions {
+  GET_ALL_COLUMNS = 'getAllColumnsRequested',
+  GET_COLUMN = 'getColumnRequested',
+  CREATE_COLUMN = 'createColumnRequested',
+  UPDATE_COLUMN = 'updateColumnRequested',
+  DELETE_COLUMN = 'deleteColumnRequested',
+}
 
 export const getAllColumns = createAction<GetAllColumnsParams>(
   ColumnsPublicActions.GET_ALL_COLUMNS,

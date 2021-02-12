@@ -1,5 +1,6 @@
 import {CommentsState} from '@/types/Store.types';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {commentActions} from '.';
 import {
   CreateCommentResponse,
   DeleteCommentResponse,
@@ -14,21 +15,10 @@ export const defaultComments: CommentsState = {
   error: null,
 };
 
-export enum CommentsPublicActions {
-  GET_ALL_COMMENTS = 'getAllCommentsRequested',
-  CREATE_COMMENT = 'createCommentRequested',
-  GET_COMMENT = 'getCommentRequested',
-  UPDATE_COMMENT = 'updateCommentRequested',
-  DELETE_COMMENT = 'deleteCommentRequested',
-}
-
 const commentsSlice = createSlice({
   name: 'comments',
   initialState: defaultComments,
   reducers: {
-    [CommentsPublicActions.GET_ALL_COMMENTS](state) {
-      state.isLoading = true;
-    },
     getAllCommentsSucceeded(
       state,
       action: PayloadAction<GetAllCommentsResponse>,
@@ -39,9 +29,6 @@ const commentsSlice = createSlice({
     getAllCommentsFailed(state, action: PayloadAction<{message: string}>) {
       state.error = action.payload.message;
       state.isLoading = false;
-    },
-    [CommentsPublicActions.CREATE_COMMENT](state) {
-      state.isLoading = true;
     },
     createCommentSucceeded(
       state,
@@ -55,9 +42,6 @@ const commentsSlice = createSlice({
       state.error = action.payload.message;
       state.isLoading = false;
     },
-    [CommentsPublicActions.GET_COMMENT](state) {
-      state.isLoading = true;
-    },
     getCommentSucceeded(state, action: PayloadAction<GetCommentResponse>) {
       state.currentComments.length = 0;
       state.currentComments.push(action.payload);
@@ -66,9 +50,6 @@ const commentsSlice = createSlice({
     getCommentFailed(state, action: PayloadAction<{message: string}>) {
       state.error = action.payload.message;
       state.isLoading = false;
-    },
-    [CommentsPublicActions.UPDATE_COMMENT](state) {
-      state.isLoading = true;
     },
     updateCommentSucceeded(
       state,
@@ -88,9 +69,6 @@ const commentsSlice = createSlice({
       state.isLoading = false;
       console.error(action.payload.message);
     },
-    [CommentsPublicActions.DELETE_COMMENT](state) {
-      state.isLoading = true;
-    },
     deleteCommentSucceeded(
       state,
       action: PayloadAction<DeleteCommentResponse>,
@@ -108,6 +86,23 @@ const commentsSlice = createSlice({
       state.isLoading = false;
     },
   },
+  extraReducers: (builder) =>
+    builder
+      .addCase(commentActions.getAllComments, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(commentActions.createComment, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(commentActions.getComment, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(commentActions.updateComment, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(commentActions.deleteComment, (state) => {
+        state.isLoading = true;
+      }),
 });
 
 export const commentsInternalActions = commentsSlice.actions;

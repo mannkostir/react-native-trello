@@ -1,9 +1,10 @@
 import {Unpromise} from '@/types/Common.types';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
-import {authInternalActions, AuthPublicActions} from './authSlice';
+import {authInternalActions} from './authSlice';
 import {SignInParams, SignUpParams} from './auth.types';
 import authService from '@/services/authService';
+import {authActions} from '.';
 
 function* signInWorker(action: PayloadAction<SignInParams>) {
   try {
@@ -31,6 +32,6 @@ function* signUpWorker(action: PayloadAction<SignUpParams>) {
 }
 
 export default function* authWatcher() {
-  yield takeEvery(AuthPublicActions.SIGN_IN, signInWorker);
-  yield takeEvery(AuthPublicActions.SIGN_UP, signUpWorker);
+  yield takeEvery(authActions.signIn, signInWorker);
+  yield takeEvery(authActions.signUp, signUpWorker);
 }

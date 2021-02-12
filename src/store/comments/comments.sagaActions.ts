@@ -6,7 +6,14 @@ import {
   GetCommentParams,
   UpdateCommentParams,
 } from './comments.types';
-import {CommentsPublicActions} from './commentsSlice';
+
+enum CommentsPublicActions {
+  GET_ALL_COMMENTS = 'getAllCommentsRequested',
+  CREATE_COMMENT = 'createCommentRequested',
+  GET_COMMENT = 'getCommentRequested',
+  UPDATE_COMMENT = 'updateCommentRequested',
+  DELETE_COMMENT = 'deleteCommentRequested',
+}
 
 export const getAllComments = createAction<GetAllCommentsParams>(
   CommentsPublicActions.GET_ALL_COMMENTS,

@@ -2,6 +2,7 @@ import commentsService from '@/services/commentsService';
 import {Unpromise} from '@/types/Common.types';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
+import {commentActions} from '.';
 import {
   CreateCommentParams,
   DeleteCommentParams,
@@ -9,7 +10,7 @@ import {
   GetCommentParams,
   UpdateCommentParams,
 } from './comments.types';
-import {commentsInternalActions, CommentsPublicActions} from './commentsSlice';
+import {commentsInternalActions} from './commentsSlice';
 
 function* getAllCommentsWorker(action: PayloadAction<GetAllCommentsParams>) {
   try {
@@ -80,9 +81,9 @@ function* deleteCommentWorker(action: PayloadAction<DeleteCommentParams>) {
 }
 
 export default function* commentsWatcher() {
-  yield takeEvery(CommentsPublicActions.GET_ALL_COMMENTS, getAllCommentsWorker);
-  yield takeEvery(CommentsPublicActions.CREATE_COMMENT, createCommentWorker);
-  yield takeEvery(CommentsPublicActions.GET_COMMENT, getCommentWorker);
-  yield takeEvery(CommentsPublicActions.UPDATE_COMMENT, updateCommentWorker);
-  yield takeEvery(CommentsPublicActions.DELETE_COMMENT, deleteCommentWorker);
+  yield takeEvery(commentActions.getAllComments, getAllCommentsWorker);
+  yield takeEvery(commentActions.createComment, createCommentWorker);
+  yield takeEvery(commentActions.getComment, getCommentWorker);
+  yield takeEvery(commentActions.updateComment, updateCommentWorker);
+  yield takeEvery(commentActions.deleteComment, deleteCommentWorker);
 }

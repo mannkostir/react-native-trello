@@ -6,7 +6,14 @@ import {
   GetCardParams,
   UpdateCardParams,
 } from './cards.types';
-import {CardsPublicActions} from './cardsSlice';
+
+enum CardsPublicActions {
+  GET_ALL_CARDS = 'getAllCardsRequested',
+  CREATE_CARD = 'createCardRequested',
+  GET_CARD = 'getCardRequested',
+  UPDATE_CARD = 'updateCardRequested',
+  DELETE_CARD = 'deleteCardRequested',
+}
 
 export const getAllCards = createAction<GetAllCardsParams>(
   CardsPublicActions.GET_ALL_CARDS,

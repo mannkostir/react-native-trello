@@ -1,3 +1,3 @@
-import * as cardsActions from './cards.sagaTypes';
+import * as cardsActions from './cards.sagaActions';
 
 export {cardsActions};

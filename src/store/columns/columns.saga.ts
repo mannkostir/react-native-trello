@@ -2,6 +2,7 @@ import columnsService from '@/services/columnsService';
 import {Unpromise} from '@/types/Common.types';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
+import {columnsActions} from '.';
 import {
   CreateColumnParams,
   DeleteColumnParams,
@@ -9,7 +10,7 @@ import {
   GetColumnParams,
   UpdateColumnParams,
 } from './columns.types';
-import {columnsInternalActions, ColumnsPublicActions} from './columnsSlice';
+import {columnsInternalActions} from './columnsSlice';
 
 function* getAllColumnsWorker(action: PayloadAction<GetAllColumnsParams>) {
   try {
@@ -72,9 +73,9 @@ function* deleteColumnWorker(action: PayloadAction<DeleteColumnParams>) {
 }
 
 export default function* columnsWatcher() {
-  yield takeEvery(ColumnsPublicActions.GET_ALL_COLUMNS, getAllColumnsWorker);
-  yield takeEvery(ColumnsPublicActions.CREATE_COLUMN, createColumnWorker);
-  yield takeEvery(ColumnsPublicActions.GET_COLUMN, getColumnWorker);
-  yield takeEvery(ColumnsPublicActions.UPDATE_COLUMN, updateColumnWorker);
-  yield takeEvery(ColumnsPublicActions.DELETE_COLUMN, deleteColumnWorker);
+  yield takeEvery(columnsActions.getAllColumns, getAllColumnsWorker);
+  yield takeEvery(columnsActions.createColumn, createColumnWorker);
+  yield takeEvery(columnsActions.getColumn, getColumnWorker);
+  yield takeEvery(columnsActions.updateColumn, updateColumnWorker);
+  yield takeEvery(columnsActions.deleteColumn, deleteColumnWorker);
 }
