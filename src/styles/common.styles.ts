@@ -7,7 +7,8 @@ export default StyleSheet.create({
   sectionTitle: {
     color: '#72A8BC',
     fontWeight: '700',
-    marginVertical: 10,
+    marginTop: 20,
+    marginBottom: 10,
   },
   textInput: {
     minHeight: 30,

@@ -9,11 +9,7 @@ const CardMembersItem = ({
 }: {
   memberInfo: {name: string; id: number};
 }) => {
-  return (
-    <View>
-      <Text>{memberInfo.name}</Text>
-    </View>
-  );
+  return <Text>{memberInfo.name}</Text>;
 };
 
 const CardMembers = ({members}: {members: {name: string; id: number}[]}) => {
