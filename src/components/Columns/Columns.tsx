@@ -61,8 +61,7 @@ const ListItem = ({
                 title,
                 columnId: id,
               })
-            }
-            onLongPress={() => setIsEditing(true)}>
+            }>
             {title}
           </MainText>
           <View
