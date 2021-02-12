@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
+import MainText from '../MainText';
 import MainTextInput from '../MainTextInput';
 
 const AddCard = ({
@@ -64,12 +65,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: 50,
     width: 40,
-    left: 0,
+    left: 5,
+    top: 8,
     justifyContent: 'center',
+    alignContent: 'center',
+    alignItems: 'center',
   },
   addCardSubmitBtnText: {
     color: '#72A8BC',
     fontSize: 36,
+    alignSelf: 'center',
     paddingHorizontal: 10,
   },
 });

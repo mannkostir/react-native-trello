@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderTopWidth: 1,
     borderBottomWidth: 1,
+    borderColor: '#E5E5E5',
     flex: 1,
   },
   commentAuthor: {

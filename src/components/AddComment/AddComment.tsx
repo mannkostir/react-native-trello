@@ -39,6 +39,7 @@ const AddComment = ({
   return (
     <View>
       <MainTextInput
+        multiline={true}
         style={commonStyles.textInput}
         placeholder="Add a comment..."
         onChangeText={(text) => setCommentBody(text)}

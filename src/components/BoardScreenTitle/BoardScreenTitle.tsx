@@ -22,7 +22,7 @@ const BoardScreenTitle = ({
       <View style={styles.titleButton}>
         <TouchableOpacity
           onPress={() => setIsAddingColumn((isAdding) => !isAdding)}>
-          <MainText style={styles.titleIcon}>+</MainText>
+          <Text style={styles.titleIcon}>+</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -34,7 +34,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    flexGrow: 1,
     width: Dimensions.get('window').width,
   },
   titleButton: {
