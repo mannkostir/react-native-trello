@@ -26,7 +26,9 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
   }, []);
 
   const [isShowingCheckedCards, setIsShowingCheckedCards] = useState(false);
-  return (
+  return isCardsLoading ? (
+    <MainText style={{marginTop: 50, alignSelf: 'center'}}>LOADING...</MainText>
+  ) : (
     <ScrollView
       style={{paddingTop: 25, paddingHorizontal: 15, marginBottom: 40}}>
       <AddCard dispatch={dispatch} columnId={currentColumnId} />
