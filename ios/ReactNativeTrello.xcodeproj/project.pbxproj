@@ -20,6 +20,18 @@
 		7C0FB8BE856677C686EC68D6 /* libPods-ReactNativeTrello-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A2F0F29E23A32F3DD8AE82 /* libPods-ReactNativeTrello-tvOS.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		D454072121EC6538B258FBBD /* libPods-ReactNativeTrello.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08CA4DCB1EAC74ED250B8B43 /* libPods-ReactNativeTrello.a */; };
+		EED40587DDAE4C4AB9E40F46 /* SFUIText-Bold.woff in Resources */ = {isa = PBXBuildFile; fileRef = E4E7B64060CA4850AD89B7E3 /* SFUIText-Bold.woff */; };
+		D5749190BF6C41D7AA023A69 /* SFUIText-BoldItalic.woff in Resources */ = {isa = PBXBuildFile; fileRef = 76FE0CA888464F74A9399A83 /* SFUIText-BoldItalic.woff */; };
+		92E10BB622DB4D749E735066 /* SFUIText-Heavy.woff in Resources */ = {isa = PBXBuildFile; fileRef = 093A438F92EC485CBC7B1674 /* SFUIText-Heavy.woff */; };
+		83CE17A45E3E4C20A6B34E73 /* SFUIText-HeavyItalic.woff in Resources */ = {isa = PBXBuildFile; fileRef = F6866BB741C546188096961E /* SFUIText-HeavyItalic.woff */; };
+		F4464904BB994E8281783E10 /* SFUIText-Light.woff in Resources */ = {isa = PBXBuildFile; fileRef = F5566AA32AA5404A9E01C880 /* SFUIText-Light.woff */; };
+		E13101BBD182408BAE915359 /* SFUIText-LightItalic.woff in Resources */ = {isa = PBXBuildFile; fileRef = B43E1F7F698E4E659BC28970 /* SFUIText-LightItalic.woff */; };
+		F141D98DB6D04ADB9976D216 /* SFUIText-Medium.woff in Resources */ = {isa = PBXBuildFile; fileRef = DE5AA550391D4B3ABA032CD0 /* SFUIText-Medium.woff */; };
+		6D73495BF7394880BC2AAB65 /* SFUIText-MediumItalic.woff in Resources */ = {isa = PBXBuildFile; fileRef = 1BD0E43BAD124D08B8F0FD89 /* SFUIText-MediumItalic.woff */; };
+		320666AB46E94D40A3CE0DAC /* SFUIText-Regular.woff in Resources */ = {isa = PBXBuildFile; fileRef = A2A190607D064243930472BA /* SFUIText-Regular.woff */; };
+		B432C03DFAF745F1A0AAD45E /* SFUIText-RegularItalic.woff in Resources */ = {isa = PBXBuildFile; fileRef = 707D44844AAD401C8FB8E0A1 /* SFUIText-RegularItalic.woff */; };
+		1F8419451E2E4C09B02692A0 /* SFUIText-Semibold.woff in Resources */ = {isa = PBXBuildFile; fileRef = 70F64F7638DC423D90129F23 /* SFUIText-Semibold.woff */; };
+		3CA3B38D70B340849926856D /* SFUIText-SemiboldItalic.woff in Resources */ = {isa = PBXBuildFile; fileRef = 09CFFF96E88B4497B258ACFA /* SFUIText-SemiboldItalic.woff */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +79,18 @@
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		EE578622383B93B4E7458F8C /* libPods-ReactNativeTrello-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeTrello-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F75FE03645004510B83E4818 /* libPods-ReactNativeTrello-ReactNativeTrelloTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReactNativeTrello-ReactNativeTrelloTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4E7B64060CA4850AD89B7E3 /* SFUIText-Bold.woff */ = {isa = PBXFileReference; name = "SFUIText-Bold.woff"; path = "../src/assets/fonts/SFUIText-Bold.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		76FE0CA888464F74A9399A83 /* SFUIText-BoldItalic.woff */ = {isa = PBXFileReference; name = "SFUIText-BoldItalic.woff"; path = "../src/assets/fonts/SFUIText-BoldItalic.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		093A438F92EC485CBC7B1674 /* SFUIText-Heavy.woff */ = {isa = PBXFileReference; name = "SFUIText-Heavy.woff"; path = "../src/assets/fonts/SFUIText-Heavy.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F6866BB741C546188096961E /* SFUIText-HeavyItalic.woff */ = {isa = PBXFileReference; name = "SFUIText-HeavyItalic.woff"; path = "../src/assets/fonts/SFUIText-HeavyItalic.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F5566AA32AA5404A9E01C880 /* SFUIText-Light.woff */ = {isa = PBXFileReference; name = "SFUIText-Light.woff"; path = "../src/assets/fonts/SFUIText-Light.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B43E1F7F698E4E659BC28970 /* SFUIText-LightItalic.woff */ = {isa = PBXFileReference; name = "SFUIText-LightItalic.woff"; path = "../src/assets/fonts/SFUIText-LightItalic.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		DE5AA550391D4B3ABA032CD0 /* SFUIText-Medium.woff */ = {isa = PBXFileReference; name = "SFUIText-Medium.woff"; path = "../src/assets/fonts/SFUIText-Medium.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1BD0E43BAD124D08B8F0FD89 /* SFUIText-MediumItalic.woff */ = {isa = PBXFileReference; name = "SFUIText-MediumItalic.woff"; path = "../src/assets/fonts/SFUIText-MediumItalic.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A2A190607D064243930472BA /* SFUIText-Regular.woff */ = {isa = PBXFileReference; name = "SFUIText-Regular.woff"; path = "../src/assets/fonts/SFUIText-Regular.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		707D44844AAD401C8FB8E0A1 /* SFUIText-RegularItalic.woff */ = {isa = PBXFileReference; name = "SFUIText-RegularItalic.woff"; path = "../src/assets/fonts/SFUIText-RegularItalic.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		70F64F7638DC423D90129F23 /* SFUIText-Semibold.woff */ = {isa = PBXFileReference; name = "SFUIText-Semibold.woff"; path = "../src/assets/fonts/SFUIText-Semibold.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		09CFFF96E88B4497B258ACFA /* SFUIText-SemiboldItalic.woff */ = {isa = PBXFileReference; name = "SFUIText-SemiboldItalic.woff"; path = "../src/assets/fonts/SFUIText-SemiboldItalic.woff"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +204,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				49C02F8AA834A44984CA6E91 /* Pods */,
+				707D8BCDA6534FDCAEDFE13C /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -196,6 +221,26 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
+		};
+		707D8BCDA6534FDCAEDFE13C /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				E4E7B64060CA4850AD89B7E3 /* SFUIText-Bold.woff */,
+				76FE0CA888464F74A9399A83 /* SFUIText-BoldItalic.woff */,
+				093A438F92EC485CBC7B1674 /* SFUIText-Heavy.woff */,
+				F6866BB741C546188096961E /* SFUIText-HeavyItalic.woff */,
+				F5566AA32AA5404A9E01C880 /* SFUIText-Light.woff */,
+				B43E1F7F698E4E659BC28970 /* SFUIText-LightItalic.woff */,
+				DE5AA550391D4B3ABA032CD0 /* SFUIText-Medium.woff */,
+				1BD0E43BAD124D08B8F0FD89 /* SFUIText-MediumItalic.woff */,
+				A2A190607D064243930472BA /* SFUIText-Regular.woff */,
+				707D44844AAD401C8FB8E0A1 /* SFUIText-RegularItalic.woff */,
+				70F64F7638DC423D90129F23 /* SFUIText-Semibold.woff */,
+				09CFFF96E88B4497B258ACFA /* SFUIText-SemiboldItalic.woff */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -341,6 +386,18 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				EED40587DDAE4C4AB9E40F46 /* SFUIText-Bold.woff in Resources */,
+				D5749190BF6C41D7AA023A69 /* SFUIText-BoldItalic.woff in Resources */,
+				92E10BB622DB4D749E735066 /* SFUIText-Heavy.woff in Resources */,
+				83CE17A45E3E4C20A6B34E73 /* SFUIText-HeavyItalic.woff in Resources */,
+				F4464904BB994E8281783E10 /* SFUIText-Light.woff in Resources */,
+				E13101BBD182408BAE915359 /* SFUIText-LightItalic.woff in Resources */,
+				F141D98DB6D04ADB9976D216 /* SFUIText-Medium.woff in Resources */,
+				6D73495BF7394880BC2AAB65 /* SFUIText-MediumItalic.woff in Resources */,
+				320666AB46E94D40A3CE0DAC /* SFUIText-Regular.woff in Resources */,
+				B432C03DFAF745F1A0AAD45E /* SFUIText-RegularItalic.woff in Resources */,
+				1F8419451E2E4C09B02692A0 /* SFUIText-Semibold.woff in Resources */,
+				3CA3B38D70B340849926856D /* SFUIText-SemiboldItalic.woff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

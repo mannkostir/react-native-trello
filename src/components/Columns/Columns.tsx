@@ -7,6 +7,7 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
+import MainText from '../MainText';
 
 const ListItem = ({
   title,
@@ -59,8 +60,8 @@ const ListItem = ({
           </TouchableOpacity>
         </View>
       ) : (
-        <Text
-          style={styles.columnText}
+        <MainText
+          weight="Medium"
           onPress={() =>
             navigation.navigate('Column', {
               title,
@@ -69,7 +70,7 @@ const ListItem = ({
           }
           onLongPress={() => setIsEditing(true)}>
           {title}
-        </Text>
+        </MainText>
       )}
     </View>
   );
@@ -117,9 +118,6 @@ const styles = StyleSheet.create({
   },
   columnsList: {
     marginTop: 20,
-  },
-  columnText: {
-    fontWeight: '700',
   },
 });
 
