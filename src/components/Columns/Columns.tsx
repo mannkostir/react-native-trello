@@ -38,6 +38,11 @@ const ListItem = ({
     }
     setIsEditing(false);
   };
+
+  const handleColumnDelete = () => {
+    dispatch(columnsActions.deleteColumn({listId: id, token}));
+    setIsEditing(false);
+  };
   return (
     <View style={styles.column}>
       {isEditing ? (
@@ -48,6 +53,9 @@ const ListItem = ({
           />
           <TouchableOpacity onPress={handleColumnTitleChange}>
             <Text style={{marginLeft: 15}}>Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleColumnDelete}>
+            <Text style={{marginLeft: 15}}>Delete</Text>
           </TouchableOpacity>
         </View>
       ) : (

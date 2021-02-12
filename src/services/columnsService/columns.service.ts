@@ -60,5 +60,5 @@ export const deleteColumn = async ({listId, token}: DeleteColumnParams) => {
     {token, method: 'DELETE'},
   );
 
-  return data;
+  return {...data, listId};
 };
