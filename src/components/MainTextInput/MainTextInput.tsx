@@ -5,7 +5,7 @@ import {TextInput} from 'react-native-gesture-handler';
 const MainTextInput = ({
   style,
   ...props
-}: TextInputProps & {style: TextStyle}) => {
+}: TextInputProps & {style?: TextStyle}) => {
   const [isFocused, setIsFocused] = useState(false);
 
   return (

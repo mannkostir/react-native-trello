@@ -9,6 +9,7 @@ import {cardsActions} from '@/store/cards';
 import {useSelector} from 'react-redux';
 import {RootState} from '@/store';
 import MainText from '../MainText';
+import EditCardModal from '../EditCardModal';
 
 const Card = ({
   card,
@@ -28,12 +29,10 @@ const Card = ({
   );
 
   const [isEditing, setIsEditing] = useState(false);
-  const [newTitle, setNewTitle] = useState('');
 
   const navigation = useNavigation<ColumnScreenNavigator>();
-  const [isChecked, setIsChecked] = useState(card.checked);
 
-  const handleCardTitleChange = () => {
+  const handleCardTitleChange = (newTitle: string) => {
     if (newTitle && column) {
       dispatch(
         cardsActions.updateCard({
@@ -78,53 +77,48 @@ const Card = ({
     }
   };
   return (
-    <View
-      style={{
-        ...styles.card,
-        ...(isEditing ? {paddingVertical: 0} : {paddingVertical: 10}),
-      }}>
+    <View style={[styles.card]}>
       <CheckBox
         value={card.checked}
         onValueChange={toggleCheckCard}
         style={styles.cardCheckbox}
       />
       {isEditing ? (
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            flex: 1,
-          }}>
-          <TextInput
-            placeholder={card.title}
-            onChangeText={(text) => setNewTitle(text)}
-          />
-          <View style={styles.buttonsWrapper}>
-            <View style={styles.editCardBtn}>
-              <TouchableOpacity onPress={handleCardTitleChange}>
-                <MainText style={styles.editCardBtnText}>Edit</MainText>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.cardDeleteBtn}>
-              <TouchableOpacity onPress={handleCardDelete}>
-                <MainText style={styles.cardDeleteBtnText}>Delete</MainText>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
+        <EditCardModal
+          onSubmit={handleCardTitleChange}
+          onDiscard={() => setIsEditing(false)}
+          card={card}
+        />
       ) : (
-        <MainText
-          numberOfLines={1}
-          onPress={() =>
-            navigation.navigate('CardDetails', {
-              cardId: card.id,
-              title: card.title,
-            })
-          }
-          onLongPress={() => setIsEditing(true)}
-          style={styles.cardText}>
-          {card.title}
-        </MainText>
+        <>
+          <MainText
+            numberOfLines={1}
+            onPress={() =>
+              navigation.navigate('CardDetails', {
+                cardId: card.id,
+                title: card.title,
+              })
+            }
+            style={styles.cardText}>
+            {card.title}
+          </MainText>
+          <View
+            style={{
+              position: 'absolute',
+              flexDirection: 'row',
+              top: 5,
+              right: 10,
+            }}>
+            <TouchableOpacity
+              style={{marginRight: 10}}
+              onPress={() => setIsEditing(true)}>
+              <Text style={{color: '#72A8BC'}}>Edit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleCardDelete}>
+              <Text style={{color: '#AC5253'}}>Delete</Text>
+            </TouchableOpacity>
+          </View>
+        </>
       )}
     </View>
   );
@@ -138,6 +132,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#E5E5E5',
     flexDirection: 'row',
     alignItems: 'center',
+    paddingVertical: 25,
   },
   cardCheckbox: {
     marginRight: 20,
@@ -155,7 +150,6 @@ const styles = StyleSheet.create({
   cardDeleteBtn: {
     backgroundColor: '#AC5253',
     justifyContent: 'center',
-    paddingHorizontal: 10,
   },
   cardDeleteBtnText: {
     color: '#ffffff',

@@ -28,7 +28,7 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
   const [isShowingCheckedCards, setIsShowingCheckedCards] = useState(false);
   return (
     <ScrollView
-      style={{paddingTop: 25, paddingHorizontal: 15, paddingBottom: 30}}>
+      style={{paddingTop: 25, paddingHorizontal: 15, marginBottom: 40}}>
       <AddCard dispatch={dispatch} columnId={currentColumnId} />
       <FlatList
         data={currentCards.filter((card) => !card.checked)}

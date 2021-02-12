@@ -7,6 +7,7 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useSelector} from 'react-redux';
+import EditColumnModal from '../EditColumnModal';
 import MainText from '../MainText';
 
 const ListItem = ({
@@ -25,9 +26,8 @@ const ListItem = ({
   );
 
   const [isEditing, setIsEditing] = useState(false);
-  const [newTitle, setNewTitle] = useState('');
 
-  const handleColumnTitleChange = () => {
+  const handleColumnTitleChange = (newTitle: string) => {
     if (newTitle) {
       dispatch(
         columnsActions.updateColumn({
@@ -47,30 +47,43 @@ const ListItem = ({
   return (
     <View style={styles.column}>
       {isEditing ? (
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <TextInput
-            placeholder={title}
-            onChangeText={(text) => setNewTitle(text)}
-          />
-          <TouchableOpacity onPress={handleColumnTitleChange}>
-            <MainText style={{marginLeft: 15}}>Edit</MainText>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleColumnDelete}>
-            <MainText style={{marginLeft: 15}}>Delete</MainText>
-          </TouchableOpacity>
-        </View>
+        <EditColumnModal
+          onSubmit={handleColumnTitleChange}
+          onDiscard={() => setIsEditing(false)}
+          columnTitle={title}
+        />
       ) : (
-        <MainText
-          weight="Medium"
-          onPress={() =>
-            navigation.navigate('Column', {
-              title,
-              columnId: id,
-            })
-          }
-          onLongPress={() => setIsEditing(true)}>
-          {title}
-        </MainText>
+        <>
+          <MainText
+            weight="Medium"
+            onPress={() =>
+              navigation.navigate('Column', {
+                title,
+                columnId: id,
+              })
+            }
+            onLongPress={() => setIsEditing(true)}>
+            {title}
+          </MainText>
+          <View
+            style={{
+              position: 'absolute',
+              flexDirection: 'row',
+              top: 5,
+              right: 10,
+            }}>
+            <TouchableOpacity
+              style={{marginRight: 10}}
+              onPress={() => setIsEditing(true)}>
+              <Text style={{color: '#72A8BC'}}>Edit</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={{color: '#AC5253'}} onPress={handleColumnDelete}>
+                Delete
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </>
       )}
     </View>
   );
