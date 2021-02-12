@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
+import MainTextInput from '../MainTextInput';
 
 const AddCard = ({
   columnId,
@@ -30,7 +31,7 @@ const AddCard = ({
   };
   return (
     <View style={styles.addCardWrapper}>
-      <TextInput
+      <MainTextInput
         style={styles.addCardInput}
         placeholder={'Add a prayer...'}
         onChangeText={(text) => setNewCardTitle(text)}
@@ -54,7 +55,6 @@ const styles = StyleSheet.create({
     padding: 15,
     borderWidth: 1,
     borderColor: '#E5E5E5',
-    color: '#72A8BC',
     borderRadius: 10,
     marginBottom: 25,
     height: 50,

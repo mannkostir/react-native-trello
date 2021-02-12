@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Button, StyleSheet, View} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
+import MainTextInput from '../MainTextInput';
 
 const AddColumn = ({
   handleSubmit,
@@ -11,7 +12,7 @@ const AddColumn = ({
 
   return (
     <View style={styles.columnsSection}>
-      <TextInput
+      <MainTextInput
         style={styles.column}
         onChangeText={(text) => setColumnTitle(text)}
         value={columnTitle}

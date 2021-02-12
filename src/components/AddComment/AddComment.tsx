@@ -5,6 +5,7 @@ import React, {useState} from 'react';
 import {Button, View} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 import {useSelector} from 'react-redux';
+import MainTextInput from '../MainTextInput';
 
 const AddComment = ({
   dispatch,
@@ -37,7 +38,7 @@ const AddComment = ({
   };
   return (
     <View>
-      <TextInput
+      <MainTextInput
         style={commonStyles.textInput}
         placeholder="Add a comment..."
         onChangeText={(text) => setCommentBody(text)}

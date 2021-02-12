@@ -1,3 +1,4 @@
+import MainTextInput from '@/components/MainTextInput';
 import {authActions} from '@/store/auth';
 import commonStyles from '@/styles/common.styles';
 import React, {useState} from 'react';
@@ -18,13 +19,13 @@ const SignIn = () => {
 
   return (
     <View>
-      <TextInput
+      <MainTextInput
         style={commonStyles.textInput}
         autoCapitalize="none"
         placeholder="Enter email"
         onChangeText={(text) => setEmail(text)}
       />
-      <TextInput
+      <MainTextInput
         style={commonStyles.textInput}
         autoCapitalize="none"
         placeholder="Enter password"
