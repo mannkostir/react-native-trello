@@ -29,7 +29,7 @@ const cardsSlice = createSlice({
     },
     createCardSucceeded(state, action: PayloadAction<CreateCardResponse>) {
       const {column, ...cardData} = action.payload;
-      state.currentCards.push({...cardData, commentsIds: []});
+      state.currentCards.unshift({...cardData, commentsIds: []});
       state.isLoading = false;
     },
     createCardFailed(state, action: PayloadAction<{message: string}>) {
@@ -86,16 +86,16 @@ const cardsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(cardsActions.createCard, (state) => {
-        state.isLoading = true;
+        // state.isLoading = true;
       })
       .addCase(cardsActions.getCard, (state) => {
-        state.isLoading = true;
+        // state.isLoading = true;
       })
       .addCase(cardsActions.updateCard, (state) => {
-        state.isLoading = true;
+        // state.isLoading = true;
       })
       .addCase(cardsActions.deleteCard, (state) => {
-        state.isLoading = true;
+        // state.isLoading = true;
       }),
 });
 
