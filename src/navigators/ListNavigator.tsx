@@ -8,7 +8,11 @@ const TopTab = createMaterialTopTabNavigator();
 
 const ListNavigator = ({columnId}: {columnId: number}) => {
   return (
-    <TopTab.Navigator>
+    <TopTab.Navigator
+      tabBarOptions={{
+        activeTintColor: '#72A8BC',
+        inactiveTintColor: '#C8C8C8',
+      }}>
       <TopTab.Screen name="Cards">
         {(props) => <Cards {...props} currentColumnId={columnId} />}
       </TopTab.Screen>

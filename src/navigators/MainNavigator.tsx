@@ -11,6 +11,8 @@ import {RootState} from '@/store';
 import {useSelector} from 'react-redux';
 import {Text, View} from 'react-native';
 import {Header} from 'react-native/Libraries/NewAppScreen';
+import MainText from '@/components/MainText';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 
 const Stack = createStackNavigator<MainNavigatorParamList>();
 
@@ -20,6 +22,8 @@ const MainNavigator = () => {
   );
 
   const [isAddingColumn, setIsAddingColumn] = useState(false);
+
+  const [isFullHeightDescription, setIsFullHeightDescription] = useState(false);
 
   const isAuthenticated = useMemo(() => token, [token]);
 
@@ -77,16 +81,48 @@ const MainNavigator = () => {
                 title: route.params.title,
                 headerStyle: {
                   backgroundColor: '#BFB393',
-                  height: 120,
+                  height: isFullHeightDescription ? '100%' : 120,
                 },
                 headerBackTitleVisible: false,
                 headerLeftContainerStyle: {
                   width: 10,
                   justifyContent: 'flex-start',
                 },
+                headerTintColor: '#fff',
                 headerTitle: (props) => (
-                  <View style={{marginLeft: -60, marginTop: 20}}>
-                    <Text>{route.params.title}</Text>
+                  <View style={{marginLeft: -60, marginTop: 30}}>
+                    {isFullHeightDescription ? (
+                      <ScrollView>
+                        <MainText
+                          style={{color: '#fff', lineHeight: 24}}
+                          onPress={() =>
+                            setIsFullHeightDescription(
+                              (isFullHeight) => !isFullHeight,
+                            )
+                          }>
+                          {route.params.title}
+                        </MainText>
+                        <TouchableOpacity
+                          style={{
+                            alignSelf: 'center',
+                            marginTop: 30,
+                          }}
+                          onPress={() => setIsFullHeightDescription(false)}>
+                          <Text style={{fontSize: 34, color: '#fff'}}>X</Text>
+                        </TouchableOpacity>
+                      </ScrollView>
+                    ) : (
+                      <MainText
+                        style={{color: '#fff', lineHeight: 24, flex: 1}}
+                        numberOfLines={2}
+                        onPress={() =>
+                          setIsFullHeightDescription(
+                            (isFullHeight) => !isFullHeight,
+                          )
+                        }>
+                        {route.params.title}
+                      </MainText>
+                    )}
                   </View>
                 ),
                 headerTitleAlign: 'left',

@@ -31,6 +31,7 @@ const MainText = ({
 const styles = StyleSheet.create({
   common: {
     fontSize: 16,
+    lineHeight: 20,
   },
   regularText: {
     fontFamily: 'SFUITEXT-Regular',

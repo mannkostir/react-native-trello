@@ -2,7 +2,7 @@ import * as types from '@/types/Common.types';
 import {ColumnScreenNavigator} from '@/types/Navigation.types';
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
 import CheckBox from '@react-native-community/checkbox';
 import {cardsActions} from '@/store/cards';
@@ -64,15 +64,19 @@ const Card = ({
   };
 
   const toggleCheckCard = () => {
+    // Wait for animation to finish first (for ios)
+    const timeoutDuration = Platform.OS === 'ios' ? 500 : 0;
     if (card) {
-      dispatch(
-        cardsActions.updateCard({
-          cardData: {...card, checked: !card.checked},
-          cardId: card.id,
-          column,
-          token,
-        }),
-      );
+      setTimeout(() => {
+        dispatch(
+          cardsActions.updateCard({
+            cardData: {...card, checked: !card.checked},
+            cardId: card.id,
+            column,
+            token,
+          }),
+        );
+      }, timeoutDuration);
     }
   };
   return (
@@ -112,6 +116,7 @@ const Card = ({
         </View>
       ) : (
         <Text
+          numberOfLines={1}
           onPress={() =>
             navigation.navigate('CardDetails', {
               cardId: card.id,
@@ -130,13 +135,14 @@ const Card = ({
 const styles = StyleSheet.create({
   card: {
     position: 'relative',
-    // padding: 15,
+    paddingLeft: 15,
     borderBottomWidth: 1,
+    borderBottomColor: '#E5E5E5',
     flexDirection: 'row',
     alignItems: 'center',
   },
   cardCheckbox: {
-    marginRight: 5,
+    marginRight: 20,
   },
   cardText: {
     flex: 1,

@@ -35,6 +35,7 @@ const AddCard = ({
         placeholder={'Add a prayer...'}
         onChangeText={(text) => setNewCardTitle(text)}
         value={newCardTitle}
+        selectionColor="#72A8BC"
       />
       <View style={styles.addCardSubmitBtn}>
         <TouchableOpacity onPress={handleAddCard}>
@@ -52,9 +53,10 @@ const styles = StyleSheet.create({
   addCardInput: {
     padding: 15,
     borderWidth: 1,
-    borderStyle: 'solid',
+    borderColor: '#E5E5E5',
+    color: '#72A8BC',
     borderRadius: 10,
-    marginBottom: 20,
+    marginBottom: 25,
     height: 50,
     paddingLeft: 50,
   },
@@ -67,8 +69,7 @@ const styles = StyleSheet.create({
   },
   addCardSubmitBtnText: {
     color: '#72A8BC',
-    fontSize: 40,
-    alignSelf: 'center',
+    fontSize: 36,
     paddingHorizontal: 10,
   },
 });

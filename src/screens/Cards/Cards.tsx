@@ -38,7 +38,7 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
       <TouchableOpacity
         style={styles.toggleAnsweredVisibilityBtn}
         onPress={() => setIsShowingCheckedCards((isShowing) => !isShowing)}>
-        <Text>
+        <Text style={{color: '#fff'}}>
           {isShowingCheckedCards
             ? 'HIDE ANSWERED PRAYERS'
             : 'SHOW ANSWERED PRAYERS'}
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    marginVertical: 20,
+    marginVertical: 25,
   },
   list: {
     flexGrow: 0,
