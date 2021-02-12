@@ -59,9 +59,6 @@ const Card = ({
         token,
       }),
     );
-    dispatch(cardsActions.getAllCards({token}));
-
-    setIsEditing(false);
   };
 
   const toggleCheckCard = () => {
