@@ -26,6 +26,7 @@ const AddCard = ({
         }),
       );
     }
+    setNewCardTitle('');
   };
   return (
     <View style={styles.addCardWrapper}>
@@ -33,6 +34,7 @@ const AddCard = ({
         style={styles.addCardInput}
         placeholder={'Add a prayer...'}
         onChangeText={(text) => setNewCardTitle(text)}
+        value={newCardTitle}
       />
       <View style={styles.addCardSubmitBtn}>
         <TouchableOpacity onPress={handleAddCard}>

@@ -32,6 +32,8 @@ const AddComment = ({
         }),
       );
     }
+
+    setCommentBody('');
   };
   return (
     <View>
@@ -39,6 +41,7 @@ const AddComment = ({
         style={commonStyles.textInput}
         placeholder="Add a comment..."
         onChangeText={(text) => setCommentBody(text)}
+        value={commentBody}
       />
       <Button onPress={handleAddComment} title="Add comment" />
     </View>

@@ -14,8 +14,15 @@ const AddColumn = ({
       <TextInput
         style={styles.column}
         onChangeText={(text) => setColumnTitle(text)}
+        value={columnTitle}
       />
-      <Button title="Add column" onPress={() => handleSubmit(columnTitle)} />
+      <Button
+        title="Add column"
+        onPress={() => {
+          handleSubmit(columnTitle);
+          setColumnTitle('');
+        }}
+      />
     </View>
   );
 };
