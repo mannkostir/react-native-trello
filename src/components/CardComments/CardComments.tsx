@@ -11,6 +11,7 @@ import {
 } from 'react-native-gesture-handler';
 import AddComment from '../AddComment/AddComment';
 import MainText from '../MainText';
+import MainTextInput from '../MainTextInput';
 
 function getDuration(ms: number): string {
   let minutes = Math.floor(ms / 60000);
@@ -67,12 +68,15 @@ const CardCommentsItem = ({
       </View>
       {isEditMode ? (
         <View>
-          <TextInput
-            style={commonStyles.textInput}
+          <MainTextInput
+            style={[
+              commonStyles.textInput,
+              {borderWidth: 1, borderColor: '#E5E5E5'},
+            ]}
             onChangeText={(text) => setNewCommentBody(text)}
           />
           <TouchableOpacity onPress={handleCommentEdit}>
-            <MainText>Edit</MainText>
+            <MainText style={{color: '#72A8BC'}}>Edit</MainText>
           </TouchableOpacity>
         </View>
       ) : (
