@@ -46,44 +46,42 @@ const ListItem = ({
   };
   return (
     <View style={styles.column}>
-      {isEditing ? (
-        <EditColumnModal
-          onSubmit={handleColumnTitleChange}
-          onDiscard={() => setIsEditing(false)}
-          columnTitle={title}
-        />
-      ) : (
-        <>
-          <MainText
-            weight="Medium"
-            onPress={() =>
-              navigation.navigate('Column', {
-                title,
-                columnId: id,
-              })
-            }>
-            {title}
-          </MainText>
-          <View
-            style={{
-              position: 'absolute',
-              flexDirection: 'row',
-              top: 5,
-              right: 10,
-            }}>
-            <TouchableOpacity
-              style={{marginRight: 10}}
-              onPress={() => setIsEditing(true)}>
-              <Text style={{color: '#72A8BC'}}>Edit</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={{color: '#AC5253'}} onPress={handleColumnDelete}>
-                Delete
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </>
-      )}
+      <EditColumnModal
+        onSubmit={handleColumnTitleChange}
+        onDiscard={() => setIsEditing(false)}
+        columnTitle={title}
+        visible={isEditing}
+      />
+      <>
+        <MainText
+          weight="Medium"
+          onPress={() =>
+            navigation.navigate('Column', {
+              title,
+              columnId: id,
+            })
+          }>
+          {title}
+        </MainText>
+        <View
+          style={{
+            position: 'absolute',
+            flexDirection: 'row',
+            top: 5,
+            right: 10,
+          }}>
+          <TouchableOpacity
+            style={{marginRight: 10}}
+            onPress={() => setIsEditing(true)}>
+            <Text style={{color: '#72A8BC'}}>Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={{color: '#AC5253'}} onPress={handleColumnDelete}>
+              Delete
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </>
     </View>
   );
 };

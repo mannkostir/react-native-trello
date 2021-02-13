@@ -83,43 +83,41 @@ const Card = ({
         onValueChange={toggleCheckCard}
         style={styles.cardCheckbox}
       />
-      {isEditing ? (
-        <EditCardModal
-          onSubmit={handleCardTitleChange}
-          onDiscard={() => setIsEditing(false)}
-          card={card}
-        />
-      ) : (
-        <>
-          <MainText
-            numberOfLines={1}
-            onPress={() =>
-              navigation.navigate('CardDetails', {
-                cardId: card.id,
-                title: card.title,
-              })
-            }
-            style={styles.cardText}>
-            {card.title}
-          </MainText>
-          <View
-            style={{
-              position: 'absolute',
-              flexDirection: 'row',
-              top: 5,
-              right: 10,
-            }}>
-            <TouchableOpacity
-              style={{marginRight: 10}}
-              onPress={() => setIsEditing(true)}>
-              <Text style={{color: '#72A8BC'}}>Edit</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleCardDelete}>
-              <Text style={{color: '#AC5253'}}>Delete</Text>
-            </TouchableOpacity>
-          </View>
-        </>
-      )}
+      <EditCardModal
+        onSubmit={handleCardTitleChange}
+        onDiscard={() => setIsEditing(false)}
+        card={card}
+        visible={isEditing}
+      />
+      <>
+        <MainText
+          numberOfLines={1}
+          onPress={() =>
+            navigation.navigate('CardDetails', {
+              cardId: card.id,
+              title: card.title,
+            })
+          }
+          style={styles.cardText}>
+          {card.title}
+        </MainText>
+        <View
+          style={{
+            position: 'absolute',
+            flexDirection: 'row',
+            top: 5,
+            right: 10,
+          }}>
+          <TouchableOpacity
+            style={{marginRight: 10}}
+            onPress={() => setIsEditing(true)}>
+            <Text style={{color: '#72A8BC'}}>Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleCardDelete}>
+            <Text style={{color: '#AC5253'}}>Delete</Text>
+          </TouchableOpacity>
+        </View>
+      </>
     </View>
   );
 };

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Modal, ModalProps, Pressable, Text, View} from 'react-native';
-import {TextInput, TouchableOpacity} from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native';
 import MainText from '../MainText';
 import MainTextInput from '../MainTextInput';
 
