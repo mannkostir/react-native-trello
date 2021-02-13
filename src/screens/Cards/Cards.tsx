@@ -6,9 +6,11 @@ import {RootState} from '@/store';
 import {cardsActions} from '@/store/cards';
 import * as types from '@/types/Common.types';
 import React, {useEffect, useState} from 'react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {useDispatch, useSelector} from 'react-redux';
+import {LeftActions, RightActions} from './SwipeableActions';
 
 const Cards = ({currentColumnId}: {currentColumnId: number}) => {
   const {currentCards, isCardsLoading, token, currentColumn} = useSelector(
@@ -59,6 +61,15 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
     disableCardEditMode();
   };
 
+  const handleCardDelete = (cardId: number) => {
+    dispatch(
+      cardsActions.deleteCard({
+        cardId,
+        token,
+      }),
+    );
+  };
+
   const enableCardEditMode = (cardId: number) => {
     setEditingCardId(cardId);
   };
@@ -81,11 +92,23 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
       <FlatList
         data={currentCards.filter((card) => !card.checked)}
         renderItem={({item}) => (
-          <Card
-            enableCardEditMode={() => enableCardEditMode(item.id)}
-            dispatch={dispatch}
-            card={item}
-          />
+          <View>
+            <Swipeable
+              overshootLeft={false}
+              overshootRight={false}
+              renderRightActions={() => (
+                <RightActions
+                  handleEditPress={() => enableCardEditMode(item.id)}
+                />
+              )}
+              renderLeftActions={() => (
+                <LeftActions
+                  handleDeletePress={() => handleCardDelete(item.id)}
+                />
+              )}>
+              <Card dispatch={dispatch} card={item} />
+            </Swipeable>
+          </View>
         )}
         keyExtractor={(card) => card.id.toString()}
         style={styles.list}
@@ -103,11 +126,18 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
         <FlatList
           data={currentCards.filter((card) => card.checked)}
           renderItem={({item}) => (
-            <Card
-              enableCardEditMode={() => enableCardEditMode(item.id)}
-              dispatch={dispatch}
-              card={item}
-            />
+            <View>
+              <Swipeable
+                overshootLeft={false}
+                overshootRight={false}
+                renderLeftActions={() => (
+                  <LeftActions
+                    handleDeletePress={() => handleCardDelete(item.id)}
+                  />
+                )}>
+                <Card dispatch={dispatch} card={item} />
+              </Swipeable>
+            </View>
           )}
           keyExtractor={(card) => card.id.toString()}
           style={styles.list}

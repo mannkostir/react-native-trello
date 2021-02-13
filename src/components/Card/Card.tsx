@@ -14,11 +14,9 @@ import EditCardModal from '../EditCardModal';
 const Card = ({
   card,
   dispatch,
-  enableCardEditMode,
 }: {
   card: types.Card;
   dispatch: React.Dispatch<any>;
-  enableCardEditMode: () => void;
 }) => {
   const token = useSelector(
     (state: RootState) => state.auth.currentUser?.token || null,
@@ -31,15 +29,6 @@ const Card = ({
   );
 
   const navigation = useNavigation<ColumnScreenNavigator>();
-
-  const handleCardDelete = () => {
-    dispatch(
-      cardsActions.deleteCard({
-        cardId: card.id,
-        token,
-      }),
-    );
-  };
 
   const toggleCheckCard = () => {
     // Wait for animation to finish first (for ios)
@@ -76,22 +65,6 @@ const Card = ({
           style={styles.cardText}>
           {card.title}
         </MainText>
-        <View
-          style={{
-            position: 'absolute',
-            flexDirection: 'row',
-            top: 5,
-            right: 10,
-          }}>
-          <TouchableOpacity
-            style={{marginRight: 10}}
-            onPress={enableCardEditMode}>
-            <Text style={{color: '#72A8BC'}}>Edit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleCardDelete}>
-            <Text style={{color: '#AC5253'}}>Delete</Text>
-          </TouchableOpacity>
-        </View>
       </>
     </View>
   );
@@ -106,6 +79,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 25,
+    backgroundColor: '#fff',
   },
   cardCheckbox: {
     marginRight: 20,

@@ -10,14 +10,10 @@ const ColumnsItem = ({
   title,
   id,
   navigation,
-  enableColumnEditMode,
-  deleteColumn,
 }: {
   title: string;
   id: number;
   navigation: BoardScreenNavigation;
-  enableColumnEditMode: () => void;
-  deleteColumn: () => void;
 }) => {
   const token = useSelector(
     (state: RootState) => state.auth.currentUser?.token || null,
@@ -36,24 +32,6 @@ const ColumnsItem = ({
           }>
           {title}
         </MainText>
-        <View
-          style={{
-            position: 'absolute',
-            flexDirection: 'row',
-            top: 5,
-            right: 10,
-          }}>
-          <TouchableOpacity
-            style={{marginRight: 10}}
-            onPress={enableColumnEditMode}>
-            <Text style={{color: '#72A8BC'}}>Edit</Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={{color: '#AC5253'}} onPress={deleteColumn}>
-              Delete
-            </Text>
-          </TouchableOpacity>
-        </View>
       </>
     </View>
   );
@@ -68,7 +46,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderRadius: 5,
     fontSize: 17,
-    marginBottom: 10,
   },
 });
 
