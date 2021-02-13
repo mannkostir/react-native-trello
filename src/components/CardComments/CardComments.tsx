@@ -2,7 +2,7 @@ import {commentActions} from '@/store/comments';
 import commonStyles from '@/styles/common.styles';
 import {Comment, User} from '@/types/Common.types';
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {KeyboardAvoidingView, StyleSheet, Text, View} from 'react-native';
 import {
   FlatList,
   ScrollView,
@@ -106,7 +106,7 @@ const CardComments = ({
   dispatch: React.Dispatch<any>;
 }) => {
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <Text style={commonStyles.sectionTitle}>Comments</Text>
       <FlatList
         data={comments}
@@ -121,7 +121,7 @@ const CardComments = ({
         keyExtractor={(item) => item.id.toString()}
       />
       <AddComment cardId={cardId} dispatch={dispatch} />
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -138,7 +138,6 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: '#E5E5E5',
-    flex: 1,
   },
   commentAuthor: {
     fontWeight: '700',

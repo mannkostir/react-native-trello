@@ -52,6 +52,7 @@ const Board = ({
       <Columns
         dispatch={dispatch}
         navigation={navigation}
+        isLoading={state.columns.isLoading}
         columns={state.columns.currentColumns}
       />
     </SafeAreaView>

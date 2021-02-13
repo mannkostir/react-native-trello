@@ -2,8 +2,9 @@ import {RootState} from '@/store';
 import {commentActions} from '@/store/comments';
 import commonStyles from '@/styles/common.styles';
 import React, {useState} from 'react';
-import {Button, View} from 'react-native';
+import {Button, KeyboardAvoidingView, View} from 'react-native';
 import {useSelector} from 'react-redux';
+import MainButton from '../MainButton';
 import MainTextInput from '../MainTextInput';
 
 const AddComment = ({
@@ -36,7 +37,7 @@ const AddComment = ({
     setCommentBody('');
   };
   return (
-    <View>
+    <KeyboardAvoidingView>
       <MainTextInput
         multiline={true}
         style={commonStyles.textInput}
@@ -44,8 +45,10 @@ const AddComment = ({
         onChangeText={(text) => setCommentBody(text)}
         value={commentBody}
       />
-      <Button onPress={handleAddComment} title="Add comment" />
-    </View>
+      <MainButton style={{marginTop: 7}} onPress={handleAddComment}>
+        Add Comment
+      </MainButton>
+    </KeyboardAvoidingView>
   );
 };
 

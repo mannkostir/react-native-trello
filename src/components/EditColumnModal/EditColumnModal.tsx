@@ -2,6 +2,7 @@ import {Column} from '@/types/Common.types';
 import React, {useState} from 'react';
 import {Modal, ModalProps, Pressable, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native';
+import MainButton from '../MainButton';
 import MainText from '../MainText';
 import MainTextInput from '../MainTextInput';
 
@@ -62,6 +63,7 @@ const EditColumnModal = ({
               borderWidth: 1,
               borderRadius: 10,
               width: '100%',
+              maxHeight: 40,
             }}
             placeholder={column?.title}
             onChangeText={(text) => setNewTitle(text)}
@@ -71,15 +73,15 @@ const EditColumnModal = ({
           <View
             style={{
               flexDirection: 'row',
+              alignItems: 'center',
               alignSelf: 'center',
+              justifyContent: 'space-between',
               marginTop: 30,
             }}>
             <TouchableOpacity style={{marginRight: 30}} onPress={handleDiscard}>
               <Text style={{color: '#AC5253'}}>Discard</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleSave}>
-              <Text style={{color: '#72A8BC'}}>Save</Text>
-            </TouchableOpacity>
+            <MainButton onPress={handleSave}>Save</MainButton>
           </View>
         </View>
       </View>

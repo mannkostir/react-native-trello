@@ -14,9 +14,9 @@ import MainNavigator from './navigators/MainNavigator';
 import StoreProvider from './store';
 import {Platform, StatusBar, View, ViewComponent} from 'react-native';
 
-// import {LogBox} from 'react-native';
+import {LogBox} from 'react-native';
 
-// LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
 
 const App = () => {
   return (
@@ -24,7 +24,7 @@ const App = () => {
       <View
         style={{
           flex: 1,
-          paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 18,
+          paddingTop: Platform.OS === 'android' ? 0 : 18,
         }}>
         <MainNavigator />
       </View>

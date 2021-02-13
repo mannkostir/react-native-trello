@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Button, StyleSheet, View} from 'react-native';
+import MainButton from '../MainButton';
 import MainTextInput from '../MainTextInput';
 
 const AddColumn = ({
@@ -16,29 +17,20 @@ const AddColumn = ({
         onChangeText={(text) => setColumnTitle(text)}
         value={columnTitle}
       />
-      <Button
-        title="Add column"
+      <MainButton
         onPress={() => {
           handleSubmit(columnTitle);
           setColumnTitle('');
-        }}
-      />
+        }}>
+        Add Column
+      </MainButton>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {},
-  column: {
-    padding: 20,
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#e5e5e5',
-    backgroundColor: '#ffffff',
-    borderRadius: 5,
-    fontSize: 17,
-    marginBottom: 10,
-  },
+  column: {},
 });
 
 export default AddColumn;

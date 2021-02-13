@@ -12,7 +12,7 @@ function* signInWorker(action: PayloadAction<SignInParams>) {
       message?: string;
     } = yield call(authService.signIn, action.payload);
 
-    if (data.name === 'QueryFailedError') {
+    if (data.name === 'QueryFailedError' || data.name === 'EntityNotFound') {
       throw new Error(data.message);
     }
 
@@ -29,7 +29,7 @@ function* signUpWorker(action: PayloadAction<SignUpParams>) {
       message?: string;
     } = yield call(authService.signUp, action.payload);
 
-    if (data.name === 'QueryFailedError') {
+    if (data.name === 'QueryFailedError' || data.name === 'EntityNotFound') {
       throw new Error(data.message);
     }
 

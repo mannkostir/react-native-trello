@@ -1,6 +1,7 @@
+import React from 'react';
 import {Pressable, Text, View} from 'react-native';
 
-export const RightActions = ({
+const RightActions = ({
   handleEditPress,
   handleDeletePress,
 }: {
@@ -41,3 +42,5 @@ export const RightActions = ({
     </View>
   );
 };
+
+export default RightActions;

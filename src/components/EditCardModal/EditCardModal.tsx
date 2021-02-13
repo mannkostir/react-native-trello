@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import {TouchableOpacity} from 'react-native';
+import MainButton from '../MainButton';
 import MainText from '../MainText';
 import MainTextInput from '../MainTextInput';
 
@@ -69,6 +70,7 @@ const EditCardModal = ({
               borderWidth: 1,
               borderRadius: 10,
               width: '100%',
+              maxHeight: 100,
             }}
             autoFocus={true}
             placeholder={card?.title}
@@ -79,15 +81,15 @@ const EditCardModal = ({
           <View
             style={{
               flexDirection: 'row',
+              alignItems: 'center',
               alignSelf: 'center',
+              justifyContent: 'space-between',
               marginTop: 30,
             }}>
             <TouchableOpacity style={{marginRight: 30}} onPress={handleDiscard}>
               <Text style={{color: '#AC5253'}}>Discard</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleSave}>
-              <Text style={{color: '#72A8BC'}}>Save</Text>
-            </TouchableOpacity>
+            <MainButton onPress={handleSave}>Save</MainButton>
           </View>
         </KeyboardAvoidingView>
       </View>

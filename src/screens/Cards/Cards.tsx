@@ -6,7 +6,7 @@ import {RootState} from '@/store';
 import {cardsActions} from '@/store/cards';
 import * as types from '@/types/Common.types';
 import React, {useEffect, useState} from 'react';
-import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
+import {Alert, FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import {useDispatch, useSelector} from 'react-redux';
@@ -29,6 +29,12 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
   const dispatch = useDispatch();
 
   const [editingCardId, setEditingCardId] = useState<number | null>(null);
+
+  useEffect(() => {
+    Alert.alert(
+      'Swipe left to see edit option. Swipe right to see delete option',
+    );
+  }, []);
 
   useEffect(() => {
     dispatch(cardsActions.getAllCards({token}));

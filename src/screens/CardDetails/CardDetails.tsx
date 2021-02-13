@@ -50,7 +50,10 @@ const CardDetails = () => {
   }, [comments]);
 
   return (
-    <ScrollView style={{flex: 1, marginBottom: 40, paddingHorizontal: 10}}>
+    <ScrollView
+      keyboardShouldPersistTaps="handled"
+      contentContainerStyle={{paddingBottom: 30}}
+      style={{flex: 1, paddingHorizontal: 20}}>
       <View style={styles.lastPrayed}>
         <MainText>Last prayed a while ago</MainText>
       </View>
@@ -94,11 +97,12 @@ const CardDetails = () => {
 
 const styles = StyleSheet.create({
   lastPrayed: {
+    flex: 0,
     paddingVertical: 20,
-    paddingLeft: 40,
+    paddingLeft: 30,
   },
   infoTable: {
-    flexGrow: 0,
+    flex: 1,
     flexDirection: 'row',
   },
   infoTableItem: {
@@ -107,7 +111,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e5e5e5',
     borderStyle: 'solid',
-    padding: 10,
+    padding: 15,
     justifyContent: 'center',
   },
   infoItemTitle: {
