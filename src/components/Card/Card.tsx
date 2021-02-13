@@ -1,8 +1,8 @@
 import * as types from '@/types/Common.types';
 import {ColumnScreenNavigator} from '@/types/Navigation.types';
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Alert, Platform, StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import CheckBox from '@react-native-community/checkbox';
 import {cardsActions} from '@/store/cards';
@@ -14,9 +14,11 @@ import EditCardModal from '../EditCardModal';
 const Card = ({
   card,
   dispatch,
+  enableCardEditMode,
 }: {
   card: types.Card;
   dispatch: React.Dispatch<any>;
+  enableCardEditMode: () => void;
 }) => {
   const token = useSelector(
     (state: RootState) => state.auth.currentUser?.token || null,
@@ -28,28 +30,7 @@ const Card = ({
       ) || null,
   );
 
-  const [isEditing, setIsEditing] = useState(false);
-
   const navigation = useNavigation<ColumnScreenNavigator>();
-
-  const handleCardTitleChange = (newTitle: string) => {
-    if (newTitle && column) {
-      dispatch(
-        cardsActions.updateCard({
-          cardData: {
-            checked: card.checked,
-            description: card.description,
-            title: newTitle,
-          },
-          cardId: card.id,
-          token,
-          column,
-        }),
-      );
-    }
-
-    setIsEditing(false);
-  };
 
   const handleCardDelete = () => {
     dispatch(
@@ -83,12 +64,6 @@ const Card = ({
         onValueChange={toggleCheckCard}
         style={styles.cardCheckbox}
       />
-      <EditCardModal
-        onSubmit={handleCardTitleChange}
-        onDiscard={() => setIsEditing(false)}
-        card={card}
-        visible={isEditing}
-      />
       <>
         <MainText
           numberOfLines={1}
@@ -110,7 +85,7 @@ const Card = ({
           }}>
           <TouchableOpacity
             style={{marginRight: 10}}
-            onPress={() => setIsEditing(true)}>
+            onPress={enableCardEditMode}>
             <Text style={{color: '#72A8BC'}}>Edit</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleCardDelete}>

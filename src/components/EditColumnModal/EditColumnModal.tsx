@@ -1,3 +1,4 @@
+import {Column} from '@/types/Common.types';
 import React, {useState} from 'react';
 import {Modal, ModalProps, Pressable, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native';
@@ -5,19 +6,19 @@ import MainText from '../MainText';
 import MainTextInput from '../MainTextInput';
 
 const EditColumnModal = ({
-  columnTitle,
+  column,
   onSubmit,
   onDiscard,
   ...props
 }: ModalProps & {
-  columnTitle: string;
-  onSubmit: (newTitle: string) => void;
+  column: Column | null;
+  onSubmit: (data: {newTitle: string; column: Column | null}) => void;
   onDiscard: () => void;
 }) => {
   const [newTitle, setNewTitle] = useState('');
 
   const handleSave = () => {
-    onSubmit(newTitle);
+    onSubmit({newTitle, column});
   };
 
   const handleDiscard = () => {
@@ -25,7 +26,7 @@ const EditColumnModal = ({
   };
 
   return (
-    <Modal {...props} transparent={true}>
+    <Modal {...props} transparent={true} animationType="slide">
       <View
         style={{
           flex: 1,
@@ -62,10 +63,10 @@ const EditColumnModal = ({
               borderRadius: 10,
               width: '100%',
             }}
-            placeholder={columnTitle}
+            placeholder={column?.title}
             onChangeText={(text) => setNewTitle(text)}
             selectTextOnFocus={true}
-            defaultValue={columnTitle}
+            defaultValue={column?.title}
           />
           <View
             style={{

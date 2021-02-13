@@ -1,6 +1,13 @@
-import {Card} from '@/types/Common.types';
+import {Card, Column} from '@/types/Common.types';
 import React, {useState} from 'react';
-import {Modal, ModalProps, Pressable, Text, View} from 'react-native';
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Modal,
+  ModalProps,
+  Text,
+  View,
+} from 'react-native';
 import {TouchableOpacity} from 'react-native';
 import MainText from '../MainText';
 import MainTextInput from '../MainTextInput';
@@ -11,14 +18,14 @@ const EditCardModal = ({
   onDiscard,
   ...props
 }: ModalProps & {
-  card: Card;
-  onSubmit: (newTitle: string) => void;
+  card: Card | null;
+  onSubmit: (data: {newTitle: string; card: Card | null}) => void;
   onDiscard: () => void;
 }) => {
   const [newTitle, setNewTitle] = useState('');
 
   const handleSave = () => {
-    onSubmit(newTitle);
+    onSubmit({newTitle, card});
   };
 
   const handleDiscard = () => {
@@ -26,14 +33,14 @@ const EditCardModal = ({
   };
 
   return (
-    <Modal {...props} transparent={true}>
+    <Modal {...props} animationType="slide" transparent={true}>
       <View
         style={{
           flex: 1,
           justifyContent: 'center',
           alignContent: 'center',
         }}>
-        <View
+        <KeyboardAvoidingView
           style={{
             margin: 20,
             backgroundColor: 'white',
@@ -63,10 +70,11 @@ const EditCardModal = ({
               borderRadius: 10,
               width: '100%',
             }}
-            placeholder={card.title}
+            autoFocus={true}
+            placeholder={card?.title}
             onChangeText={(text) => setNewTitle(text)}
             selectTextOnFocus={true}
-            defaultValue={card.title}
+            defaultValue={card?.title}
           />
           <View
             style={{
@@ -81,7 +89,7 @@ const EditCardModal = ({
               <Text style={{color: '#72A8BC'}}>Save</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </View>
     </Modal>
   );
