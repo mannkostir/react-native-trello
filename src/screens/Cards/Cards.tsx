@@ -4,7 +4,7 @@ import MainText from '@/components/MainText';
 import {RootState} from '@/store';
 import {cardsActions} from '@/store/cards';
 import React, {useEffect, useState} from 'react';
-import {FlatList, StyleSheet, Text} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -28,8 +28,7 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
   return isCardsLoading ? (
     <MainText style={{marginTop: 50, alignSelf: 'center'}}>LOADING...</MainText>
   ) : (
-    <ScrollView
-      style={{paddingTop: 25, paddingHorizontal: 15, marginBottom: 40}}>
+    <View style={styles.container}>
       <AddCard dispatch={dispatch} columnId={currentColumnId} />
       <FlatList
         data={currentCards.filter((card) => !card.checked)}
@@ -46,7 +45,7 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
             : 'SHOW ANSWERED PRAYERS'}
         </MainText>
       </TouchableOpacity>
-      {isShowingCheckedCards ? (
+      {isShowingCheckedCards && currentCards.find((card) => card.checked) ? (
         <FlatList
           data={currentCards.filter((card) => card.checked)}
           renderItem={({item}) => <Card dispatch={dispatch} card={item} />}
@@ -54,11 +53,16 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
           style={styles.list}
         />
       ) : null}
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 25,
+    paddingHorizontal: 15,
+  },
   toggleAnsweredVisibilityBtn: {
     backgroundColor: '#BFB393',
     borderRadius: 15,
@@ -68,9 +72,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginVertical: 25,
   },
-  list: {
-    flexGrow: 0,
-  },
+  list: {flex: 1},
 });
 
 export default Cards;

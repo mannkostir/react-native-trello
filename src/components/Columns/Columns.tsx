@@ -116,7 +116,7 @@ const Columns = ({lists, navigation, dispatch}: IListsProps) => {
 
 const styles = StyleSheet.create({
   columnsSection: {
-    paddingHorizontal: 20,
+    flex: 1,
   },
   column: {
     padding: 20,
@@ -129,6 +129,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   columnsList: {
+    flex: 1,
     marginTop: 20,
   },
 });

@@ -29,6 +29,7 @@ const CardMembers = ({members}: {members: {name: string; id: number}[]}) => {
 
 const styles = StyleSheet.create({
   membersList: {
+    flex: 1,
     flexDirection: 'row',
   },
 });

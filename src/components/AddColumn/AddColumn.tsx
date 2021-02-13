@@ -10,7 +10,7 @@ const AddColumn = ({
   const [columnTitle, setColumnTitle] = useState('');
 
   return (
-    <View style={styles.columnsSection}>
+    <View style={styles.container}>
       <MainTextInput
         style={styles.column}
         onChangeText={(text) => setColumnTitle(text)}
@@ -28,9 +28,7 @@ const AddColumn = ({
 };
 
 const styles = StyleSheet.create({
-  columnsSection: {
-    paddingHorizontal: 20,
-  },
+  container: {},
   column: {
     padding: 20,
     borderWidth: 1,

@@ -5,6 +5,7 @@ import {columnsActions} from '@/store/columns';
 import {BoardScreenNavigation} from '@/types/Navigation.types';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
+import {StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -44,7 +45,7 @@ const Board = ({
   }, []);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       {isAddingColumn ? (
         <AddColumn handleSubmit={handleColumnCreationSubmit} />
       ) : null}
@@ -56,5 +57,12 @@ const Board = ({
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+});
 
 export default Board;

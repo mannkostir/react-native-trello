@@ -106,10 +106,11 @@ const CardComments = ({
   dispatch: React.Dispatch<any>;
 }) => {
   return (
-    <ScrollView>
+    <View style={styles.container}>
       <Text style={commonStyles.sectionTitle}>Comments</Text>
       <FlatList
         data={comments}
+        style={styles.commentsList}
         renderItem={({item}) => (
           <CardCommentsItem
             dispatch={dispatch}
@@ -120,11 +121,17 @@ const CardComments = ({
         keyExtractor={(item) => item.id.toString()}
       />
       <AddComment cardId={cardId} dispatch={dispatch} />
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  commentsList: {
+    flex: 1,
+  },
   comment: {
     paddingVertical: 10,
     paddingHorizontal: 10,
