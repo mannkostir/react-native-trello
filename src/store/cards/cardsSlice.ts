@@ -11,6 +11,7 @@ import {
 
 export const defaultCards: CardsState = {
   currentCards: [],
+  selectedCard: null,
   isLoading: false,
   error: null,
 };
@@ -37,8 +38,7 @@ const cardsSlice = createSlice({
       state.isLoading = false;
     },
     getCardSucceeded(state, action: PayloadAction<GetCardResponse>) {
-      state.currentCards.length = 0;
-      state.currentCards.push(action.payload);
+      state.selectedCard = action.payload;
       state.isLoading = false;
     },
     getCardFailed(state, action: PayloadAction<{message: string}>) {

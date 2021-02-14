@@ -19,10 +19,14 @@ const cardMembers = [
 
 const CardDetails = () => {
   const route = useRoute<CardDetailsRoute>();
+
   const {card, comments, auth} = useSelector((state: RootState) => ({
-    card: state.cards.currentCards.filter(
-      (card) => card.id === route.params.cardId,
-    )[0],
+    card:
+      state.cards.selectedCard ||
+      state.cards.currentCards.find(
+        (card) => card.id === route.params.cardId,
+      ) ||
+      null,
     comments: state.comments,
     auth: state.auth,
   }));
@@ -32,15 +36,10 @@ const CardDetails = () => {
     dispatch(
       commentActions.getAllComments({token: auth.currentUser?.token || null}),
     );
-
-    return () => {
-      dispatch(
-        cardsActions.getAllCards({token: auth.currentUser?.token || null}),
-      );
-    };
   }, []);
 
   useEffect(() => {
+    if (!card) return;
     dispatch(
       cardsActions.getCard({
         cardId: card.id,
@@ -49,7 +48,7 @@ const CardDetails = () => {
     );
   }, [comments]);
 
-  return (
+  return card ? (
     <ScrollView
       keyboardShouldPersistTaps="handled"
       contentContainerStyle={{paddingBottom: 30}}
@@ -92,7 +91,7 @@ const CardDetails = () => {
         dispatch={dispatch}
       />
     </ScrollView>
-  );
+  ) : null;
 };
 
 const styles = StyleSheet.create({

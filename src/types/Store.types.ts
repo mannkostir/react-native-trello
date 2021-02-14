@@ -7,6 +7,7 @@ export type ColumnsState = {
 };
 export type CardsState = {
   currentCards: Card[];
+  selectedCard: Card | null;
   isLoading: boolean;
   error: string | null;
 };
