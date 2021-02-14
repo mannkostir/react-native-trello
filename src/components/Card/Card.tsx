@@ -53,40 +53,38 @@ const Card = ({
         onValueChange={toggleCheckCard}
         style={styles.cardCheckbox}
       />
-      <>
-        <MainText
-          numberOfLines={1}
+      <View style={{flex: 1, justifyContent: 'center'}}>
+        <TouchableOpacity
           onPress={() =>
             navigation.navigate('CardDetails', {
               cardId: card.id,
               title: card.title,
             })
-          }
-          style={styles.cardText}>
-          {card.title}
-        </MainText>
-      </>
+          }>
+          <MainText numberOfLines={1} style={styles.cardText}>
+            {card.title}
+          </MainText>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   card: {
+    flex: 1,
     position: 'relative',
-    paddingLeft: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#E5E5E5',
     flexDirection: 'row',
-    alignItems: 'center',
     paddingVertical: 25,
+    paddingHorizontal: 20,
     backgroundColor: '#fff',
   },
   cardCheckbox: {
     marginRight: 20,
   },
-  cardText: {
-    flex: 1,
-  },
+  cardText: {},
   buttonsWrapper: {
     position: 'absolute',
     top: 0,
