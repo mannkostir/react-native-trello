@@ -1,9 +1,13 @@
-import {RootState} from '@/store';
 import {BoardScreenNavigation} from '@/types/Navigation.types';
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
+import React, {useEffect, useRef, useState} from 'react';
+import {
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  Text,
+  View,
+  ViewStyle,
+} from 'react-native';
 import MainText from '../MainText';
 
 const ColumnsItem = ({
@@ -15,24 +19,21 @@ const ColumnsItem = ({
   id: number;
   navigation: BoardScreenNavigation;
 }) => {
-  const token = useSelector(
-    (state: RootState) => state.auth.currentUser?.token || null,
-  );
+  const [isPressed, setIsPressed] = useState(false);
 
   return (
-    <View style={styles.column}>
-      <>
-        <MainText
-          weight="Medium"
-          onPress={() =>
-            navigation.navigate('Column', {
-              title,
-              columnId: id,
-            })
-          }>
-          {title}
-        </MainText>
-      </>
+    <View style={[styles.column, isPressed ? styles.columnPressed : {}]}>
+      <Pressable
+        onPressIn={() => setIsPressed(true)}
+        onPressOut={() => {
+          navigation.navigate('Column', {
+            title,
+            columnId: id,
+          });
+          setIsPressed(false);
+        }}>
+        <MainText weight="Medium">{title}</MainText>
+      </Pressable>
     </View>
   );
 };
@@ -43,9 +44,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: '#e5e5e5',
-    backgroundColor: '#ffffff',
+    backgroundColor: 'rgb(255, 255, 255)',
     borderRadius: 5,
     fontSize: 17,
+  },
+  columnPressed: {
+    backgroundColor: 'rgb(226, 226, 226)',
   },
 });
 
