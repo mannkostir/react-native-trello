@@ -24,12 +24,14 @@ const ColumnsItem = ({
   return (
     <View style={[styles.column, isPressed ? styles.columnPressed : {}]}>
       <Pressable
-        onPressIn={() => setIsPressed(true)}
-        onPressOut={() => {
+        onPress={() => {
           navigation.navigate('Column', {
             title,
             columnId: id,
           });
+        }}
+        onPressIn={() => setIsPressed(true)}
+        onPressOut={() => {
           setIsPressed(false);
         }}>
         <MainText weight="Medium">{title}</MainText>
