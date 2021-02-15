@@ -2,8 +2,6 @@ import React, {useMemo, useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Board from '@/screens/Board';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
-import Column from '@/screens/Column';
-import Auth from '@/screens/Auth';
 import {MainNavigatorParamList} from '@/types/navigationTypes';
 import CardDetails from '@/screens/CardDetails';
 import BoardScreenTitle from '@/components/BoardScreenTitle';
@@ -13,6 +11,8 @@ import {Text, View} from 'react-native';
 import {Header} from 'react-native/Libraries/NewAppScreen';
 import MainText from '@/components/MainText';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import AuthNavigator from './AuthNavigator';
+import ListNavigator from './ListNavigator';
 
 const Stack = createStackNavigator<MainNavigatorParamList>();
 
@@ -69,7 +69,7 @@ const MainNavigator = () => {
             </Stack.Screen>
             <Stack.Screen
               name="Column"
-              component={Column}
+              component={ListNavigator}
               options={({route}) => ({
                 title: route.params.title,
               })}
@@ -130,7 +130,7 @@ const MainNavigator = () => {
             />
           </>
         ) : (
-          <Stack.Screen name="Auth" component={Auth} />
+          <Stack.Screen name="Auth" component={AuthNavigator} />
         )}
       </Stack.Navigator>
     </NavigationContainer>

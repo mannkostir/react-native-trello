@@ -3,10 +3,16 @@ import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs
 import Cards from '@/screens/Cards';
 import {Card} from '@/types/commonTypes';
 import Subscribed from '@/screens/Subscribed';
+import {useRoute} from '@react-navigation/native';
+import {ColumnScreenRoute} from '@/types/navigationTypes';
 
 const TopTab = createMaterialTopTabNavigator();
 
-const ListNavigator = ({columnId}: {columnId: number}) => {
+const ListNavigator = () => {
+  const route = useRoute<ColumnScreenRoute>();
+
+  const columnId = route.params.columnId;
+
   return (
     <TopTab.Navigator
       tabBarOptions={{
