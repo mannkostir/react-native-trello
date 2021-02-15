@@ -4,7 +4,7 @@ import EditCardModal from '@/components/EditCardModal';
 import MainText from '@/components/MainText';
 import {RootState} from '@/store';
 import {cardsActions} from '@/store/cards';
-import * as types from '@/types/Common.types';
+import * as types from '@/types/commonTypes';
 import React, {useEffect, useState} from 'react';
 import {Alert, FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';

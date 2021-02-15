@@ -4,7 +4,7 @@ import MainText from '@/components/MainText';
 import {RootState} from '@/store';
 import {cardsActions} from '@/store/cards';
 import {commentActions} from '@/store/comments';
-import {CardDetailsRoute} from '@/types/Navigation.types';
+import {CardDetailsRoute} from '@/types/navigationTypes';
 import {useRoute} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';

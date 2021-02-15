@@ -9,7 +9,7 @@ import {
   GetCommentResponse,
   UpdateCommentParams,
   UpdateCommentResponse,
-} from '@/store/comments/comments.types';
+} from '@/store/comments/commentsTypes';
 
 export const getAllComments = async () => {
   const data = await fetchAPI<GetAllCommentsResponse>(

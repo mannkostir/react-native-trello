@@ -1,4 +1,4 @@
-import {Column} from '@/types/Common.types';
+import {Column} from '@/types/commonTypes';
 import React, {useState} from 'react';
 import {Modal, ModalProps, Pressable, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native';

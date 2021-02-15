@@ -2,7 +2,7 @@ import AddColumn from '@/components/AddColumn';
 import Columns from '@/components/Columns';
 import {RootState} from '@/store';
 import {columnsActions} from '@/store/columns';
-import {BoardScreenNavigation} from '@/types/Navigation.types';
+import {BoardScreenNavigation} from '@/types/navigationTypes';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
 import {StyleSheet} from 'react-native';

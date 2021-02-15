@@ -1,4 +1,4 @@
-import {Column} from '@/types/Common.types';
+import {Column} from '@/types/commonTypes';
 
 export type GetAllColumnsResponse = Column[];
 

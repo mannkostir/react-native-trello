@@ -1,5 +1,5 @@
 import ListNavigator from '@/navigators/ListNavigator';
-import {ColumnScreenRoute} from '@/types/Navigation.types';
+import {ColumnScreenRoute} from '@/types/navigationTypes';
 import {useRoute} from '@react-navigation/native';
 import React from 'react';
 

@@ -1,7 +1,7 @@
 import {RootState} from '@/store';
 import {columnsActions} from '@/store/columns';
-import {Column} from '@/types/Common.types';
-import {BoardScreenNavigation} from '@/types/Navigation.types';
+import {Column} from '@/types/commonTypes';
+import {BoardScreenNavigation} from '@/types/navigationTypes';
 import React, {useEffect, useState} from 'react';
 import {Alert, FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';

@@ -1,4 +1,4 @@
-import * as columnsActions from './columns.sagaActions';
-import * as columnsTypes from './columns.types';
+import * as columnsActions from './columnsSagaActions';
+import * as columnsTypes from './columnsTypes';
 
 export {columnsActions, columnsTypes};

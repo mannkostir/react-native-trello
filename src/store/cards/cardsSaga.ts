@@ -1,5 +1,5 @@
 import cardsService from '@/services/cardsService';
-import {Unpromise} from '@/types/Common.types';
+import {Unpromise} from '@/types/commonTypes';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
 import {cardsActions} from '.';
@@ -8,7 +8,7 @@ import {
   DeleteCardParams,
   GetCardParams,
   UpdateCardParams,
-} from './cards.types';
+} from './cardsTypes';
 import {cardsInternalActions} from './cardsSlice';
 
 function* getAllCardsWorker() {

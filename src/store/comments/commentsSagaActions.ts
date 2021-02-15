@@ -2,10 +2,9 @@ import {createAction} from '@reduxjs/toolkit';
 import {
   CreateCommentParams,
   DeleteCommentParams,
-  GetAllCommentsParams,
   GetCommentParams,
   UpdateCommentParams,
-} from './comments.types';
+} from './commentsTypes';
 
 enum CommentsPublicActions {
   GET_ALL_COMMENTS = 'getAllCommentsRequested',
@@ -15,7 +14,7 @@ enum CommentsPublicActions {
   DELETE_COMMENT = 'deleteCommentRequested',
 }
 
-export const getAllComments = createAction<GetAllCommentsParams>(
+export const getAllComments = createAction(
   CommentsPublicActions.GET_ALL_COMMENTS,
 );
 export const createComment = createAction<CreateCommentParams>(

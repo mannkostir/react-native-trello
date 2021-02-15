@@ -1,4 +1,4 @@
-import {CardsState} from '@/types/Store.types';
+import {CardsState} from '@/types/storeTypes';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {cardsActions} from '.';
 import {
@@ -7,7 +7,7 @@ import {
   GetAllCardsResponse,
   GetCardResponse,
   UpdateCardResponse,
-} from './cards.types';
+} from './cardsTypes';
 
 export const defaultCards: CardsState = {
   currentCards: [],

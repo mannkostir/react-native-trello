@@ -1,4 +1,4 @@
-import {Card, Column} from '@/types/Common.types';
+import {Card, Column} from '@/types/commonTypes';
 import React, {useState} from 'react';
 import {
   Alert,

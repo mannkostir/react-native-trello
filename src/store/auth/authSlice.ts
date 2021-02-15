@@ -1,7 +1,7 @@
-import {AuthState} from '@/types/Store.types';
+import {AuthState} from '@/types/storeTypes';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {authActions} from '.';
-import {SignUpResponse, SignInResponse} from './auth.types';
+import {SignUpResponse, SignInResponse} from './authTypes';
 
 export const defaultAuth: AuthState = {
   currentUser: null,

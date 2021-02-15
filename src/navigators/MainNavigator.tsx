@@ -4,7 +4,7 @@ import Board from '@/screens/Board';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import Column from '@/screens/Column';
 import Auth from '@/screens/Auth';
-import {MainNavigatorParamList} from '@/types/Navigation.types';
+import {MainNavigatorParamList} from '@/types/navigationTypes';
 import CardDetails from '@/screens/CardDetails';
 import BoardScreenTitle from '@/components/BoardScreenTitle';
 import {RootState} from '@/store';

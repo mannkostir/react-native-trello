@@ -3,7 +3,7 @@ import MainText from '@/components/MainText';
 import MainTextInput from '@/components/MainTextInput';
 import {RootState} from '@/store';
 import {authActions} from '@/store/auth';
-import commonStyles from '@/styles/common.styles';
+import commonStyles from '@/styles/commonStyles';
 import React, {useState} from 'react';
 import {Button, StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';

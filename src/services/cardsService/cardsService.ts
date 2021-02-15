@@ -4,13 +4,12 @@ import {
   CreateCardResponse,
   DeleteCardParams,
   DeleteCardResponse,
-  GetAllCardsParams,
   GetAllCardsResponse,
   GetCardParams,
   GetCardResponse,
   UpdateCardParams,
   UpdateCardResponse,
-} from '@/store/cards/cards.types';
+} from '@/store/cards/cardsTypes';
 
 export const getAllCards = async () => {
   const data = await fetchAPI<GetAllCardsResponse>(

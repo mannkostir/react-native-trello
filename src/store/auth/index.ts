@@ -1,3 +1,3 @@
-import * as authActions from './auth.sagaActions';
+import * as authActions from './authSagaActions';
 
 export {authActions};

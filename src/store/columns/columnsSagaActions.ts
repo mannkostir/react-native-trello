@@ -2,10 +2,9 @@ import {createAction} from '@reduxjs/toolkit';
 import {
   CreateColumnParams,
   DeleteColumnParams,
-  GetAllColumnsParams,
   GetColumnParams,
   UpdateColumnParams,
-} from './columns.types';
+} from './columnsTypes';
 
 enum ColumnsPublicActions {
   GET_ALL_COLUMNS = 'getAllColumnsRequested',
@@ -15,9 +14,7 @@ enum ColumnsPublicActions {
   DELETE_COLUMN = 'deleteColumnRequested',
 }
 
-export const getAllColumns = createAction<GetAllColumnsParams>(
-  ColumnsPublicActions.GET_ALL_COLUMNS,
-);
+export const getAllColumns = createAction(ColumnsPublicActions.GET_ALL_COLUMNS);
 export const getColumn = createAction<GetColumnParams>(
   ColumnsPublicActions.GET_COLUMN,
 );

@@ -1,2 +1,2 @@
-import * as columnsService from './columns.service';
+import * as columnsService from './columnsService';
 export default columnsService;

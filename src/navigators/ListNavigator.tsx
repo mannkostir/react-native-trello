@@ -1,7 +1,7 @@
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Cards from '@/screens/Cards';
-import {Card} from '@/types/Common.types';
+import {Card} from '@/types/commonTypes';
 import Subscribed from '@/screens/Subscribed';
 
 const TopTab = createMaterialTopTabNavigator();

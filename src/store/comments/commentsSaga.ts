@@ -1,5 +1,5 @@
 import commentsService from '@/services/commentsService';
-import {Unpromise} from '@/types/Common.types';
+import {Unpromise} from '@/types/commonTypes';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
 import {commentActions} from '.';
@@ -8,7 +8,7 @@ import {
   DeleteCommentParams,
   GetCommentParams,
   UpdateCommentParams,
-} from './comments.types';
+} from './commentsTypes';
 import {commentsInternalActions} from './commentsSlice';
 
 function* getAllCommentsWorker() {

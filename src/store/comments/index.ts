@@ -1,3 +1,3 @@
-import * as commentActions from './comments.sagaActions';
+import * as commentActions from './commentsSagaActions';
 
 export {commentActions};

@@ -1,4 +1,4 @@
-import {CommentsState} from '@/types/Store.types';
+import {CommentsState} from '@/types/storeTypes';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {commentActions} from '.';
 import {
@@ -7,7 +7,7 @@ import {
   GetAllCommentsResponse,
   GetCommentResponse,
   UpdateCommentResponse,
-} from './comments.types';
+} from './commentsTypes';
 
 export const defaultComments: CommentsState = {
   currentComments: [],

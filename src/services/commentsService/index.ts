@@ -1,2 +1,2 @@
-import * as commentsService from './comments.service';
+import * as commentsService from './commentsService';
 export default commentsService;

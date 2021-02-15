@@ -1,4 +1,4 @@
-import {BoardScreenNavigation} from '@/types/Navigation.types';
+import {BoardScreenNavigation} from '@/types/navigationTypes';
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Pressable,

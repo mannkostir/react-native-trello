@@ -1,4 +1,4 @@
-import {ColumnsState} from '@/types/Store.types';
+import {ColumnsState} from '@/types/storeTypes';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {columnsActions} from '.';
 import {
@@ -7,7 +7,7 @@ import {
   GetAllColumnsResponse,
   GetColumnResponse,
   UpdateColumnResponse,
-} from './columns.types';
+} from './columnsTypes';
 
 export const defaultColumns: ColumnsState = {
   currentColumns: [],

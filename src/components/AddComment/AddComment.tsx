@@ -1,6 +1,6 @@
 import {RootState} from '@/store';
 import {commentActions} from '@/store/comments';
-import commonStyles from '@/styles/common.styles';
+import commonStyles from '@/styles/commonStyles';
 import React, {useState} from 'react';
 import {Button, KeyboardAvoidingView, View} from 'react-native';
 import {useSelector} from 'react-redux';

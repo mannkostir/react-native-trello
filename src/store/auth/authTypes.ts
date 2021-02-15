@@ -1,4 +1,4 @@
-import {Column, User} from '@/types/Common.types';
+import {Column, User} from '@/types/commonTypes';
 
 export type SignInParams = {
   email: string;

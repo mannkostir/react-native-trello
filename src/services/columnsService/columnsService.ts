@@ -9,7 +9,7 @@ import {
   GetColumnResponse,
   UpdateColumnParams,
   UpdateColumnResponse,
-} from '@/store/columns/columns.types';
+} from '@/store/columns/columnsTypes';
 
 export const getAllColumns = async () => {
   const data = await fetchAPI<GetAllColumnsResponse>(

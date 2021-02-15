@@ -1,4 +1,4 @@
-import {Card} from '@/types/Common.types';
+import {Card} from '@/types/commonTypes';
 import React, {useState} from 'react';
 import {Modal, ModalProps, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';

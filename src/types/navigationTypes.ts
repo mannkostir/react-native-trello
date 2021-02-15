@@ -1,6 +1,6 @@
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {Card} from './Common.types';
+import {Card} from './commonTypes';
 
 export type MainNavigatorParamList = {
   Board: {isAddingColumn: boolean};

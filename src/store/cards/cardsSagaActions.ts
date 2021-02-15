@@ -2,10 +2,9 @@ import {createAction} from '@reduxjs/toolkit';
 import {
   CreateCardParams,
   DeleteCardParams,
-  GetAllCardsParams,
   GetCardParams,
   UpdateCardParams,
-} from './cards.types';
+} from './cardsTypes';
 
 enum CardsPublicActions {
   GET_ALL_CARDS = 'getAllCardsRequested',
@@ -15,9 +14,7 @@ enum CardsPublicActions {
   DELETE_CARD = 'deleteCardRequested',
 }
 
-export const getAllCards = createAction<GetAllCardsParams>(
-  CardsPublicActions.GET_ALL_CARDS,
-);
+export const getAllCards = createAction(CardsPublicActions.GET_ALL_CARDS);
 export const createCard = createAction<CreateCardParams>(
   CardsPublicActions.CREATE_CARD,
 );

@@ -1,8 +1,8 @@
-import {Unpromise} from '@/types/Common.types';
+import {Unpromise} from '@/types/commonTypes';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
 import {authInternalActions} from './authSlice';
-import {SignInParams, SignUpParams} from './auth.types';
+import {SignInParams, SignUpParams} from './authTypes';
 import authService from '@/services/authService';
 import {authActions} from '.';
 

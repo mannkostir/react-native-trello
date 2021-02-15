@@ -1,5 +1,5 @@
-import * as types from '@/types/Common.types';
-import {ColumnScreenNavigator} from '@/types/Navigation.types';
+import * as types from '@/types/commonTypes';
+import {ColumnScreenNavigator} from '@/types/navigationTypes';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {Alert, Platform, StyleSheet, Text, View} from 'react-native';

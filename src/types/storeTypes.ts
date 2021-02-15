@@ -1,4 +1,4 @@
-import {Card, Column, Comment, User} from './Common.types';
+import {Card, Column, Comment, User} from './commonTypes';
 
 export type ColumnsState = {
   currentColumns: Column[];

@@ -4,7 +4,7 @@ import {
   SignInResponse,
   SignUpParams,
   SignUpResponse,
-} from '@/store/auth/auth.types';
+} from '@/store/auth/authTypes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const signIn = async (params: SignInParams) => {

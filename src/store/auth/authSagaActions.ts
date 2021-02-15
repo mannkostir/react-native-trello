@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import {SignInParams, SignUpParams} from './auth.types';
+import {SignInParams, SignUpParams} from './authTypes';
 
 enum AuthPublicActions {
   SIGN_IN = 'signInRequested',

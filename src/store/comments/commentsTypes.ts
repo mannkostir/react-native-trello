@@ -1,4 +1,4 @@
-import {Card, Comment, User} from '@/types/Common.types';
+import {Card, Comment, User} from '@/types/commonTypes';
 
 export type GetAllCommentsResponse = Comment[];
 

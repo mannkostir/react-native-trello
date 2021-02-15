@@ -1,2 +1,2 @@
-import * as cardsService from './cards.service';
+import * as cardsService from './cardsService';
 export default cardsService;

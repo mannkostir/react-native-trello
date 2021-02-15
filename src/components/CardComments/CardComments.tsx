@@ -1,6 +1,6 @@
 import {commentActions} from '@/store/comments';
-import commonStyles from '@/styles/common.styles';
-import {Comment, User} from '@/types/Common.types';
+import commonStyles from '@/styles/commonStyles';
+import {Comment, User} from '@/types/commonTypes';
 import React, {useState} from 'react';
 import {KeyboardAvoidingView, StyleSheet, Text, View} from 'react-native';
 import {

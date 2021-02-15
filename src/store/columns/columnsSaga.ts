@@ -1,5 +1,5 @@
 import columnsService from '@/services/columnsService';
-import {Unpromise} from '@/types/Common.types';
+import {Unpromise} from '@/types/commonTypes';
 import {PayloadAction} from '@reduxjs/toolkit';
 import {call, put, takeEvery} from 'redux-saga/effects';
 import {columnsActions} from '.';
@@ -8,7 +8,7 @@ import {
   DeleteColumnParams,
   GetColumnParams,
   UpdateColumnParams,
-} from './columns.types';
+} from './columnsTypes';
 import {columnsInternalActions} from './columnsSlice';
 
 function* getAllColumnsWorker() {
