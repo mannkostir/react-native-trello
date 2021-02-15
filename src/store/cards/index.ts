@@ -1,3 +1,4 @@
 import * as cardsActions from './cardsSagaActions';
+import * as cardsAccessors from './cardsAccessors';
 
-export {cardsActions};
+export {cardsActions, cardsAccessors};

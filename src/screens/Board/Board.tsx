@@ -1,7 +1,7 @@
 import AddColumn from '@/components/AddColumn';
 import Columns from '@/components/Columns';
 import {RootState} from '@/store';
-import {columnsActions} from '@/store/columns';
+import {columnsAccessors, columnsActions} from '@/store/columns';
 import {BoardScreenNavigation} from '@/types/navigationTypes';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
@@ -17,10 +17,9 @@ const Board = ({
   setIsAddingColumn: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const navigation = useNavigation<BoardScreenNavigation>();
-  const state = useSelector((state: RootState) => ({
-    cards: state.cards,
-    columns: state.columns,
-  }));
+  const columns = useSelector((state: RootState) =>
+    columnsAccessors.getColumnsState(state),
+  );
   const dispatch = useDispatch();
 
   const handleColumnCreationSubmit = (columnTitle: string) => {
@@ -46,8 +45,8 @@ const Board = ({
       <Columns
         dispatch={dispatch}
         navigation={navigation}
-        isLoading={state.columns.isLoading}
-        columns={state.columns.currentColumns}
+        isLoading={columns.isLoading}
+        columns={columns.currentColumns}
       />
     </SafeAreaView>
   );
