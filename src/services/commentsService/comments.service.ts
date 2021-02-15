@@ -4,7 +4,6 @@ import {
   CreateCommentResponse,
   DeleteCommentParams,
   DeleteCommentResponse,
-  GetAllCommentsParams,
   GetAllCommentsResponse,
   GetCommentParams,
   GetCommentResponse,
@@ -12,19 +11,15 @@ import {
   UpdateCommentResponse,
 } from '@/store/comments/comments.types';
 
-export const getAllComments = async ({token}: GetAllCommentsParams) => {
+export const getAllComments = async () => {
   const data = await fetchAPI<GetAllCommentsResponse>(
     `http://trello-purrweb.herokuapp.com/comments`,
-    {
-      token,
-    },
   );
 
   return data;
 };
 
 export const createComment = async ({
-  token,
   commentData,
   cardId,
 }: CreateCommentParams) => {
@@ -32,7 +27,6 @@ export const createComment = async ({
     `http://trello-purrweb.herokuapp.com/cards/${cardId}/comments`,
     {
       method: 'POST',
-      token,
       rawBody: commentData,
     },
   );
@@ -40,10 +34,9 @@ export const createComment = async ({
   return data;
 };
 
-export const getComment = async ({commentId, token}: GetCommentParams) => {
+export const getComment = async ({commentId}: GetCommentParams) => {
   const data = await fetchAPI<GetCommentResponse>(
     `http://trello-purrweb.herokuapp.com/comments/${commentId}`,
-    {token},
   );
 
   return data;
@@ -51,12 +44,11 @@ export const getComment = async ({commentId, token}: GetCommentParams) => {
 
 export const updateComment = async ({
   commentId,
-  token,
   commentData,
 }: UpdateCommentParams) => {
   const data = await fetchAPI<UpdateCommentResponse>(
     `http://trello-purrweb.herokuapp.com/comments/${commentId}`,
-    {token, method: 'PUT', rawBody: commentData},
+    {method: 'PUT', rawBody: commentData},
   );
 
   return data;
@@ -64,11 +56,10 @@ export const updateComment = async ({
 
 export const deleteComment = async ({
   commentId,
-  token,
 }: DeleteCommentParams): Promise<DeleteCommentResponse> => {
   const data = await fetchAPI(
     `http://trello-purrweb.herokuapp.com/comments/${commentId}`,
-    {token, method: 'DELETE'},
+    {method: 'DELETE'},
   );
 
   return {commentId};

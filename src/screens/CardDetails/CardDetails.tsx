@@ -33,9 +33,7 @@ const CardDetails = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(
-      commentActions.getAllComments({token: auth.currentUser?.token || null}),
-    );
+    dispatch(commentActions.getAllComments());
   }, []);
 
   useEffect(() => {
@@ -43,7 +41,6 @@ const CardDetails = () => {
     dispatch(
       cardsActions.getCard({
         cardId: card.id,
-        token: auth.currentUser?.token || null,
       }),
     );
   }, [comments]);

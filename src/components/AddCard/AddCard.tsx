@@ -1,9 +1,7 @@
-import {RootState} from '@/store';
 import {cardsActions} from '@/store/cards';
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {useSelector} from 'react-redux';
 import MainTextInput from '../MainTextInput';
 
 const AddCard = ({
@@ -15,14 +13,11 @@ const AddCard = ({
 }) => {
   const [newCardTitle, setNewCardTitle] = useState('');
 
-  const auth = useSelector((state: RootState) => state.auth);
-
   const handleAddCard = () => {
     if (newCardTitle) {
       dispatch(
         cardsActions.createCard({
           cardData: {title: newCardTitle, description: '', checked: false},
-          token: auth.currentUser?.token || null,
           columnId,
         }),
       );

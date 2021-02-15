@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 interface IFetchAPIOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
   token?: null | string;
@@ -9,7 +11,7 @@ interface ResponseError extends Error {
 
 export default async function fetchAPI<T>(
   url: RequestInfo,
-  reqOptions: IFetchAPIOptions,
+  reqOptions: IFetchAPIOptions = {},
 ): Promise<T> {
   try {
     const options: RequestInit = {};
@@ -23,12 +25,12 @@ export default async function fetchAPI<T>(
       reqOptions.rawBody = null;
     }
 
+    const token = await AsyncStorage.getItem('@token');
+
     options.method = reqOptions.method || 'GET';
     options.headers = {
       ...options.headers,
-      ...(reqOptions.token
-        ? {Authorization: `bearer ${reqOptions.token}`}
-        : {}),
+      Authorization: `bearer ${token}`,
       'Content-Type': 'application/json',
     };
 

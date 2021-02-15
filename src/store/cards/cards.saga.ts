@@ -6,17 +6,16 @@ import {cardsActions} from '.';
 import {
   CreateCardParams,
   DeleteCardParams,
-  GetAllCardsParams,
   GetCardParams,
   UpdateCardParams,
 } from './cards.types';
 import {cardsInternalActions} from './cardsSlice';
 
-function* getAllCardsWorker(action: PayloadAction<GetAllCardsParams>) {
+function* getAllCardsWorker() {
   try {
     const data: Unpromise<
       ReturnType<typeof cardsService.getAllCards>
-    > = yield call(cardsService.getAllCards, action.payload);
+    > = yield call(cardsService.getAllCards);
 
     yield put(cardsInternalActions.getAllCardsSucceeded(data));
   } catch (e) {

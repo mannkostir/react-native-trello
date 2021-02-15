@@ -13,13 +13,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import {LeftActions, RightActions} from './SwipeableActions';
 
 const Cards = ({currentColumnId}: {currentColumnId: number}) => {
-  const {currentCards, isCardsLoading, token, currentColumn} = useSelector(
+  const {currentCards, isCardsLoading, currentColumn} = useSelector(
     (state: RootState) => ({
       currentCards: state.cards.currentCards.filter(
         (card) => card.columnId === currentColumnId,
       ),
       isCardsLoading: state.cards.isLoading,
-      token: state.auth.currentUser?.token || null,
       currentColumn:
         state.columns.currentColumns.find(
           (column) => column.id === currentColumnId,
@@ -37,7 +36,7 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
   }, []);
 
   useEffect(() => {
-    dispatch(cardsActions.getAllCards({token}));
+    dispatch(cardsActions.getAllCards());
   }, []);
 
   const [isShowingCheckedCards, setIsShowingCheckedCards] = useState(false);
@@ -58,7 +57,6 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
             title: newTitle,
           },
           cardId: card.id,
-          token,
           column: currentColumn,
         }),
       );
@@ -71,7 +69,6 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
     dispatch(
       cardsActions.deleteCard({
         cardId,
-        token,
       }),
     );
   };

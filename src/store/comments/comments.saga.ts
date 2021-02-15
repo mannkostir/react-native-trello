@@ -6,17 +6,16 @@ import {commentActions} from '.';
 import {
   CreateCommentParams,
   DeleteCommentParams,
-  GetAllCommentsParams,
   GetCommentParams,
   UpdateCommentParams,
 } from './comments.types';
 import {commentsInternalActions} from './commentsSlice';
 
-function* getAllCommentsWorker(action: PayloadAction<GetAllCommentsParams>) {
+function* getAllCommentsWorker() {
   try {
     const data: Unpromise<
       ReturnType<typeof commentsService.getAllComments>
-    > = yield call(commentsService.getAllComments, action.payload);
+    > = yield call(commentsService.getAllComments);
 
     yield put(commentsInternalActions.getAllCommentsSucceeded(data));
   } catch (e) {

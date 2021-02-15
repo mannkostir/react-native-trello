@@ -14,10 +14,6 @@ const AddComment = ({
   dispatch: React.Dispatch<any>;
   cardId: number;
 }) => {
-  const token = useSelector(
-    (state: RootState) => state.auth.currentUser?.token || null,
-  );
-
   const [commentBody, setCommentBody] = useState('');
 
   const handleAddComment = () => {
@@ -28,7 +24,6 @@ const AddComment = ({
             body: commentBody,
             created: new Date().toDateString(),
           },
-          token,
           cardId,
         }),
       );

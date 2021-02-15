@@ -27,10 +27,6 @@ const Columns = ({
 }: IListsProps) => {
   const [editingColumnId, setEditingColumnId] = useState<number | null>(null);
 
-  const token = useSelector(
-    (state: RootState) => state.auth.currentUser?.token || null,
-  );
-
   useEffect(() => {
     Alert.alert('Swipe left to see edit/delete options');
   }, []);
@@ -47,7 +43,6 @@ const Columns = ({
         columnsActions.updateColumn({
           columnData: {title: newTitle},
           listId: column.id,
-          token,
         }),
       );
     }
@@ -56,7 +51,7 @@ const Columns = ({
   };
 
   const handleColumnDelete = (columnId: number) => {
-    dispatch(columnsActions.deleteColumn({listId: columnId, token}));
+    dispatch(columnsActions.deleteColumn({listId: columnId}));
   };
 
   const enableColumnEditMode = (columnId: number) => {

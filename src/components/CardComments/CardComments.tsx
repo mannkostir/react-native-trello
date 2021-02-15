@@ -40,7 +40,6 @@ const CardCommentsItem = ({
     dispatch(
       commentActions.deleteComment({
         commentId: comment.id,
-        token: user?.token || null,
       }),
     );
   };
@@ -49,7 +48,6 @@ const CardCommentsItem = ({
       commentActions.updateComment({
         commentData: {...comment, body: newCommentBody},
         commentId: comment.id,
-        token: user?.token || null,
       }),
     );
 

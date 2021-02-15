@@ -6,17 +6,16 @@ import {columnsActions} from '.';
 import {
   CreateColumnParams,
   DeleteColumnParams,
-  GetAllColumnsParams,
   GetColumnParams,
   UpdateColumnParams,
 } from './columns.types';
 import {columnsInternalActions} from './columnsSlice';
 
-function* getAllColumnsWorker(action: PayloadAction<GetAllColumnsParams>) {
+function* getAllColumnsWorker() {
   try {
     const data: Unpromise<
       ReturnType<typeof columnsService.getAllColumns>
-    > = yield call(columnsService.getAllColumns, action.payload);
+    > = yield call(columnsService.getAllColumns);
 
     yield put(columnsInternalActions.getAllColumnsSucceeded(data));
   } catch (e) {

@@ -18,9 +18,6 @@ const Card = ({
   card: types.Card;
   dispatch: React.Dispatch<any>;
 }) => {
-  const token = useSelector(
-    (state: RootState) => state.auth.currentUser?.token || null,
-  );
   const column = useSelector(
     (state: RootState) =>
       state.columns.currentColumns.find(
@@ -40,7 +37,6 @@ const Card = ({
             cardData: {...card, checked: !card.checked},
             cardId: card.id,
             column,
-            token,
           }),
         );
       }, timeoutDuration);

@@ -20,7 +20,6 @@ const Board = ({
   const state = useSelector((state: RootState) => ({
     cards: state.cards,
     columns: state.columns,
-    token: state.auth.currentUser?.token || null,
   }));
   const dispatch = useDispatch();
 
@@ -29,7 +28,6 @@ const Board = ({
       dispatch(
         columnsActions.createColumn({
           columnData: {title: columnTitle, description: ''},
-          token: state.token,
         }),
       );
     }
@@ -37,11 +35,7 @@ const Board = ({
   };
 
   useEffect(() => {
-    dispatch(
-      columnsActions.getAllColumns({
-        token: state.token,
-      }),
-    );
+    dispatch(columnsActions.getAllColumns());
   }, []);
 
   return (
