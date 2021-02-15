@@ -6,13 +6,14 @@ import {
   SignUpResponse,
 } from '@/store/auth/authTypes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {API_BASE} from '@env';
 
 export const signIn = async (params: SignInParams) => {
   try {
-    const data = await fetchAPI<SignInResponse>(
-      'http://trello-purrweb.herokuapp.com/auth/sign-in',
-      {method: 'POST', rawBody: params},
-    );
+    const data = await fetchAPI<SignInResponse>(`${API_BASE}/auth/sign-in`, {
+      method: 'POST',
+      rawBody: params,
+    });
 
     await AsyncStorage.setItem('@token', data.token);
 
@@ -23,10 +24,10 @@ export const signIn = async (params: SignInParams) => {
 };
 
 export const signUp = async (params: SignUpParams) => {
-  const data = await fetchAPI<SignUpResponse>(
-    'http://trello-purrweb.herokuapp.com/auth/sign-up',
-    {method: 'POST', rawBody: params},
-  );
+  const data = await fetchAPI<SignUpResponse>(`${API_BASE}/auth/sign-up`, {
+    method: 'POST',
+    rawBody: params,
+  });
 
   return data;
 };

@@ -10,28 +10,27 @@ import {
   UpdateColumnParams,
   UpdateColumnResponse,
 } from '@/store/columns/columnsTypes';
+import {API_BASE} from '@env';
 
 export const getAllColumns = async () => {
-  const data = await fetchAPI<GetAllColumnsResponse>(
-    'http://trello-purrweb.herokuapp.com/columns',
-  );
+  const data = await fetchAPI<GetAllColumnsResponse>(`${API_BASE}/columns`);
 
   return data;
 };
 
 export const getColumn = async ({listId}: GetColumnParams) => {
   const data = await fetchAPI<GetColumnResponse>(
-    `http://trello-purrweb.herokuapp.com/columns/${listId}`,
+    `${API_BASE}/columns/${listId}`,
   );
 
   return data;
 };
 
 export const createColumn = async ({columnData}: CreateColumnParams) => {
-  const data = await fetchAPI<CreateColumnResponse>(
-    `http://trello-purrweb.herokuapp.com/columns`,
-    {method: 'POST', rawBody: columnData},
-  );
+  const data = await fetchAPI<CreateColumnResponse>(`${API_BASE}/columns`, {
+    method: 'POST',
+    rawBody: columnData,
+  });
 
   return data;
 };
@@ -41,7 +40,7 @@ export const updateColumn = async ({
   columnData,
 }: UpdateColumnParams) => {
   const data = await fetchAPI<UpdateColumnResponse>(
-    `http://trello-purrweb.herokuapp.com/columns/${listId}`,
+    `${API_BASE}/columns/${listId}`,
     {method: 'PUT', rawBody: columnData},
   );
 
@@ -51,10 +50,9 @@ export const updateColumn = async ({
 export const deleteColumn = async ({
   listId,
 }: DeleteColumnParams): Promise<DeleteColumnResponse> => {
-  const data = await fetchAPI(
-    `http://trello-purrweb.herokuapp.com/columns/${listId}`,
-    {method: 'DELETE'},
-  );
+  const data = await fetchAPI(`${API_BASE}/columns/${listId}`, {
+    method: 'DELETE',
+  });
 
   return {listId};
 };

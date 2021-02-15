@@ -10,11 +10,10 @@ import {
   UpdateCommentParams,
   UpdateCommentResponse,
 } from '@/store/comments/commentsTypes';
+import {API_BASE} from '@env';
 
 export const getAllComments = async () => {
-  const data = await fetchAPI<GetAllCommentsResponse>(
-    `http://trello-purrweb.herokuapp.com/comments`,
-  );
+  const data = await fetchAPI<GetAllCommentsResponse>(`${API_BASE}/comments`);
 
   return data;
 };
@@ -24,7 +23,7 @@ export const createComment = async ({
   cardId,
 }: CreateCommentParams) => {
   const data = await fetchAPI<CreateCommentResponse>(
-    `http://trello-purrweb.herokuapp.com/cards/${cardId}/comments`,
+    `${API_BASE}/cards/${cardId}/comments`,
     {
       method: 'POST',
       rawBody: commentData,
@@ -36,7 +35,7 @@ export const createComment = async ({
 
 export const getComment = async ({commentId}: GetCommentParams) => {
   const data = await fetchAPI<GetCommentResponse>(
-    `http://trello-purrweb.herokuapp.com/comments/${commentId}`,
+    `${API_BASE}/comments/${commentId}`,
   );
 
   return data;
@@ -47,7 +46,7 @@ export const updateComment = async ({
   commentData,
 }: UpdateCommentParams) => {
   const data = await fetchAPI<UpdateCommentResponse>(
-    `http://trello-purrweb.herokuapp.com/comments/${commentId}`,
+    `${API_BASE}/comments/${commentId}`,
     {method: 'PUT', rawBody: commentData},
   );
 
@@ -57,10 +56,9 @@ export const updateComment = async ({
 export const deleteComment = async ({
   commentId,
 }: DeleteCommentParams): Promise<DeleteCommentResponse> => {
-  const data = await fetchAPI(
-    `http://trello-purrweb.herokuapp.com/comments/${commentId}`,
-    {method: 'DELETE'},
-  );
+  const data = await fetchAPI(`${API_BASE}/comments/${commentId}`, {
+    method: 'DELETE',
+  });
 
   return {commentId};
 };

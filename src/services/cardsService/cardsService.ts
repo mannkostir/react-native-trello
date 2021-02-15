@@ -10,18 +10,17 @@ import {
   UpdateCardParams,
   UpdateCardResponse,
 } from '@/store/cards/cardsTypes';
+import {API_BASE} from '@env';
 
 export const getAllCards = async () => {
-  const data = await fetchAPI<GetAllCardsResponse>(
-    'http://trello-purrweb.herokuapp.com/cards',
-  );
+  const data = await fetchAPI<GetAllCardsResponse>(`${API_BASE}/cards`);
 
   return data;
 };
 
 export const createCard = async ({columnId, cardData}: CreateCardParams) => {
   const data = await fetchAPI<CreateCardResponse>(
-    `http://trello-purrweb.herokuapp.com/columns/${columnId}/cards`,
+    `${API_BASE}/columns/${columnId}/cards`,
     {
       method: 'POST',
       rawBody: cardData,
@@ -32,16 +31,14 @@ export const createCard = async ({columnId, cardData}: CreateCardParams) => {
 };
 
 export const getCard = async ({cardId}: GetCardParams) => {
-  const data = await fetchAPI<GetCardResponse>(
-    `http://trello-purrweb.herokuapp.com/cards/${cardId}`,
-  );
+  const data = await fetchAPI<GetCardResponse>(`${API_BASE}/cards/${cardId}`);
 
   return data;
 };
 
 export const updateCard = async ({cardId, cardData}: UpdateCardParams) => {
   const data = await fetchAPI<UpdateCardResponse>(
-    `http://trello-purrweb.herokuapp.com/cards/${cardId}`,
+    `${API_BASE}/cards/${cardId}`,
     {rawBody: cardData, method: 'PUT'},
   );
 
@@ -51,7 +48,7 @@ export const updateCard = async ({cardId, cardData}: UpdateCardParams) => {
 export const deleteCard = async ({
   cardId,
 }: DeleteCardParams): Promise<DeleteCardResponse> => {
-  await fetchAPI(`http://trello-purrweb.herokuapp.com/cards/${cardId}`, {
+  await fetchAPI(`${API_BASE}/cards/${cardId}`, {
     method: 'DELETE',
   });
 
