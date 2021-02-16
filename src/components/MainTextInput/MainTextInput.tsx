@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {MutableRefObject, useEffect, useState} from 'react';
 import {StyleSheet, TextInputProps, TextStyle} from 'react-native';
 import {TextInput} from 'react-native-gesture-handler';
 

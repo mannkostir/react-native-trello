@@ -7,9 +7,16 @@ import {cardsActions, useCardsSelector} from '@/store/cards';
 import {commentActions, useCommentsSelector} from '@/store/comments';
 import {CardDetailsRoute} from '@/types/navigationTypes';
 import {useRoute} from '@react-navigation/native';
-import React, {useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 
 const cardMembers = [
@@ -27,6 +34,8 @@ const CardDetails = () => {
 
   const card = selectedCard || getCard(route.params.cardId);
 
+  const scrollView = useRef();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,48 +52,58 @@ const CardDetails = () => {
   }, [comments]);
 
   return card ? (
-    <ScrollView
-      keyboardShouldPersistTaps="handled"
-      contentContainerStyle={{paddingBottom: 30}}
-      style={{flex: 1, paddingHorizontal: 20}}>
-      <View style={styles.lastPrayed}>
-        <MainText>Last prayed a while ago</MainText>
-      </View>
-      <View style={styles.infoTable}>
-        <View style={styles.infoTableItem}>
-          <MainText style={styles.infoItemTitle}>February 30 2017</MainText>
-          <MainText style={styles.infoItemText}>Date Added</MainText>
-          <MainText style={[styles.infoItemText, {color: 'blue'}]}>
-            Opened for several days
-          </MainText>
-        </View>
-        <View style={styles.infoTableItem}>
-          <MainText style={styles.infoItemTitle}>9001</MainText>
-          <MainText style={styles.infoItemText}>Times Prayed Total</MainText>
-        </View>
-      </View>
-      <View style={styles.infoTable}>
-        <View style={styles.infoTableItem}>
-          <MainText style={styles.infoItemTitle}>9000</MainText>
-          <MainText style={styles.infoItemText}>Times Prayed By Me</MainText>
-        </View>
-        <View style={styles.infoTableItem}>
-          <MainText style={styles.infoItemTitle}>1</MainText>
-          <MainText style={styles.infoItemText}>
-            Times Prayed By Others
-          </MainText>
-        </View>
-      </View>
-      <CardMembers members={cardMembers} />
-      <CardComments
-        comments={comments.filter((comment) =>
-          card.commentsIds.includes(comment.id),
-        )}
-        cardId={card.id}
-        currentUser={currentUser || null}
-        dispatch={dispatch}
-      />
-    </ScrollView>
+    <KeyboardAvoidingView
+      style={{flex: 1}}
+      keyboardVerticalOffset={150}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <SafeAreaView style={{flex: 1}}>
+        <ScrollView
+          keyboardShouldPersistTaps="handled"
+          style={{flex: 1, paddingHorizontal: 20}}>
+          <View style={styles.lastPrayed}>
+            <MainText>Last prayed a while ago</MainText>
+          </View>
+          <View style={styles.infoTable}>
+            <View style={styles.infoTableItem}>
+              <MainText style={styles.infoItemTitle}>February 30 2017</MainText>
+              <MainText style={styles.infoItemText}>Date Added</MainText>
+              <MainText style={[styles.infoItemText, {color: 'blue'}]}>
+                Opened for several days
+              </MainText>
+            </View>
+            <View style={styles.infoTableItem}>
+              <MainText style={styles.infoItemTitle}>9001</MainText>
+              <MainText style={styles.infoItemText}>
+                Times Prayed Total
+              </MainText>
+            </View>
+          </View>
+          <View style={styles.infoTable}>
+            <View style={styles.infoTableItem}>
+              <MainText style={styles.infoItemTitle}>9000</MainText>
+              <MainText style={styles.infoItemText}>
+                Times Prayed By Me
+              </MainText>
+            </View>
+            <View style={styles.infoTableItem}>
+              <MainText style={styles.infoItemTitle}>1</MainText>
+              <MainText style={styles.infoItemText}>
+                Times Prayed By Others
+              </MainText>
+            </View>
+          </View>
+          <CardMembers members={cardMembers} />
+          <CardComments
+            comments={comments.filter((comment) =>
+              card.commentsIds.includes(comment.id),
+            )}
+            cardId={card.id}
+            currentUser={currentUser || null}
+            dispatch={dispatch}
+          />
+        </ScrollView>
+      </SafeAreaView>
+    </KeyboardAvoidingView>
   ) : null;
 };
 

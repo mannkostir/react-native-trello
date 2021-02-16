@@ -1,10 +1,8 @@
 import {RootState} from '@/store';
 import {commentActions} from '@/store/comments';
 import commonStyles from '@/styles/commonStyles';
-import React, {useState} from 'react';
-import {Button, KeyboardAvoidingView, View} from 'react-native';
-import {useSelector} from 'react-redux';
-import MainButton from '../MainButton';
+import React, {useRef, useState} from 'react';
+import {Keyboard, View} from 'react-native';
 import MainTextInput from '../MainTextInput';
 
 const AddComment = ({
@@ -29,21 +27,23 @@ const AddComment = ({
       );
     }
 
-    setCommentBody('');
+    Keyboard.dismiss();
   };
   return (
-    <KeyboardAvoidingView>
+    <View style={{flex: 1}}>
       <MainTextInput
         multiline={true}
         style={commonStyles.textInput}
         placeholder="Add a comment..."
         onChangeText={(text) => setCommentBody(text)}
+        onEndEditing={() => {
+          setCommentBody('');
+        }}
         value={commentBody}
+        onSubmitEditing={handleAddComment}
+        returnKeyType="done"
       />
-      <MainButton style={{marginTop: 7}} onPress={handleAddComment}>
-        Add Comment
-      </MainButton>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 

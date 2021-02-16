@@ -1,13 +1,14 @@
 import {commentActions} from '@/store/comments';
 import commonStyles from '@/styles/commonStyles';
 import {Comment, User} from '@/types/commonTypes';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {KeyboardAvoidingView, StyleSheet, Text, View} from 'react-native';
 import {
   FlatList,
   ScrollView,
   TouchableOpacity,
 } from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import AddComment from '../AddComment/AddComment';
 import MainText from '../MainText';
 import MainTextInput from '../MainTextInput';
@@ -43,6 +44,7 @@ const CardCommentsItem = ({
       }),
     );
   };
+
   const handleCommentEdit = () => {
     dispatch(
       commentActions.updateComment({
@@ -104,7 +106,7 @@ const CardComments = ({
   dispatch: React.Dispatch<any>;
 }) => {
   return (
-    <KeyboardAvoidingView style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={commonStyles.sectionTitle}>Comments</Text>
       <FlatList
         data={comments}
@@ -119,7 +121,7 @@ const CardComments = ({
         keyExtractor={(item) => item.id.toString()}
       />
       <AddComment cardId={cardId} dispatch={dispatch} />
-    </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 

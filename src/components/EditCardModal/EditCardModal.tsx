@@ -2,9 +2,11 @@ import {Card, Column} from '@/types/commonTypes';
 import React, {useState} from 'react';
 import {
   Alert,
+  Keyboard,
   KeyboardAvoidingView,
   Modal,
   ModalProps,
+  Platform,
   Text,
   View,
 } from 'react-native';
@@ -35,64 +37,73 @@ const EditCardModal = ({
 
   return (
     <Modal {...props} animationType="slide" transparent={true}>
-      <View
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}>
-        <KeyboardAvoidingView
+      <KeyboardAvoidingView
+        style={{flex: 1}}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+        <View
           style={{
-            margin: 20,
-            backgroundColor: 'white',
-            borderRadius: 20,
-            width: '70%',
-            minHeight: 200,
-            alignSelf: 'center',
-            alignItems: 'center',
-            shadowColor: '#000',
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 4,
-            elevation: 5,
-            paddingVertical: 30,
-            paddingHorizontal: 20,
+            flex: 1,
+            justifyContent: 'center',
+            alignContent: 'center',
           }}>
-          <MainText>Enter new card title:</MainText>
-          <MainTextInput
-            numberOfLines={3}
-            multiline={true}
-            style={{
-              borderColor: '#E5E5E5',
-              borderWidth: 1,
-              borderRadius: 10,
-              width: '100%',
-              maxHeight: 100,
-            }}
-            autoFocus={true}
-            placeholder={card?.title}
-            onChangeText={(text) => setNewTitle(text)}
-            selectTextOnFocus={true}
-            defaultValue={card?.title}
-          />
           <View
             style={{
-              flexDirection: 'row',
-              alignItems: 'center',
+              margin: 20,
+              backgroundColor: 'white',
+              borderRadius: 20,
+              width: '70%',
+              minHeight: 200,
               alignSelf: 'center',
-              justifyContent: 'space-between',
-              marginTop: 30,
+              alignItems: 'center',
+              shadowColor: '#000',
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 4,
+              elevation: 5,
+              paddingVertical: 30,
+              paddingHorizontal: 20,
             }}>
-            <TouchableOpacity style={{marginRight: 30}} onPress={handleDiscard}>
-              <Text style={{color: '#AC5253'}}>Discard</Text>
-            </TouchableOpacity>
-            <MainButton onPress={handleSave}>Save</MainButton>
+            <MainText>Enter new card title:</MainText>
+            <MainTextInput
+              numberOfLines={3}
+              multiline={true}
+              style={{
+                borderColor: '#E5E5E5',
+                borderWidth: 1,
+                borderRadius: 10,
+                width: '100%',
+                maxHeight: 100,
+              }}
+              autoFocus={true}
+              placeholder={card?.title}
+              onChangeText={(text) => setNewTitle(text)}
+              selectTextOnFocus={true}
+              defaultValue={card?.title}
+              returnKeyType="done"
+              onSubmitEditing={() => Keyboard.dismiss()}
+              blurOnSubmit={true}
+            />
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                alignSelf: 'center',
+                justifyContent: 'space-between',
+                marginTop: 30,
+              }}>
+              <TouchableOpacity
+                style={{marginRight: 30}}
+                onPress={handleDiscard}>
+                <Text style={{color: '#AC5253'}}>Discard</Text>
+              </TouchableOpacity>
+              <MainButton onPress={handleSave}>Save</MainButton>
+            </View>
           </View>
-        </KeyboardAvoidingView>
-      </View>
+        </View>
+      </KeyboardAvoidingView>
     </Modal>
   );
 };

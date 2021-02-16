@@ -1,6 +1,6 @@
 import {cardsActions} from '@/store/cards';
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Keyboard, StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import MainTextInput from '../MainTextInput';
 
@@ -22,7 +22,7 @@ const AddCard = ({
         }),
       );
     }
-    setNewCardTitle('');
+    Keyboard.dismiss();
   };
   return (
     <View style={styles.addCardWrapper}>
@@ -32,6 +32,9 @@ const AddCard = ({
         onChangeText={(text) => setNewCardTitle(text)}
         value={newCardTitle}
         selectionColor="#72A8BC"
+        returnKeyType="done"
+        onSubmitEditing={handleAddCard}
+        onEndEditing={() => setNewCardTitle('')}
       />
       <View style={styles.addCardSubmitBtn}>
         <TouchableOpacity onPress={handleAddCard}>

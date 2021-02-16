@@ -87,30 +87,32 @@ const Cards = ({currentColumnId}: {currentColumnId: number}) => {
         onRequestClose={disableCardEditMode}
       />
       <AddCard dispatch={dispatch} columnId={currentColumnId} />
-      <FlatList
-        data={currentCards.filter((card) => !card.checked)}
-        renderItem={({item}) => (
-          <View>
-            <Swipeable
-              overshootLeft={false}
-              overshootRight={false}
-              renderRightActions={() => (
-                <RightActions
-                  handleEditPress={() => enableCardEditMode(item.id)}
-                />
-              )}
-              renderLeftActions={() => (
-                <LeftActions
-                  handleDeletePress={() => handleCardDelete(item.id)}
-                />
-              )}>
-              <Card dispatch={dispatch} card={item} />
-            </Swipeable>
-          </View>
-        )}
-        keyExtractor={(card) => card.id.toString()}
-        style={styles.list}
-      />
+      {currentCards.find((card) => !card.checked) ? (
+        <FlatList
+          data={currentCards.filter((card) => !card.checked)}
+          renderItem={({item}) => (
+            <View>
+              <Swipeable
+                overshootLeft={false}
+                overshootRight={false}
+                renderRightActions={() => (
+                  <RightActions
+                    handleEditPress={() => enableCardEditMode(item.id)}
+                  />
+                )}
+                renderLeftActions={() => (
+                  <LeftActions
+                    handleDeletePress={() => handleCardDelete(item.id)}
+                  />
+                )}>
+                <Card dispatch={dispatch} card={item} />
+              </Swipeable>
+            </View>
+          )}
+          keyExtractor={(card) => card.id.toString()}
+          style={styles.list}
+        />
+      ) : null}
       <TouchableOpacity
         style={styles.toggleAnsweredVisibilityBtn}
         onPress={() => setIsShowingCheckedCards((isShowing) => !isShowing)}>
