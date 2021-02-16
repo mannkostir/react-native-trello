@@ -1,8 +1,8 @@
 import React from 'react';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import Cards from '@/screens/Cards';
+import Cards from '@/navigators/ListNavigator/screens/Cards';
 import {Card} from '@/types/commonTypes';
-import Subscribed from '@/screens/Subscribed';
+import Subscribed from '@/navigators/ListNavigator/screens/Subscribed';
 import {useRoute} from '@react-navigation/native';
 import {ColumnScreenRoute} from '@/types/navigationTypes';
 

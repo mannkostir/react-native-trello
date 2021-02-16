@@ -1,9 +1,9 @@
 import React, {useMemo, useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import Board from '@/screens/Board';
+import Board from '@/navigators/MainNavigator/screens/Board';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import {MainNavigatorParamList} from '@/types/navigationTypes';
-import CardDetails from '@/screens/CardDetails';
+import CardDetails from '@/navigators/MainNavigator/screens/CardDetails';
 import BoardScreenTitle from '@/components/BoardScreenTitle';
 import {RootState} from '@/store';
 import {useSelector} from 'react-redux';
@@ -11,8 +11,8 @@ import {Text, View} from 'react-native';
 import {Header} from 'react-native/Libraries/NewAppScreen';
 import MainText from '@/components/MainText';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
-import AuthNavigator from './AuthNavigator';
-import ListNavigator from './ListNavigator';
+import AuthNavigator from '../AuthNavigator';
+import ListNavigator from '../ListNavigator';
 
 const Stack = createStackNavigator<MainNavigatorParamList>();
 
