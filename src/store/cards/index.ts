@@ -1,4 +1,4 @@
 import * as cardsActions from './cardsSagaActions';
-import * as cardsAccessors from './cardsAccessors';
+import {useCardsSelector} from './useCardsSelector';
 
-export {cardsActions, cardsAccessors};
+export {cardsActions, useCardsSelector};

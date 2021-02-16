@@ -1,3 +1,4 @@
 import * as authActions from './authSagaActions';
+import {useAuthSelector} from './useAuthSelector';
 
-export {authActions};
+export {authActions, useAuthSelector};

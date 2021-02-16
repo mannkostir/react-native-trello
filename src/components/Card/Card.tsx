@@ -10,6 +10,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '@/store';
 import MainText from '../MainText';
 import EditCardModal from '../EditCardModal';
+import {useColumnsSelector} from '@/store/columns';
 
 const Card = ({
   card,
@@ -18,12 +19,9 @@ const Card = ({
   card: types.Card;
   dispatch: React.Dispatch<any>;
 }) => {
-  const column = useSelector(
-    (state: RootState) =>
-      state.columns.currentColumns.find(
-        (column) => column.id === card.columnId,
-      ) || null,
-  );
+  const {getColumn} = useColumnsSelector();
+
+  const column = getColumn(card.columnId);
 
   const navigation = useNavigation<ColumnScreenNavigator>();
 

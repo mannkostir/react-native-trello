@@ -2,7 +2,7 @@ import MainButton from '@/components/MainButton';
 import MainText from '@/components/MainText';
 import MainTextInput from '@/components/MainTextInput';
 import {RootState} from '@/store';
-import {authActions} from '@/store/auth';
+import {authActions, useAuthSelector} from '@/store/auth';
 import commonStyles from '@/styles/commonStyles';
 import React, {useState} from 'react';
 import {Button, StyleSheet, View} from 'react-native';
@@ -12,7 +12,7 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
-  const authState = useSelector((state: RootState) => state.auth);
+  const {isAuthLoading, authError} = useAuthSelector();
 
   const dispatch = useDispatch();
 
@@ -22,8 +22,8 @@ const SignIn = () => {
 
   return (
     <View style={styles.container}>
-      {authState.error ? (
-        <MainText style={styles.errorMessage}>{authState.error}</MainText>
+      {authError ? (
+        <MainText style={styles.errorMessage}>{authError}</MainText>
       ) : null}
       <MainTextInput
         style={commonStyles.textInput}
@@ -39,7 +39,7 @@ const SignIn = () => {
         onChangeText={(text) => setPassword(text)}
       />
       <MainButton
-        disabled={authState.isLoading}
+        disabled={isAuthLoading}
         style={styles.submitButton}
         onPress={handleSignIn}>
         Sign In

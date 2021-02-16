@@ -1,5 +1,5 @@
 import * as columnsActions from './columnsSagaActions';
 import * as columnsTypes from './columnsTypes';
-import * as columnsAccessors from './columnsAccessors';
+import {useColumnsSelector} from './useColumnsSelector';
 
-export {columnsActions, columnsTypes, columnsAccessors};
+export {columnsActions, columnsTypes, useColumnsSelector};

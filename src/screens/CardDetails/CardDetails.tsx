@@ -2,8 +2,9 @@ import CardComments from '@/components/CardComments';
 import CardMembers from '@/components/CardMembers';
 import MainText from '@/components/MainText';
 import {RootState} from '@/store';
-import {cardsActions} from '@/store/cards';
-import {commentActions} from '@/store/comments';
+import {useAuthSelector} from '@/store/auth';
+import {cardsActions, useCardsSelector} from '@/store/cards';
+import {commentActions, useCommentsSelector} from '@/store/comments';
 import {CardDetailsRoute} from '@/types/navigationTypes';
 import {useRoute} from '@react-navigation/native';
 import React, {useEffect} from 'react';
@@ -20,16 +21,12 @@ const cardMembers = [
 const CardDetails = () => {
   const route = useRoute<CardDetailsRoute>();
 
-  const {card, comments, auth} = useSelector((state: RootState) => ({
-    card:
-      state.cards.selectedCard ||
-      state.cards.currentCards.find(
-        (card) => card.id === route.params.cardId,
-      ) ||
-      null,
-    comments: state.comments,
-    auth: state.auth,
-  }));
+  const {selectedCard, getCard} = useCardsSelector();
+  const {comments} = useCommentsSelector();
+  const {currentUser} = useAuthSelector();
+
+  const card = selectedCard || getCard(route.params.cardId);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -80,11 +77,11 @@ const CardDetails = () => {
       </View>
       <CardMembers members={cardMembers} />
       <CardComments
-        comments={comments.currentComments.filter((comment) =>
+        comments={comments.filter((comment) =>
           card.commentsIds.includes(comment.id),
         )}
         cardId={card.id}
-        currentUser={auth.currentUser || null}
+        currentUser={currentUser || null}
         dispatch={dispatch}
       />
     </ScrollView>

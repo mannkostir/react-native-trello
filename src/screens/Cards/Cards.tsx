@@ -3,7 +3,8 @@ import Card from '@/components/Card';
 import EditCardModal from '@/components/EditCardModal';
 import MainText from '@/components/MainText';
 import {RootState} from '@/store';
-import {cardsActions} from '@/store/cards';
+import {cardsActions, useCardsSelector} from '@/store/cards';
+import {useColumnsSelector} from '@/store/columns';
 import * as types from '@/types/commonTypes';
 import React, {useEffect, useState} from 'react';
 import {Alert, FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
@@ -13,18 +14,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import {LeftActions, RightActions} from './SwipeableActions';
 
 const Cards = ({currentColumnId}: {currentColumnId: number}) => {
-  const {currentCards, isCardsLoading, currentColumn} = useSelector(
-    (state: RootState) => ({
-      currentCards: state.cards.currentCards.filter(
-        (card) => card.columnId === currentColumnId,
-      ),
-      isCardsLoading: state.cards.isLoading,
-      currentColumn:
-        state.columns.currentColumns.find(
-          (column) => column.id === currentColumnId,
-        ) || null,
-    }),
-  );
+  const {getCurrentCards, isCardsLoading} = useCardsSelector();
+  const {getColumn} = useColumnsSelector();
+
+  const currentCards = getCurrentCards(currentColumnId);
+  const currentColumn = getColumn(currentColumnId);
+
   const dispatch = useDispatch();
 
   const [editingCardId, setEditingCardId] = useState<number | null>(null);
