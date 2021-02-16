@@ -1,11 +1,7 @@
 import AddColumn from '@/components/AddColumn';
 import Columns from '@/components/Columns';
 import {RootState} from '@/store';
-import {
-  columnsAccessors,
-  columnsActions,
-  useColumnsSelector,
-} from '@/store/columns';
+import {columnsActions, useColumnsSelector} from '@/store/columns';
 import {BoardScreenNavigation} from '@/types/navigationTypes';
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect} from 'react';
