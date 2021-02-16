@@ -3,6 +3,7 @@ import {commentActions} from '@/store/comments';
 import commonStyles from '@/styles/commonStyles';
 import React, {useRef, useState} from 'react';
 import {Keyboard, View} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import MainTextInput from '../MainTextInput';
 
 const AddComment = ({

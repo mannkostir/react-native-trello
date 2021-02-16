@@ -9,6 +9,7 @@ import {CardDetailsRoute} from '@/types/navigationTypes';
 import {useRoute} from '@react-navigation/native';
 import React, {useEffect, useRef} from 'react';
 import {
+  Keyboard,
   KeyboardAvoidingView,
   Platform,
   StyleSheet,
@@ -34,12 +35,22 @@ const CardDetails = () => {
 
   const card = selectedCard || getCard(route.params.cardId);
 
-  const scrollView = useRef();
+  const scrollView = React.createRef<ScrollView>();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(commentActions.getAllComments());
+
+    Keyboard.addListener('keyboardWillShow', () => {
+      scrollView.current?.scrollToEnd();
+    });
+
+    return () => {
+      Keyboard.removeListener('keyboardWillShow', () => {
+        scrollView.current?.scrollToEnd();
+      });
+    };
   }, []);
 
   useEffect(() => {
@@ -58,6 +69,7 @@ const CardDetails = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <SafeAreaView style={{flex: 1}}>
         <ScrollView
+          ref={scrollView}
           keyboardShouldPersistTaps="handled"
           style={{flex: 1, paddingHorizontal: 20}}>
           <View style={styles.lastPrayed}>
